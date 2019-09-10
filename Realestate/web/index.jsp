@@ -18,6 +18,7 @@
                   <i class="fas fa-sign"></i>
                   My Real Estate
               </a>
+
               <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
@@ -91,6 +92,36 @@
 
           <h1 class="my-4">Welcome to My Real Estate</h1>
 
+          <hr>
+
+          <div class="row justify-content-center">
+              <div class="col-lg-12 mx-auto bg-white p-3 rounded">
+
+                  <!-- Underlined search bars with buttons -->
+                  <form>
+                      <div class="row mb-4">
+                          <div class="input-group form-group col-md-10">
+                              <select class="custom-select" id="inputGroupSelect04" aria-label="Select City">
+                                  <option selected>City...</option>
+                                  <option value="1">Melbourne</option>
+                                  <option value="2">Sydney</option>
+                              </select>
+                              <label for="search"></label>
+                              <input id="search" type="text" placeholder="What are you searching for?"
+                                     class="form-control form-control-underlined">
+                          </div>
+                          <div class="form-group col-md-2">
+                              <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
+                          </div>
+                      </div>
+                  </form>
+                  <!-- End -->
+
+              </div>
+          </div>
+
+          <br>
+
           <div class="row">
               <div class="col-lg-6 mb-6">
                   <div class="card h-100">
@@ -126,6 +157,7 @@
               </div>
           </div>
 
+          <br>
           <hr>
 
           <!-- Call to Action Section -->

@@ -1,0 +1,77 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: junhanyang
+  Date: 2019-09-11
+  Time: 11:24
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>My Real Estate - Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/modern-business.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/c42c4fb0e2.js"></script>
+</head>
+<body class="bg-secondary">
+    <div class="container">
+        <div class="row">
+            <div class="d-flex justify-content-center align-items-center container">
+                <form method="post" action="" class="bg-white p-5 shadow col-lg-6">
+                    <a class="close bg-transparent float-lg-left" aria-label="Close" href="index.jsp">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                    <div class="text-center">
+                        <p class="h2 text-info"><i class="fas fa-sign"></i>My Real Estate</p>
+                    </div>
+                    <p class="h4 p-3 font-weight-bolder">Sign Up</p>
+                    <div class="form-group input-group col-lg-12">
+                        <label for="email"></label>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                        </div>
+                        <input type="email" class="form-control" id="email" aria-labelledby="email" placeholder="Email address">
+                    </div>
+                    <div class="form-group input-group col-lg-12">
+                        <label for="password"></label>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
+                        </div>
+                        <input type="password" class="form-control" id="password" aria-labelledby="password" placeholder="Password">
+                        <div class="input-group-append">
+                            <button type="button" class="bg-transparent" id="show-hide" onclick="showOrHide()">
+                                <i id="show-hide-icon" class="fas fa-eye-slash" style="color: red"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-info col-lg-12">Sign Up</button>
+                    <p class="p-3 font-weight-light">Already have an account? <a href="signin.jsp">Sign in.</a></p>
+
+                    <hr>
+
+                    <div class="text-center">
+                        <small class="font-weight-light text-black-50">We value your privacy of personal information.</small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function showOrHide() {
+        let x = document.getElementById("password");
+        let icon = document.getElementById("show-hide-icon");
+        if (x.type === "password") {
+            x.type = "text";
+            icon.style.color = 'black';
+        } else {
+            x.type = "password";
+            icon.style.color = 'red';
+        }
+    }
+</script>
+</html>

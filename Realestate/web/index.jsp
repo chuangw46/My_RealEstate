@@ -25,39 +25,31 @@
               <div class="collapse navbar-collapse" id="navbarResponsive">
                   <ul class="navbar-nav ml-auto">
                       <li class="nav-item">
-                          <a class="nav-link" href="about.html">About</a>
+                          <a class="nav-link" href="about.jsp">About </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="properties.jsp">Properties</a>
+                          <a class="nav-link" href="properties.jsp">Buy </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="contact.html">Contact</a>
+                          <a class="nav-link" href="properties.jsp">Rent </a>
                       </li>
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Portfolio
+                      <li class="nav-item">
+                          <a class="nav-link" href="properties.jsp">Find Agents </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="profile.jsp">Enquiries </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="profile.jsp">Username <i class="far fa-user-circle"></i></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="signin.jsp">
+                              Sign In <i class="fas fa-sign-in-alt"></i>
                           </a>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                              <a class="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
-                              <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
-                              <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
-                              <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
-                              <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
-                          </div>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Blog
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                              <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
-                              <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
-                              <a class="dropdown-item" href="blog-post.html">Blog Post</a>
-                          </div>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="login.jsp">
-                              Log In <i class="fas fa-sign-in-alt"></i>
+                          <a class="nav-link" href="signup.jsp">
+                              Join Us
                           </a>
                       </li>
                   </ul>
@@ -96,27 +88,177 @@
 
           <div class="row justify-content-center">
               <div class="col-lg-12 mx-auto bg-white p-3 rounded">
-
-                  <!-- Underlined search bars with buttons -->
-                  <form>
-                      <div class="row mb-4">
-                          <div class="input-group form-group col-md-10">
-                              <select class="custom-select" id="inputGroupSelect04" aria-label="Select City">
-                                  <option selected>City...</option>
-                                  <option value="1">Melbourne</option>
-                                  <option value="2">Sydney</option>
-                              </select>
-                              <label for="search"></label>
-                              <input id="search" type="text" placeholder="What are you searching for?"
-                                     class="form-control form-control-underlined">
-                          </div>
-                          <div class="form-group col-md-2">
-                              <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
-                          </div>
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item">
+                          <a class="nav-link active" id="buy-tab" data-toggle="tab" href="#buy" role="tab" aria-controls="home" aria-selected="true">Buy</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="rent-tab" data-toggle="tab" href="#rent" role="tab" aria-controls="profile" aria-selected="false">Rent</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="find-agents-tab" data-toggle="tab" href="#find-agents" role="tab" aria-controls="contact" aria-selected="false">Find Agents</a>
+                      </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="buy" role="tabpanel" aria-labelledby="rent-tab">
+                          <form class="p-5">
+                              <div class="row mb-4">
+                                  <div class="input-group col-md-12">
+                                      <select class="custom-select" id="buy-property-type" aria-label="Property Type">
+                                          <option value="0" selected>All Property Types</option>
+                                          <option value="1">House</option>
+                                          <option value="2">Apartment & Unit</option>
+                                          <option value="3">Town House</option>
+                                          <option value="4">Villa</option>
+                                          <option value="5">Land</option>
+                                          <option value="6">Acreage</option>
+                                          <option value="7">Rural</option>
+                                          <option value="8">Block of Units</option>
+                                          <option value="9">Retirement Living</option>
+                                      </select>
+                                      <select class="custom-select" id="buy-beds-max" aria-label="Beds Max">
+                                          <option selected>Beds (Max)</option>
+                                          <option value="1">Any</option>
+                                          <option value="2">Studio</option>
+                                          <option value="3">1 Bed</option>
+                                          <option value="4">2 Beds</option>
+                                          <option value="5">3 Beds</option>
+                                          <option value="6">4 Beds</option>
+                                          <option value="7">5 Beds</option>
+                                      </select>
+                                      <select class="custom-select" id="buy-beds-min" aria-label="Beds Min">
+                                          <option selected>Beds (Min)</option>
+                                          <option value="1">Any</option>
+                                          <option value="2">Studio</option>
+                                          <option value="3">1 Bed</option>
+                                          <option value="4">2 Beds</option>
+                                          <option value="5">3 Beds</option>
+                                          <option value="6">4 Beds</option>
+                                          <option value="7">5 Beds</option>
+                                      </select>
+                                      <select class="custom-select" id="buy-price-max" aria-label="Price Max">
+                                          <option selected>Price (Max)</option>
+                                          <option value="1">Any</option>
+                                          <option value="2">$50,000</option>
+                                          <option value="3">$75,000</option>
+                                          <option value="4">$100,000</option>
+                                          <option value="5">$125,000</option>
+                                          <option value="6">$150,000</option>
+                                          <option value="7">$175,000</option>
+                                          <option value="8">$200,000</option>
+                                      </select>
+                                      <select class="custom-select" id="buy-price-min" aria-label="Price Min">
+                                          <option selected>Price (Min)</option>
+                                          <option value="1">Any</option>
+                                          <option value="2">$50,000</option>
+                                          <option value="3">$75,000</option>
+                                          <option value="4">$100,000</option>
+                                          <option value="5">$125,000</option>
+                                          <option value="6">$150,000</option>
+                                          <option value="7">$175,000</option>
+                                          <option value="8">$200,000</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="row mb-4">
+                                  <div class="input-group form-group col-md-10">
+                                      <label for="buy-search"></label>
+                                      <input id="buy-search" type="text" placeholder="Search By Postcode"
+                                             class="form-control form-control-underlined">
+                                  </div>
+                                  <div class="form-group col-md-2">
+                                      <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
+                                  </div>
+                              </div>
+                          </form>
                       </div>
-                  </form>
-                  <!-- End -->
-
+                      <div class="tab-pane fade" id="rent" role="tabpanel" aria-labelledby="sell-tab">
+                          <form class="p-5">
+                              <div class="row mb-4">
+                                  <div class="input-group col-md-12">
+                                      <select class="custom-select" id="rent-property-type" aria-label="Property Type">
+                                          <option value="0" selected>All Property Types</option>
+                                          <option value="1">House</option>
+                                          <option value="2">Apartment & Unit</option>
+                                          <option value="3">Town House</option>
+                                          <option value="4">Villa</option>
+                                          <option value="5">Land</option>
+                                          <option value="6">Acreage</option>
+                                          <option value="7">Rural</option>
+                                          <option value="8">Block of Units</option>
+                                          <option value="9">Retirement Living</option>
+                                      </select>
+                                      <select class="custom-select" id="rent-beds-max" aria-label="Beds Max">
+                                          <option selected>Beds (Max)</option>
+                                          <option value="1">Any</option>
+                                          <option value="2">Studio</option>
+                                          <option value="3">1 Bed</option>
+                                          <option value="4">2 Beds</option>
+                                          <option value="5">3 Beds</option>
+                                          <option value="6">4 Beds</option>
+                                          <option value="7">5 Beds</option>
+                                      </select>
+                                      <select class="custom-select" id="rent-beds-min" aria-label="Beds Min">
+                                          <option selected>Beds (Min)</option>
+                                          <option value="1">Any</option>
+                                          <option value="2">Studio</option>
+                                          <option value="3">1 Bed</option>
+                                          <option value="4">2 Beds</option>
+                                          <option value="5">3 Beds</option>
+                                          <option value="6">4 Beds</option>
+                                          <option value="7">5 Beds</option>
+                                      </select>
+                                      <select class="custom-select" id="rent-price-max" aria-label="Price PW Max">
+                                          <option selected>Price per week (Max)</option>
+                                          <option value="1">Any</option>
+                                          <option value="2">$50 pw</option>
+                                          <option value="3">$75 pw</option>
+                                          <option value="4">$100 pw</option>
+                                          <option value="5">$125 pw</option>
+                                          <option value="6">$150 pw</option>
+                                          <option value="7">$175 pw</option>
+                                          <option value="8">$200 pw</option>
+                                      </select>
+                                      <select class="custom-select" id="price-min" aria-label="Price PW Min">
+                                          <option selected>Price per week (Min)</option>
+                                          <option value="1">Any</option>
+                                          <option value="2">$50 pw</option>
+                                          <option value="3">$75 pw</option>
+                                          <option value="4">$100 pw</option>
+                                          <option value="5">$125 pw</option>
+                                          <option value="6">$150 pw</option>
+                                          <option value="7">$175 pw</option>
+                                          <option value="8">$200 pw</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="row mb-4">
+                                  <div class="input-group form-group col-md-10">
+                                      <label for="rent-search"></label>
+                                      <input id="rent-search" type="text" placeholder="Search By Postcode"
+                                             class="form-control form-control-underlined">
+                                  </div>
+                                  <div class="form-group col-md-2">
+                                      <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="tab-pane fade" id="find-agents" role="tabpanel" aria-labelledby="find-agents-tab">
+                          <form class="p-5">
+                              <div class="row mb-4">
+                                  <div class="input-group form-group col-md-10">
+                                      <label for="agent-search"></label>
+                                      <input id="agent-search" type="text" placeholder="Search Agent By Name"
+                                             class="form-control form-control-underlined">
+                                  </div>
+                                  <div class="form-group col-md-2">
+                                      <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
               </div>
           </div>
 

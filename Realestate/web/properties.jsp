@@ -25,45 +25,38 @@
                 <i class="fas fa-sign"></i>
                 My Real Estate
             </a>
+
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link" href="about.jsp">About </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="properties.jsp">Properties</a>
+                        <a class="nav-link" href="properties.jsp">Buy </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" href="properties.jsp">Rent </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Portfolio
+                    <li class="nav-item">
+                        <a class="nav-link" href="properties.jsp">Find Agents </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.jsp">Enquiries </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.jsp">Username <i class="far fa-user-circle"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signin.jsp">
+                            Sign In <i class="fas fa-sign-in-alt"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <a class="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
-                            <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
-                            <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
-                            <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
-                            <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Blog
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                            <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
-                            <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
-                            <a class="dropdown-item" href="blog-post.html">Blog Post</a>
-                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">
-                            Log In <i class="fas fa-sign-in-alt"></i>
+                        <a class="nav-link" href="signup.jsp">
+                            Join Us
                         </a>
                     </li>
                 </ul>
@@ -73,7 +66,7 @@
 
     <div class="container">
         <!-- Page Heading/Breadcrumbs -->
-        <h1 class="mt-4 mb-3">Properties <i class="fas fa-building"></i>
+        <h1 class="mt-4 mb-3 font-weight-light">Properties <i class="fas fa-building"></i>
 <%--            <small>Subheading</small>--%>
         </h1>
 
@@ -92,7 +85,7 @@
 
         <!-- Marketing Icons Section -->
         <div class="row">
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-4 mb-4 d-flex justify-content-center">
                 <div class="card" style="width: 18rem;">
                     <img src="./images/yasmine-boheas-i_q8BWT80TE-unsplash.jpg" class="card-img-top" alt="Property Photo">
                     <div class="card-body">
@@ -102,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-4 mb-4 d-flex justify-content-center">
                 <div class="card" style="width: 18rem;">
                     <img src="./images/siniz-kim-0vCHIpgLpco-unsplash.jpg" class="card-img-top" alt="Property Photo">
                     <div class="card-body">
@@ -112,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-4 mb-4 d-flex justify-content-center">
                 <div class="card" style="width: 18rem;">
                     <img src="./images/neonbrand-kdwahpWYfQo-unsplash.jpg" class="card-img-top" alt="Property Photo">
                     <div class="card-body">
@@ -126,7 +119,7 @@
 
         <hr>
 
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">

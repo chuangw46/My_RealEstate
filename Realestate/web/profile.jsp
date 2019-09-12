@@ -51,12 +51,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="signin.jsp">
-                            Sign In <i class="fas fa-sign-in-alt"></i>
+                            Sign in <i class="fas fa-sign-in-alt"></i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="signup.jsp">
-                            Join Us
+                            Join us
                         </a>
                     </li>
                 </ul>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="card-footer text-center">
                         <form id="buyer-properties-form">
-                            <button class="btn btn-info" type="submit">My favourite properties</button>
+                            <button class="btn btn-info" type="submit" disabled>My favourite properties</button>
                         </form>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="card-footer text-center">
                         <form id="tenant-properties-form">
-                            <button class="btn btn-info" type="submit">My favourite properties</button>
+                            <button class="btn btn-info" type="submit" disabled>My favourite properties</button>
                         </form>
                     </div>
                 </div>

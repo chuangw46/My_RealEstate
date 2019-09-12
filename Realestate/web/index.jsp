@@ -44,12 +44,12 @@
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="signin.jsp">
-                              Sign In <i class="fas fa-sign-in-alt"></i>
+                              Sign in <i class="fas fa-sign-in-alt"></i>
                           </a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="signup.jsp">
-                              Join Us
+                              Join us
                           </a>
                       </li>
                   </ul>
@@ -102,7 +102,7 @@
                   <div class="tab-content" id="myTabContent">
                       <div class="tab-pane fade show active" id="buy" role="tabpanel" aria-labelledby="rent-tab">
                           <form class="p-5">
-                              <div class="row mb-4">
+                              <div class="row">
                                   <div class="input-group col-md-12">
                                       <select class="custom-select" id="buy-property-type" aria-label="Property Type">
                                           <option value="0" selected>All Property Types</option>
@@ -160,7 +160,7 @@
                                       </select>
                                   </div>
                               </div>
-                              <div class="row mb-4">
+                              <div class="row mt-5">
                                   <div class="input-group form-group col-md-10">
                                       <label for="buy-search"></label>
                                       <input id="buy-search" type="text" placeholder="Search By Postcode"
@@ -174,7 +174,7 @@
                       </div>
                       <div class="tab-pane fade" id="rent" role="tabpanel" aria-labelledby="sell-tab">
                           <form class="p-5">
-                              <div class="row mb-4">
+                              <div class="row">
                                   <div class="input-group col-md-12">
                                       <select class="custom-select" id="rent-property-type" aria-label="Property Type">
                                           <option value="0" selected>All Property Types</option>
@@ -232,7 +232,7 @@
                                       </select>
                                   </div>
                               </div>
-                              <div class="row mb-4">
+                              <div class="row mt-5">
                                   <div class="input-group form-group col-md-10">
                                       <label for="rent-search"></label>
                                       <input id="rent-search" type="text" placeholder="Search By Postcode"
@@ -244,9 +244,9 @@
                               </div>
                           </form>
                       </div>
-                      <div class="tab-pane fade" id="find-agents" role="tabpanel" aria-labelledby="find-agents-tab">
-                          <form class="p-5">
-                              <div class="row mb-4">
+                      <div class="tab-pane fade p-5" id="find-agents" role="tabpanel" aria-labelledby="find-agents-tab">
+                          <form>
+                              <div class="row">
                                   <div class="input-group form-group col-md-10">
                                       <label for="agent-search"></label>
                                       <input id="agent-search" type="text" placeholder="Search Agent By Name"
@@ -262,38 +262,60 @@
               </div>
           </div>
 
-          <br>
+          <hr>
 
           <div class="row">
-              <div class="col-lg-6 mb-6">
-                  <div class="card h-100">
+              <div class="col-lg-4 mb-6">
+                  <div class="card h-100 text-center">
                       <h4 class="card-header">
-                          <i class="fas fa-dove"></i>
-                          I am a tenant or buyer.
+                          Track my enquiry status
+                          <i class="far fa-question-circle"></i>
                       </h4>
                       <div class="card-body">
                           <p class="card-text">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
+                              As a buyer or tenant, you can create new enquires to a specific agent with regards to the
+                              property that I am interested. As an agent, you can view a list of the enquiries sent by
+                              a buyer or tenant and respond to any of them.
                           </p>
                       </div>
                       <div class="card-footer">
-                          <a href="#" class="btn btn-info">Learn More</a>
+                          <a href="#" class="btn btn-info">Manage my enquires</a>
                       </div>
                   </div>
               </div>
-              <div class="col-lg-6 mb-6">
-                  <div class="card h-100">
+              <div class="col-lg-4 mb-6">
+                  <div class="card h-100 text-center">
                       <h4 class="card-header">
-                          <i class="fas fa-broadcast-tower"></i>
-                          I am an agent.
+                          Review my favourite list
+                          <i class="fas fa-shopping-cart"></i>
                       </h4>
                       <div class="card-body">
                           <p class="card-text">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.
+                              As a buyer or tenant, you can mark a property that you are interested to follow up. This
+                              property then will be added into your personal favourite list, which can be reviewed and
+                              modified by you anytime.
                           </p>
                       </div>
                       <div class="card-footer">
-                          <a href="#" class="btn btn-info">Learn More</a>
+                          <a href="#" class="btn btn-info disabled">Check out favourite list</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 mb-6">
+                  <div class="card h-100 text-center">
+                      <h4 class="card-header">
+                          Publish properties
+                          <i class="fas fa-home"></i>
+                      </h4>
+                      <div class="card-body">
+                          <p class="card-text">
+                              As an agent, you can publish a new property along with the general description and a series
+                              of photos. After publishing the property, buyers or tenants are able to find it immediately
+                              on this platform.
+                          </p>
+                      </div>
+                      <div class="card-footer">
+                          <a href="#" class="btn btn-info">Publish a property</a>
                       </div>
                   </div>
               </div>
@@ -304,13 +326,13 @@
 
           <!-- Call to Action Section -->
           <div class="row mb-4">
-              <div class="col-md-8">
-                  <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.
+              <div class="col-md-8 text-center">
+                  <p class="h5 font-weight-light text-black-50">
+                      Follow our work on
+                      <a href="https://github.com/chuangw46/SWEN90007_Project">
+                          <i class="fab fa-github fa-2x"></i>
+                      </a>
                   </p>
-              </div>
-              <div class="col-md-4">
-                  <a class="btn btn-lg btn-secondary" href="#">JOIN US</a>
               </div>
           </div>
       </div>

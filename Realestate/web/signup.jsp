@@ -21,7 +21,8 @@
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-center align-items-center container">
-                <form method="post" action="" class="bg-white p-5 shadow col-lg-6">
+                <form method="post" action="frontServlet" class="bg-white p-5 shadow col-lg-6">
+                    <input type="hidden" name="command" id="command" value="SignUp">
                     <a class="close bg-transparent float-lg-left" aria-label="Close" href="index.jsp">
                         <span aria-hidden="true">&times;</span>
                     </a>
@@ -34,21 +35,28 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-envelope"></i></span>
                         </div>
-                        <input type="email" class="form-control" id="email" aria-labelledby="email" placeholder="Email address">
+                        <input type="email" class="form-control" id="email" aria-labelledby="email" placeholder="Email address" required>
+                    </div>
+                    <div class="form-group input-group col-lg-12">
+                        <label for="email"></label>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-user-circle"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="username" aria-labelledby="username" placeholder="Username" required>
                     </div>
                     <div class="form-group input-group col-lg-12">
                         <label for="password"></label>
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
                         </div>
-                        <input type="password" class="form-control" id="password" aria-labelledby="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" aria-labelledby="password" placeholder="Password" required>
                         <div class="input-group-append">
                             <button type="button" class="bg-transparent" id="show-hide" onclick="showOrHide()">
                                 <i id="show-hide-icon" class="fas fa-eye-slash" style="color: red"></i>
                             </button>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-info col-lg-12">Sign Up</button>
+                    <button type="submit" class="btn btn-info col-lg-12">Sign Up</button>
                     <p class="p-3 font-weight-light">Already have an account? <a href="signin.jsp">Sign in.</a></p>
 
                     <hr>

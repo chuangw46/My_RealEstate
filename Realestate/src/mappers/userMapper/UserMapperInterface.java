@@ -10,15 +10,19 @@ import java.util.List;
  * @institution University of Melbourne
  */
 public interface UserMapperInterface {
+
+    // TODO: sign up
     public void createUser(User user); // create
 
-
+    // TODO: log in
     public User getUserByEmail(String email);
 
     // TODO: caller needs to check if the returned result is null
     public List<User> getUserByName(String name);
 
+    // TODO: update user info
     public void updateUser(User user); // update
 
+    // TODO: delete a user
     public void deleteUser(User user); // delete
 }

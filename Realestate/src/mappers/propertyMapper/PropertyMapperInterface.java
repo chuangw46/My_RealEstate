@@ -11,7 +11,10 @@ import java.util.List;
  * @institution University of Melbourne
  */
 public interface PropertyMapperInterface {
+
     public void createProperty(Property property); // create
+
+    public List<Property> searchByPostCode(int postCode);
 
     public List<Property> searchByPropertyType(String type);
 

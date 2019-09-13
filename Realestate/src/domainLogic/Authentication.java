@@ -12,6 +12,7 @@ import models.User;
 public class Authentication {
 
     private static UserMapperInterface userMapper = new UserMapper();
+
     public static boolean login(String email, String password) {
         User user = userMapper.getUserByEmail(email);
         return user != null && password.equals(user.getPassword());

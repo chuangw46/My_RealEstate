@@ -1,7 +1,7 @@
 package models;
 
-import java.util.HashSet;
-import java.util.Set;
+import lazyLoadUtils.FavoriteList;
+import lazyLoadUtils.FavoriteListImplement;
 
 /**
  * @author Chuang Wang
@@ -9,13 +9,16 @@ import java.util.Set;
  * @institution University of Melbourne
  */
 public class Client extends User{
-    private Set<Property> favorites;
-    public Client(int id, String name, String email, String password) {
-        super(id, name, email, password);
-        favorites = new HashSet<>();
+    private FavoriteList favorites;
+
+    public Client(int id, String email, String password, String name) {
+        super(id, email, password, name);
+        this.favorites = new FavoriteListImplement(this);
+
     }
 
-    public Set<Property> getFavorites() {
+
+    public FavoriteList getFavorites() {
         return favorites;
     }
 

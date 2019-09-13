@@ -12,7 +12,8 @@ import java.util.List;
 public interface UserMapperInterface {
     public void createUser(User user); // create
 
-    public User getUserByEmail(String email); // read
+
+    public User getUserByEmail(String email);
 
     // TODO: caller needs to check if the returned result is null
     public List<User> getUserByName(String name);

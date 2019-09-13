@@ -1,7 +1,6 @@
 package models;
 
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,23 +17,32 @@ public class Property {
     private Date date_available;
     private Date date_inspection;
     private String description;
-    private boolean rent;
+    private int address_id;
+    private String rent_or_buy;
     private int price;
-    private Address address;
-    private Agent postedBy;
+    private int agent_id;
     private Set<Client> favoriteBy;
 //    private
 
-//    public static void main(String[] args) {
-//        String str="2015-03-31";
-//        Date date=Date.valueOf(str);//converting string into sql date
-//        System.out.println(date);
-//    }
-    public Property(int id, Address address) {
-        this.id = id;
-        this.address = address;
-        favoriteBy = new HashSet<>();
+
+    public Property() {
     }
+
+    public Property(int id, String type, int num_bed, int num_bath, int num_carpark, Date date_available, Date date_inspection, String description, int address_id, String rent_or_buy, int price, int agent_id) {
+        this.id = id;
+        this.type = type;
+        this.num_bed = num_bed;
+        this.num_bath = num_bath;
+        this.num_carpark = num_carpark;
+        this.date_available = date_available;
+        this.date_inspection = date_inspection;
+        this.description = description;
+        this.address_id = address_id;
+        this.rent_or_buy = rent_or_buy;
+        this.price = price;
+        this.agent_id = agent_id;
+    }
+
 
     public int getId() {
         return id;
@@ -100,12 +108,12 @@ public class Property {
         this.description = description;
     }
 
-    public boolean isRent() {
-        return rent;
+    public String getRent_or_buy() {
+        return rent_or_buy;
     }
 
-    public void setRent(boolean rent) {
-        this.rent = rent;
+    public void setRent_or_buy(String rent_or_buy) {
+        this.rent_or_buy = rent_or_buy;
     }
 
     public int getPrice() {
@@ -116,20 +124,20 @@ public class Property {
         this.price = price;
     }
 
-    public Address getAddress() {
-        return address;
+    public int getAddress_id() {
+        return address_id;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 
-    public Agent getPostedBy() {
-        return postedBy;
+    public int getAgent_id() {
+        return agent_id;
     }
 
-    public void setPostedBy(Agent postedBy) {
-        this.postedBy = postedBy;
+    public void setAgent_id(int agent_id) {
+        this.agent_id = agent_id;
     }
 
     public Set<Client> getFavoriteBy() {
@@ -142,5 +150,23 @@ public class Property {
 
     public void removeClient(Client client){
         favoriteBy.remove(client);
+    }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", num_bed=" + num_bed +
+                ", num_bath=" + num_bath +
+                ", num_carpark=" + num_carpark +
+                ", date_available=" + date_available +
+                ", date_inspection=" + date_inspection +
+                ", description='" + description + '\'' +
+                ", address_id=" + address_id +
+                ", rent_or_buy='" + rent_or_buy + '\'' +
+                ", price=" + price +
+                ", agent_id=" + agent_id +
+                '}';
     }
 }

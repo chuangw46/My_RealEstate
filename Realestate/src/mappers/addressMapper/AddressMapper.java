@@ -14,7 +14,6 @@ import java.util.List;
  * @institution University of Melbourne
  */
 public class AddressMapper implements AddressMapperInterface {
-    private String selectStatement = "SELECT * FROM public.address WHERE ";
 
     @Override
     public void createAddress(Address address) {

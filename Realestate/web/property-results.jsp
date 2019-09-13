@@ -40,7 +40,7 @@
                     <a href="#"><img class="card-img-top" src="./images/neonbrand-kdwahpWYfQo-unsplash.jpg" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Property Title 1</a>
+                            <a href="frontServlet?command=PropertyInfo">Property Title 1</a>
                         </h4>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
                     </div>
@@ -51,7 +51,7 @@
                     <a href="#"><img class="card-img-top" src="./images/siniz-kim-0vCHIpgLpco-unsplash.jpg" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Property Title 2</a>
+                            <a href="frontServlet?command=PropertyInfo">Property Title 2</a>
                         </h4>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
                     </div>
@@ -62,7 +62,7 @@
                     <a href="#"><img class="card-img-top" src="./images/yasmine-boheas-i_q8BWT80TE-unsplash.jpg" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Property Title 3</a>
+                            <a href="frontServlet?command=PropertyInfo">Property Title 3</a>
                         </h4>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
                     </div>
@@ -73,7 +73,7 @@
                     <a href="#"><img class="card-img-top" src="./images/andrew-barrowman--kh2s5BdwxI-unsplash.jpg" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Property Title 4</a>
+                            <a href="frontServlet?command=PropertyInfo">Property Title 4</a>
                         </h4>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
                     </div>
@@ -84,7 +84,7 @@
                     <a href="#"><img class="card-img-top" src="./images/elsa-noblet-5KD5PmZEfcg-unsplash.jpg" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Property Title 5</a>
+                            <a href="frontServlet?command=PropertyInfo">Property Title 5</a>
                         </h4>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
                     </div>
@@ -95,7 +95,7 @@
                     <a href="#"><img class="card-img-top" src="./images/andre-francois-mckenzie-rz2YF0vBsvA-unsplash.jpg" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Property Title 6</a>
+                            <a href="frontServlet?command=PropertyInfo">Property Title 6</a>
                         </h4>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
                     </div>

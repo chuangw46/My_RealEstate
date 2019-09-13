@@ -18,7 +18,7 @@
     <div class="container">
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3 font-weight-light">My Profile <i class="fas fa-users-cog"></i>
-            <small>Subheading</small>
+            <small>Manage profile</small>
         </h1>
 
         <ol class="breadcrumb">

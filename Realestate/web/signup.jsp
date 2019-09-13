@@ -51,6 +51,17 @@
                             </button>
                         </div>
                     </div>
+                    <div class="form-group input-group col-lg-12">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="user-type"><i class="fas fa-user-tag"></i></label>
+                        </div>
+                        <select class="custom-select" id="user-type" name="user-type">
+                            <option selected>My user type...</option>
+                            <option value="Buyer">Buyer</option>
+                            <option value="Tenant">Tenant</option>
+                            <option value="Agent">Agent</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-info col-lg-12">Sign Up</button>
                     <p class="p-3 font-weight-light">Already have an account? <a href="signin.jsp">Sign in.</a></p>
 

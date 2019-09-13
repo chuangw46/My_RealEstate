@@ -25,9 +25,9 @@
             <li class="breadcrumb-item">
                 <a href="frontServlet?command=IndexPage">Home</a>
             </li>
-            <li class="breadcrumb-item">
-                <a href="frontServlet?command=ListProperties">List of Properties</a>
-            </li>
+<%--            <li class="breadcrumb-item">--%>
+<%--                <a href="frontServlet?command=ListProperties">List of Properties</a>--%>
+<%--            </li>--%>
             <li class="breadcrumb-item active">Property Information</li>
         </ol>
 
@@ -50,6 +50,7 @@
                     <li>Inspection Date: 18/09/2019</li>
                     <li>Available Date: 01/09/2019</li>
                     <li>Price: $1,000,000</li>
+                    <li><i class="fas fa-bed"></i> 3; <i class="fas fa-bath"></i> 2; <i class="fas fa-car-side"></i> 1.</li>
                 </ul>
             </div>
         </div>

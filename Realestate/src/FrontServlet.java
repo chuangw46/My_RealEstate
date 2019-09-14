@@ -11,20 +11,20 @@ import commands.UnknownCommand;
 public class FrontServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FrontCommand command = getCommand(request);
+        FrontCommand command = getCommand(request, "postRequest.");
         command.init(getServletContext(), request, response);
         command.process();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FrontCommand command = getCommand(request);
+        FrontCommand command = getCommand(request, "getRequest.");
         command.init(getServletContext(), request, response);
         command.process();
     }
 
-    private FrontCommand getCommand(HttpServletRequest request){
+    private FrontCommand getCommand(HttpServletRequest request, String pkg){
         try{
-            return (FrontCommand) getCommandClass(request).newInstance();
+            return (FrontCommand) getCommandClass(request, pkg).newInstance();
         }
         catch(Exception e){
             System.out.println("Getting Command Class fails.");
@@ -32,9 +32,9 @@ public class FrontServlet extends HttpServlet {
         }
     }
 
-    private Class getCommandClass(HttpServletRequest request){
+    private Class getCommandClass(HttpServletRequest request, String pkg){
         Class result;
-        final String commandClassName = "commands." + (String) request.getParameter("command") + "Command";
+        final String commandClassName = "commands." + pkg + (String) request.getParameter("command") + "Command";
         System.out.println(commandClassName);
         try{
             result = Class.forName(commandClassName);

@@ -1,5 +1,7 @@
-package mappers.addressMapper;
+package test;
 
+import dataSourceLayer.mappers.addressMapper.AddressMapper;
+import dataSourceLayer.mappers.addressMapper.AddressMapperInterface;
 import models.Address;
 
 /**

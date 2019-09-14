@@ -1,4 +1,4 @@
-package mappers.userMapper;
+package dataSourceLayer.mappers.userMapper;
 
 import models.User;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserMapperInterface {
 
     // TODO: sign up
-    public void createUser(User user); // create
+    public boolean createUser(User user); // create
 
     // TODO: log in
     public User getUserByEmail(String email);

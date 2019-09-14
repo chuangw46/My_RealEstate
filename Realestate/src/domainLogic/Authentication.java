@@ -1,7 +1,7 @@
 package domainLogic;
 
-import mappers.userMapper.UserMapper;
-import mappers.userMapper.UserMapperInterface;
+import dataSourceLayer.mappers.userMapper.UserMapper;
+import dataSourceLayer.mappers.userMapper.UserMapperInterface;
 import models.User;
 
 /**
@@ -13,9 +13,14 @@ public class Authentication {
 
     private static UserMapperInterface userMapper = new UserMapper();
 
-    public static boolean login(String email, String password) {
+    public static User login(String email, String password) {
         User user = userMapper.getUserByEmail(email);
-        return user != null && password.equals(user.getPassword());
+        if (user != null) {
+            if (password.equals(user.getPassword())){
+                return user;
+            }
+        }
+        return null;
     }
 
 }

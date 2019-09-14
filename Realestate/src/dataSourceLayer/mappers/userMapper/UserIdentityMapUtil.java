@@ -1,4 +1,4 @@
-package mappers.userMapper;
+package dataSourceLayer.mappers.userMapper;
 
 import models.User;
 

@@ -236,7 +236,7 @@
                       </p>
                   </div>
                   <div class="card-footer">
-                      <a href="frontServlet?command=ViewEnquiry" class="btn btn-info">Manage my enquires</a>
+                      <a href="frontServlet?command=ViewEnquiry" class="btn btn-info disabled">Manage my enquires</a>
                   </div>
               </div>
           </div>

@@ -101,7 +101,7 @@ public class PropertyUoW implements UnitOfWorkI<Property> {
     private void commitDelete() {
         List<Property> propertiesToBeDeleted = readyToCommit.get(UnitOfWorkI.DELETE);
         for (Property p : propertiesToBeDeleted) {
-            propertyMapper.deleteProperty(p);
+            propertyMapper.deleteProperty(p.getAgent_id(), p.getId());
         }
     }
 }

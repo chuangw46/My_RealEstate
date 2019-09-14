@@ -1,4 +1,4 @@
-<%--
+<%@ page import="models.Property" %><%--
   Created by IntelliJ IDEA.
   User: junhanyang
   Date: 2019-09-12
@@ -34,7 +34,7 @@
         </ol>
 
         <hr>
-
+        <% Property p = (Property) request.getSession().getAttribute("currentProperty");%>
         <div class="row">
             <div class="col-lg-8">
                 <img class="img-fluid" src="./images/andre-francois-mckenzie-rz2YF0vBsvA-unsplash.jpg" alt="main photo">
@@ -48,7 +48,7 @@
                 <h3 class="my-3 text-muted">Property Details</h3>
                 <ul class="text-black-50 font-weight-light">
                     <li>Type: ${currentProperty.type} - ${currentProperty.rent_or_buy}</li>
-                    <li>Address: ${currentAddress.street} ${currentAddress.city} ${currentAddress.state} ${currentAddress.country} ${currentAddress.postal_code}</li>
+                    <li>Address: <%= p.retrieveTheAddressString() %></li>
                     <li>Inspection Date: ${currentProperty.date_inspection}</li>
                     <li>Available Date: ${currentProperty.date_available}</li>
                     <li>Price: ${currentProperty.price}</li>

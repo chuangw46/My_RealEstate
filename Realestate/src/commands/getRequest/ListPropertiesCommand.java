@@ -1,13 +1,13 @@
 package commands.getRequest;
 
 import commands.FrontCommand;
+import domainLogic.PropertyManagement;
 import models.Property;
+import models.User;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +15,10 @@ import java.util.List;
  */
 public class ListPropertiesCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
-        Property p1 = new Property(1, "House", 3, 2, 1, new Date(1), new Date(1), "XXX", 1, "rent", 350, 1);
-        List<Property> p = new ArrayList<>();
-        p.add(p1);
-        request.getSession().setAttribute("propertyList", p);
-        if (request.getSession().getAttribute("currentUser") != null) {
+        User user = (User) request.getSession().getAttribute("currentUser");
+        if (user != null) {
+            List<Property> pl = PropertyManagement.viewMyPropertyList(user.getId());
+            request.getSession().setAttribute("propertyList", pl);
             forward("/property-list.jsp");
         }
         else {

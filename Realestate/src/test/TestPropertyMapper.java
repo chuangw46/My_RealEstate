@@ -43,7 +43,6 @@ public class TestPropertyMapper {
     }
 
     private static void testDeleteProperty(PropertyMapperInterface mapper) {
-        Property p = new Property(40);
-        mapper.deleteProperty(p);
+//        mapper.deleteProperty(40);
     }
 }

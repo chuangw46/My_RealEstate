@@ -31,21 +31,24 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-envelope"></i></span>
                         </div>
-                        <input type="email" class="form-control" id="email" aria-labelledby="email" placeholder="Email address" required>
+                        <input type="email" class="form-control" id="email" name="email"
+                               aria-labelledby="email" placeholder="Email address" required>
                     </div>
                     <div class="form-group input-group col-lg-12">
                         <label for="email"></label>
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user-circle"></i></span>
                         </div>
-                        <input type="text" class="form-control" id="name" aria-labelledby="name" placeholder="Full name" required>
+                        <input type="text" class="form-control" id="name" name="name"
+                               aria-labelledby="name" placeholder="Full name" required>
                     </div>
                     <div class="form-group input-group col-lg-12">
                         <label for="password"></label>
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
                         </div>
-                        <input type="password" class="form-control" id="password" aria-labelledby="password" placeholder="Password" required>
+                        <input type="password" class="form-control" id="password" name="password"
+                               aria-labelledby="password" placeholder="Password" required>
                         <div class="input-group-append">
                             <button type="button" class="bg-transparent" id="show-hide" onclick="showOrHide()">
                                 <i id="show-hide-icon" class="fas fa-eye-slash" style="color: red"></i>

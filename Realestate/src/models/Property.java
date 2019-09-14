@@ -1,5 +1,8 @@
 package models;
 
+import dataSourceLayer.mappers.addressMapper.AddressMapper;
+import dataSourceLayer.mappers.addressMapper.AddressMapperInterface;
+
 import java.sql.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -23,8 +26,6 @@ public class Property {
     private int price;
     private int agent_id;
     private Set<Client> favoriteBy;
-//    private
-
 
     public Property() {
     }
@@ -177,6 +178,18 @@ public class Property {
     public void removeClient(Client client){
         favoriteBy.remove(client);
     }
+
+    public String retrieveTheAddressString() {
+        AddressMapperInterface am = new AddressMapper();
+        Address a = am.getAddressByID(getAddress_id());
+        return a.getStreet() + ", " + a.getCity() + " " + a.getState() + " " + a.getPostal_code() + " " + a.getCountry();
+    }
+
+    public Address retrieveTheAddressObj(){
+        AddressMapperInterface am = new AddressMapper();
+        return am.getAddressByID(getAddress_id());
+    }
+
 
     @Override
     public String toString() {

@@ -31,9 +31,9 @@ public class ConstructPropertySQLStmt{
                         property.getType() + "', " +
                         property.getNum_bed() + ", " +
                         property.getNum_bath() + ", " +
-                        property.getNum_carpark() + ", " +
-                        property.getDate_available() + ", " +
-                        property.getDate_inspection() + ", '" +
+                        property.getNum_carpark() + ", '" +
+                        property.getDate_available() + "', '" +
+                        property.getDate_inspection() + "', '" +
                         property.getDescription() + "', " +
                         property.getAddress_id() + ", '" +
                         property.getRent_or_buy() + "', " +
@@ -64,10 +64,14 @@ public class ConstructPropertySQLStmt{
 
     /**
      * get a delete statement
-     * @param property
+     * @param p_id
      * @return a SQL DELETE statement which deletes the information of a property in db table
      */
-    public static String getDeleteStmt(Property property) {
-        return "DELETE FROM properties WHERE property_id = " + property.getId();
+    public static String getDeleteStmt(int p_id) {
+        return "DELETE FROM properties WHERE property_id = " + p_id;
+    }
+
+    public static String getSelectStmt(int p_id) {
+        return "SELECT * FROM properties WHERE property_id = " + p_id;
     }
 }

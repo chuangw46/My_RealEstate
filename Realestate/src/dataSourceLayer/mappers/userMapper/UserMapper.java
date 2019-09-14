@@ -28,7 +28,6 @@ public class UserMapper implements UserMapperInterface{
             } else if (user instanceof Agent){
                 insertStatement = ConstructUserSQLStmt.getAgentINSERTStmt(user);
             }
-//            System.out.println(insertStatement);
             PreparedStatement stmt = DBConnection.prepare(insertStatement);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -68,15 +67,16 @@ public class UserMapper implements UserMapperInterface{
     }
 
     @Override
-    public void updateUser(User user) {
+    public boolean updateUser(User user) {
         if (user instanceof Client) {
-            updateClient((Client)user);
+            return updateClient((Client)user);
         } else if (user instanceof Agent) {
-            updateAgent((Agent)user);
+            return updateAgent((Agent)user);
         }
+        return false;
     }
 
-    private void updateClient(Client client) {
+    private boolean updateClient(Client client) {
         try {
             String updateStatement = ConstructUserSQLStmt.getClientUPDATEStmt(client);
             System.out.println(updateStatement);
@@ -84,18 +84,20 @@ public class UserMapper implements UserMapperInterface{
             int i = stmt.executeUpdate();
             System.out.println(i + " rows changed");
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    private void updateAgent(Agent agent) {
+    private boolean updateAgent(Agent agent) {
         try {
             String updateStatement = ConstructUserSQLStmt.getAgentUPDATEStmt(agent);
             PreparedStatement stmt = DBConnection.prepare(updateStatement);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
 

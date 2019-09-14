@@ -2,7 +2,7 @@ package test;
 
 import dataSourceLayer.mappers.userMapper.UserMapper;
 import dataSourceLayer.mappers.userMapper.UserMapperInterface;
-import domainLogic.Authentication;
+import domainLogic.UserManagement;
 import models.Agent;
 import models.Client;
 import models.User;
@@ -17,13 +17,13 @@ public class TestUser {
         UserMapperInterface userMapper = new UserMapper();
 //        System.out.println(login());
 //        System.out.println(creatClientAccount(userMapper));
-//        System.out.println(creatAgentAccount(userMapper));
+        System.out.println(creatAgentAccount(userMapper));
 //        updateClient(userMapper);
-        updateAgent(userMapper);
+//        updateAgent(userMapper);
     }
 
     public static User login(){
-        return Authentication.login("chuangw@gmail.com", "chuangw");
+        return UserManagement.login("chuangw@gmail.com", "chuangw");
     }
 
     public static boolean creatClientAccount(UserMapperInterface mapper){
@@ -32,7 +32,7 @@ public class TestUser {
     }
 
     public static boolean creatAgentAccount(UserMapperInterface mapper){
-        User agent = new Agent("testAgent@gamil.com","test","test name");
+        User agent = new Agent("a@gmail.com","chuangw","test name");
         return mapper.createUser(agent);
     }
 

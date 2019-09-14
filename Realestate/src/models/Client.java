@@ -13,6 +13,14 @@ import dataSourceLayer.lazyLoad.FavoriteListImplement;
 public class Client extends User{
     private FavoriteList favorites;
 
+    public Client(int id) {
+        super(id);
+    }
+
+    public Client(int id, String name) {
+        super(id, name);
+    }
+
     public Client(String email, String password, String name) {
         super(email, password, name);
     }

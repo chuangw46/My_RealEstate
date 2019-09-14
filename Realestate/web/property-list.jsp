@@ -44,7 +44,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Property Type</th>
-                        <th scope="col">Address</th>
+                        <th scope="col" class="col-lg-2">Address</th>
                         <th scope="col">Price</th>
                         <th scope="col">Available Date</th>
                         <th scope="col">Actions</th>
@@ -54,20 +54,24 @@
                         <%  if (request.getSession().getAttribute("propertyList") != null) {
                                 ArrayList ps = (ArrayList) request.getSession().getAttribute("propertyList");
                                 for (int i=0; i<ps.size(); i++) {
-                                Property p = (Property) ps.get(i); %>
+                                    Property p = (Property) ps.get(i); %>
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row"><%= i+1 %></th>
                                 <td><%=p.getType()%> - <%= p.getRent_or_buy() %></td>
-                                <td><%=p.getAddress_id()%></td>
+                                <td><%=p.retrieveTheAddressString()%></td>
                                 <td><%=p.getPrice()%></td>
                                 <td><%=p.getDate_available()%></td>
                                 <td>
                                     <form method="post" action="frontServlet" class="form-inline">
-                                        <a href="frontServlet?command=PropertyInfo&id=<%=p.getId()%>" class="btn btn-success btn-sm mr-2" role="button">View</a>
+                                        <a href="frontServlet?command=PropertyInfo&id=<%=p.getId()%>"
+                                           class="btn btn-success btn-sm m-1" role="button">View</a>
                                         <% if (isAgent) { %>
-                                        <a href="frontServlet?command=RedirectEditProperty&id=<%=p.getId()%>" class="btn btn-warning btn-sm mr-2" role="button">Edit</a>
+                                        <a href="frontServlet?command=RedirectEditProperty&id=<%=p.getId()%>"
+                                           class="btn btn-warning btn-sm m-1" role="button">Edit</a>
+
                                         <input type="hidden" id="command" name="command" value="DeleteProperty">
-                                        <button class="btn btn-danger btn-sm" type="submit"
+                                        <input type="hidden" id="property_id" name="property_id" value="<%=p.getId()%>">
+                                        <button class="btn btn-danger btn-sm m-1" type="submit"
                                                 onclick="return confirm('Are you sure you want to delete this property?')">Delete
                                         </button>
                                         <% } %>

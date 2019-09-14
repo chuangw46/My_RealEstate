@@ -6,18 +6,20 @@ package models;
  * @institution University of Melbourne
  */
 public class Agent extends User{
-    private AgencyCompany company;
+    private AgencyCompany company = new AgencyCompany();
     private String phone;
     private String bio;
 
+    public Agent(int id) {
+        super(id);
+    }
+
     public Agent(int id, String email, String password, String name) {
         super(id, email, password, name);
-        company = new AgencyCompany();
     }
 
     public Agent(String email, String password, String name) {
         super(email, password, name);
-        company = new AgencyCompany();
     }
 
     public Agent(int id, String email, String password, String name, String phone, String bio,

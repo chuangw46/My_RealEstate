@@ -1,6 +1,9 @@
 package commands.postRequest;
 
 import commands.FrontCommand;
+import domainLogic.UserManagement;
+import models.User;
+import utils.FlashMessage;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -10,9 +13,18 @@ import java.io.IOException;
  */
 public class SignUpCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
-        String email = this.request.getParameter("email");
-        String username = this.request.getParameter("username");
-        String password = this.request.getParameter("password");
-        forward("/index.jsp");
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String password = request.getParameter("password");
+        String type = request.getParameter("user-type");
+        User user = UserManagement.signup(email, password, name, type);
+        if (user != null) {
+            request.getSession().setAttribute("currentUser", user);
+            request.getSession().setAttribute("userType", type);
+            forward("/index.jsp");
+        } else {
+            FlashMessage.createErrorMessage(request.getSession(), "This email already exists.");
+            forward("/signup.jsp");
+        }
     }
 }

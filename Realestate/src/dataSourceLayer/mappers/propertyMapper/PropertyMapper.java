@@ -1,7 +1,10 @@
 package dataSourceLayer.mappers.propertyMapper;
 
+import dataSourceLayer.mappers.addressMapper.AddressMapper;
+import dataSourceLayer.mappers.addressMapper.AddressMapperInterface;
 import dbConfig.DBConnection;
 import models.Property;
+import utils.ConstructASTSQLStmt;
 import utils.ConstructObjectFromDB;
 import utils.ConstructPropertySQLStmt;
 
@@ -24,14 +27,15 @@ public class PropertyMapper implements PropertyMapperInterface {
      * @param property
      */
     @Override
-    public void createProperty(Property property) {
+    public boolean createProperty(Property property) {
         try {
             String insertStatetment = ConstructPropertySQLStmt.getInsertStmt(property);
             PreparedStatement stmt = DBConnection.prepare(insertStatetment);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
 
@@ -69,34 +73,44 @@ public class PropertyMapper implements PropertyMapperInterface {
      * @param property
      */
     @Override
-    public void updateProperty(Property property) {
+    public boolean updateProperty(Property property) {
         try {
-            String updateStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
-            System.out.println(updateStatement);
-            PreparedStatement stmt = DBConnection.prepare(updateStatement);
-            int i = stmt.executeUpdate();
-            System.out.println(i + " row is changed");
+            String updatePropertyStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
+            AddressMapperInterface am = new AddressMapper();
+            // update the address first
+            if (am.updateAddress(property.retrieveTheAddressObj())){
+                // update property
+                PreparedStatement stmt = DBConnection.prepare(updatePropertyStatement);
+                stmt.executeUpdate();
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     /**
      * Feature A - only agents have the permission to delete a property
      * the permission check is done on the domain logic layer
-     * @param property
+     * @param p_id
      */
     @Override
-    public void deleteProperty(Property property) {
+    public boolean deleteProperty(int a_id, int p_id) {
         try {
-            String deleteStatement = ConstructPropertySQLStmt.getDeleteStmt(property);
-            System.out.println(deleteStatement);
-            PreparedStatement stmt = DBConnection.prepare(deleteStatement);
-            int i = stmt.executeUpdate();
-            System.out.println(i + " row is changed");
+            String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(p_id);
+            PreparedStatement stmt = DBConnection.prepare(deleteFromPropertyTable);
+            stmt.executeUpdate();
+            PropertyIdentityMapUtil.deleteFromPropertyIDMap(p_id);
+            PropertyIdentityMapUtil.deleteFromPropertyAgentMap(a_id, p_id);
+
+            String deleteFromASTable = ConstructASTSQLStmt.getDeleteStmt(p_id);
+            stmt = DBConnection.prepare(deleteFromASTable);
+            stmt.executeUpdate();
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     // TODO: Feature B
@@ -121,5 +135,27 @@ public class PropertyMapper implements PropertyMapperInterface {
     @Override
     public List<Property> searchByPrice(int minPrice, int maxPrice) {
         return null;
+    }
+
+    @Override
+    public Property searchByPropertyID(int property_id) {
+        Property result = PropertyIdentityMapUtil.getPropertyByPID(property_id);
+        try {
+            if (result == null) {
+                // get the object from database
+                String selectStatement = ConstructPropertySQLStmt.getSelectStmt(property_id);
+                PreparedStatement stmt = DBConnection.prepare(selectStatement);
+
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    result = ConstructObjectFromDB.constructPropertyByRS(rs);
+                    // add the object to IdentityMap
+                    PropertyIdentityMapUtil.addToPropertyIDMap(result);
+                }
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+        return result;
     }
 }

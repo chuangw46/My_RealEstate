@@ -36,6 +36,7 @@
         <% Property p = (Property) request.getSession().getAttribute("currentProperty");%>
         <form method="post" action="frontServlet">
             <input type="hidden" id="command" name="command" value="PublishProperty">
+            <input type="hidden" id="action" name="action" value="Edit">
             <div class="row">
                 <div class="col">
                     <p class="h5 font-weight-light text-black-50">Property Address</p>
@@ -45,27 +46,27 @@
                 <div class="form-group col-lg-4">
                     <label for="street"></label>
                     <input id="street" name="street" type="text" class="form-control"
-                           placeholder="Street number and name" value="${currentAddress.street}">
+                           placeholder="Street number and name" value="<%=p.retrieveTheAddressObj().getStreet()%>">
                 </div>
                 <div class="form-group col-lg-2">
                     <label for="city"></label>
                     <input id="city" name="city" type="text" class="form-control"
-                           placeholder="City" value="${currentAddress.city}">
+                           placeholder="City" value="<%=p.retrieveTheAddressObj().getCity()%>">
                 </div>
                 <div class="form-group col-lg-2">
                     <label for="state"></label>
                     <input id="state" name="state" type="text" class="form-control"
-                           placeholder="State" value="${currentAddress.state}">
+                           placeholder="State" value="<%=p.retrieveTheAddressObj().getState()%>">
                 </div>
                 <div class="form-group col-lg-2">
                     <label for="country"></label>
                     <input id="country" name="country" type="text" class="form-control"
-                           placeholder="Country" value="${currentAddress.country}">
+                           placeholder="Country" value="<%=p.retrieveTheAddressObj().getCountry()%>">
                 </div>
                 <div class="form-group col-lg-2">
                     <label for="post-code"></label>
                     <input id="post-code" name="post-code" type="number" class="form-control"
-                           placeholder="Post code" value="${currentAddress.postal_code}">
+                           placeholder="Post code" value="<%=p.retrieveTheAddressObj().getPostal_code()%>">
                 </div>
             </div>
             <div class="row">

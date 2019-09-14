@@ -1,6 +1,7 @@
 package commands.getRequest;
 
 import commands.FrontCommand;
+import domainLogic.UserManagement;
 import models.Agent;
 import models.Client;
 import models.User;
@@ -16,10 +17,9 @@ public class SignInCommand extends FrontCommand {
     public void process() throws ServletException, IOException{
         String email = this.request.getParameter("email");
         String password = this.request.getParameter("password");
-//        if (Authentication.login(email, password)) {
-        User user = new Agent(1, "aaa@com", "123", "Junhan Yang", "0450001111",
-                "XXX", "Tencent", "333 Swanston St.", "www.tencent.com");
-//        User user = new Client(1, "aaa.com", "123", "Junhan Yang");
+        User user = UserManagement.login(email, password);
+        if (user != null) {
+//            System.out.println(user.getName());
             request.getSession().setAttribute("currentUser", user);
             if (user instanceof  Agent) {
                 request.getSession().setAttribute("userType", "Agent");
@@ -27,13 +27,15 @@ public class SignInCommand extends FrontCommand {
             else if (user instanceof Client) {
                 request.getSession().setAttribute("userType", "Client");
             }
-//        }
-            FlashMessage.createSuccessMessage(request.getSession(), "Welcome home, you are logged in.");
+            FlashMessage.createSuccessMessage(request.getSession(), "Hi " + user.getName() + ", " +
+                    "Welcome to Realestate welsite.  Enjoy your journey here :)");
             forward("/index.jsp");
-//        }
-//        else {
-//            forward("/signin.jsp");
-//        }
+        }
+        else {
+            FlashMessage.createErrorMessage(request.getSession(), "We didn't recognise the " +
+                    "username or password you entered. Please try again!");
+            forward("/signin.jsp");
+        }
 
     }
 }

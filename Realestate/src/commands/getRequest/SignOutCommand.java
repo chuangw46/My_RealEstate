@@ -10,8 +10,8 @@ import java.io.IOException;
  */
 public class SignOutCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
-        if (request.getSession().getAttribute("currentUser") != null) {
-            request.getSession().removeAttribute("currentUser");
+        if (request.getSession() != null) {
+            request.getSession().invalidate();
         }
         forward("/index.jsp");
     }

@@ -35,6 +35,8 @@
 
     <form method="post" action="frontServlet">
         <input type="hidden" id="command" name="command" value="PublishProperty">
+        <input type="hidden" id="action" name="action" value="Publish">
+        <input type="hidden" id="agent-id" name="id" value="${currentUser.id}">
         <div class="row">
             <div class="col">
                 <p class="h5 font-weight-light text-black-50">Property Address</p>

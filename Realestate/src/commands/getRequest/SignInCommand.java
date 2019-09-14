@@ -9,6 +9,9 @@ import utils.FlashMessage;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
+/**
+ * Get Sign in Page Command
+ */
 public class SignInCommand extends FrontCommand {
     public void process() throws ServletException, IOException{
         String email = this.request.getParameter("email");

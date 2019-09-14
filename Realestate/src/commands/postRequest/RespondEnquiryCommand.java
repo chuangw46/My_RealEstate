@@ -7,11 +7,11 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 
 /**
- * Post: update profile Command
+ * Post: respond an enquiry Command
  */
-public class UpdateProfileCommand extends FrontCommand {
+public class RespondEnquiryCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
-        FlashMessage.createSuccessMessage(request.getSession(), "Your profile has been updated.");
-        forward("/profile.jsp");
+        FlashMessage.createSuccessMessage(request.getSession(), "The enquiry has been responded.");
+        forward("/enquiry-list.jsp");
     }
 }

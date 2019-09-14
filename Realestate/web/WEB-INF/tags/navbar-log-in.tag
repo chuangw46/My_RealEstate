@@ -32,6 +32,9 @@
                         ${currentUser.name}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="frontServlet?command=SignOut">Sign out </a>
+                </li>
             </ul>
         </div>
     </div>

@@ -5,6 +5,9 @@ import commands.FrontCommand;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
+/**
+ * Post: sign up an account Command
+ */
 public class SignUpCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
         String email = this.request.getParameter("email");

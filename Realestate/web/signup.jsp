@@ -38,7 +38,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user-circle"></i></span>
                         </div>
-                        <input type="text" class="form-control" id="username" aria-labelledby="username" placeholder="Username" required>
+                        <input type="text" class="form-control" id="name" aria-labelledby="name" placeholder="Full name" required>
                     </div>
                     <div class="form-group input-group col-lg-12">
                         <label for="password"></label>
@@ -58,8 +58,7 @@
                         </div>
                         <select class="custom-select" id="user-type" name="user-type">
                             <option selected>My user type...</option>
-                            <option value="Buyer">Buyer</option>
-                            <option value="Tenant">Tenant</option>
+                            <option value="Client">Buyer/Tenant</option>
                             <option value="Agent">Agent</option>
                         </select>
                     </div>

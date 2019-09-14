@@ -18,6 +18,7 @@
     <% } else { %>
     <tags:navbar-log-out/>
     <% } %>
+    <% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
     <div class="container">
         <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
@@ -29,9 +30,6 @@
             <li class="breadcrumb-item">
                 <a href="frontServlet?command=IndexPage">Home</a>
             </li>
-<%--            <li class="breadcrumb-item">--%>
-<%--                <a href="frontServlet?command=ListProperties">List of Properties</a>--%>
-<%--            </li>--%>
             <li class="breadcrumb-item active">Property Information</li>
         </ol>
 
@@ -45,16 +43,18 @@
             <div class="col-lg-4">
                 <h3 class="my-3 text-muted">Property Description</h3>
                 <p class="font-weight-light text-black-50">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.
+                    ${currentProperty.description}
                 </p>
                 <h3 class="my-3 text-muted">Property Details</h3>
                 <ul class="text-black-50 font-weight-light">
-                    <li>Type: House - Sell</li>
-                    <li>Address: 888 Swanston Street, Carlton, VIC, Australia, 3033</li>
-                    <li>Inspection Date: 18/09/2019</li>
-                    <li>Available Date: 01/09/2019</li>
-                    <li>Price: $1,000,000</li>
-                    <li><i class="fas fa-bed"></i> 3; <i class="fas fa-bath"></i> 2; <i class="fas fa-car-side"></i> 1.</li>
+                    <li>Type: ${currentProperty.type} - ${currentProperty.rent_or_buy}</li>
+                    <li>Address: ${currentAddress.street} ${currentAddress.city} ${currentAddress.state} ${currentAddress.country} ${currentAddress.postal_code}</li>
+                    <li>Inspection Date: ${currentProperty.date_inspection}</li>
+                    <li>Available Date: ${currentProperty.date_available}</li>
+                    <li>Price: ${currentProperty.price}</li>
+                    <li><i class="fas fa-bed"></i> ${currentProperty.num_bed}
+                        <i class="fas fa-bath"></i> ${currentProperty.num_bath}
+                        <i class="fas fa-car-side"></i> ${currentProperty.num_carpark} </li>
                 </ul>
             </div>
         </div>
@@ -83,6 +83,12 @@
                 </a>
             </div>
         </div>
+        <% if (isAgent) { %>
+        <div class="row mb-3">
+            <a href="frontServlet?command=RedirectEditProperty&id=${currentProperty.id}"
+               class="btn btn-warning m-3" role="button">Update details</a>
+        </div>
+        <% } %>
     </div>
 
     <tags:footer-copyright/>

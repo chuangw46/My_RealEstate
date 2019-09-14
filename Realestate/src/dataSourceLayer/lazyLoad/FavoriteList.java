@@ -1,4 +1,4 @@
-package lazyLoadUtils;
+package dataSourceLayer.lazyLoad;
 
 import models.Property;
 

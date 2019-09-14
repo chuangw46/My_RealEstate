@@ -10,6 +10,9 @@ public class AgencyCompany {
     private String address;
     private String website;
 
+    public AgencyCompany() {
+    }
+
     public AgencyCompany(String name, String address, String website) {
         this.name = name;
         this.address = address;

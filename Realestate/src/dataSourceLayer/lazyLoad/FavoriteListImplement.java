@@ -1,10 +1,10 @@
-package lazyLoadUtils;
+package dataSourceLayer.lazyLoad;
 
 import dbConfig.DBConnection;
 import models.Property;
 import models.User;
+import utils.ConstructObjectFromDB;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,26 +51,12 @@ public class FavoriteListImplement implements FavoriteList{
         PreparedStatement stmt = DBConnection.prepare(selectStatement);
         ResultSet resultSet = stmt.executeQuery();
         while (resultSet.next()){
-            int id = resultSet.getInt(1);
-            String p_type = resultSet.getString(2);
-            int num_bed = resultSet.getInt(3);
-            int num_bath = resultSet.getInt(4);
-            int num_carpark = resultSet.getInt(5);
-            Date date_available = resultSet.getDate(6);
-            Date date_inpection = resultSet.getDate(7);
-            String description = resultSet.getString(8);
-            int address_id = resultSet.getInt(9);
-            String rent_or_buy = resultSet.getString(10);
-            int price = resultSet.getInt(11);
-            int agent_id = resultSet.getInt(12);
-
-
-            result = new Property(id,p_type,num_bed,num_bath,num_carpark,date_available,
-                    date_inpection,description,address_id, rent_or_buy, price, agent_id);
+            result = ConstructObjectFromDB.constructPropertyByRS(resultSet);
         }
         return result;
 
     }
+
 
     @Override
     public void add(Property property) {

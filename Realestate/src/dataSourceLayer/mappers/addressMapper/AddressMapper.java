@@ -1,7 +1,8 @@
-package mappers.addressMapper;
+package dataSourceLayer.mappers.addressMapper;
 
 import dbConfig.DBConnection;
 import models.Address;
+import utils.ConstructObjectFromDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +33,7 @@ public class AddressMapper implements AddressMapperInterface {
 
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    result = getAddressHelper(rs);
+                    result = ConstructObjectFromDB.constructAddressByRS(rs);
                     // add the object to IdentityMap
                     AddressIdentityMapUtil.addToPKMap(result);
                 }
@@ -55,7 +56,7 @@ public class AddressMapper implements AddressMapperInterface {
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
-                    Address temp = getAddressHelper(rs);
+                    Address temp = ConstructObjectFromDB.constructAddressByRS(rs);
                     // add each object to IdentityMap
                     AddressIdentityMapUtil.addToPostCodeMap(temp);
                 }
@@ -78,13 +79,5 @@ public class AddressMapper implements AddressMapperInterface {
 
     }
 
-    private Address getAddressHelper(ResultSet rs) throws SQLException {
-        int a_id = rs.getInt(1);
-        String a_street = rs.getString(2);
-        String a_city = rs.getString(3);
-        String a_state = rs.getString(4);
-        int a_postal_code = rs.getInt(5);
-        String a_country = rs.getString(6);
-        return new Address(a_id, a_street, a_city, a_state, a_postal_code, a_country);
-    }
+
 }

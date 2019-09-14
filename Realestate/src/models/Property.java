@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Date;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -28,6 +29,31 @@ public class Property {
     public Property() {
     }
 
+    public Property(int id) {
+        this.id = id;
+    }
+
+    public Property(int address_id, int agent_id) {
+        this.address_id = address_id;
+        this.agent_id = agent_id;
+    }
+
+    // the constructor without id -- for INSERT only
+    public Property(String type, int num_bed, int num_bath, int num_carpark, Date date_available, Date date_inspection, String description, int address_id, String rent_or_buy, int price, int agent_id) {
+        this.type = type;
+        this.num_bed = num_bed;
+        this.num_bath = num_bath;
+        this.num_carpark = num_carpark;
+        this.date_available = date_available;
+        this.date_inspection = date_inspection;
+        this.description = description;
+        this.address_id = address_id;
+        this.rent_or_buy = rent_or_buy;
+        this.price = price;
+        this.agent_id = agent_id;
+    }
+
+    // the constructor with id -- for SELECT only
     public Property(int id, String type, int num_bed, int num_bath, int num_carpark, Date date_available, Date date_inspection, String description, int address_id, String rent_or_buy, int price, int agent_id) {
         this.id = id;
         this.type = type;
@@ -168,5 +194,20 @@ public class Property {
                 ", price=" + price +
                 ", agent_id=" + agent_id +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Property property = (Property) o;
+        return id == property.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

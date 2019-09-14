@@ -127,7 +127,7 @@
             <div class="row">
                 <div class="form-group col-lg-5">
                     <label for="email"></label>
-                    <input id="email" name="email" type='email' placeholder="XXX@XXX" class="form-control" value="${currentUser.email}"/>
+                    <input id="email" name="email" type='email' placeholder="XXX@XXX" class="form-control" value="${currentUser.email}" disabled/>
                 </div>
             </div>
             <div class="row">

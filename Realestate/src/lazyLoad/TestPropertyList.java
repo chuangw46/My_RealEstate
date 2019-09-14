@@ -1,4 +1,4 @@
-package lazyLoadUtils;
+package lazyLoad;
 
 import models.Client;
 import models.Property;

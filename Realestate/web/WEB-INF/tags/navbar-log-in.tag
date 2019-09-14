@@ -27,7 +27,10 @@
                     <a class="nav-link" href="frontServlet?command=ViewEnquiry">Enquiries </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="frontServlet?command=ViewProfile">Username <i class="far fa-user-circle"></i></a>
+                    <a class="nav-link" href="frontServlet?command=ViewProfile">
+                        <i class="far fa-user-circle"></i>
+                        ${currentUser.name}
+                    </a>
                 </li>
             </ul>
         </div>

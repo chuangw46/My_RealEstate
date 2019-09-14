@@ -13,9 +13,9 @@
     <tags:head/>
 </head>
 <body>
-    <tags:navbar-log-out/>
-
+    <tags:navbar-log-in/>
     <div class="container">
+        <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3 font-weight-light">Property <i class="fas fa-share-alt"></i>
             <small>Publish New</small>
@@ -26,7 +26,7 @@
                 <a href="frontServlet?command=IndexPage">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="frontServlet?command=ListProperties">List of Properties</a>
+                <a href="frontServlet?command=ListProperties">Published Properties</a>
             </li>
             <li class="breadcrumb-item active">Publish a Property</li>
         </ol>
@@ -35,7 +35,6 @@
 
         <form method="post" action="frontServlet">
             <input type="hidden" id="command" name="command" value="PublishProperty">
-            <input type="hidden" id="action" name="action" value="publish">
             <div class="row">
                 <div class="col">
                     <p class="h5 font-weight-light text-black-50">Property Address</p>

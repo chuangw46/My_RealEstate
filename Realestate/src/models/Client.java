@@ -1,7 +1,7 @@
 package models;
 
-import lazyLoadUtils.FavoriteList;
-import lazyLoadUtils.FavoriteListImplement;
+import lazyLoad.FavoriteList;
+import lazyLoad.FavoriteListImplement;
 
 /**
  * @author Chuang Wang

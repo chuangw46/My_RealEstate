@@ -13,9 +13,10 @@
     <tags:head/>
 </head>
 <body>
-    <tags:navbar-log-out/>
-
+    <tags:navbar-log-in/>
+    <% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
     <div class="container">
+        <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3 font-weight-light">My Profile <i class="fas fa-users-cog"></i>
             <small>Manage profile</small>
@@ -41,8 +42,13 @@
                         </p>
                     </div>
                     <div class="card-footer text-center">
-                        <form id="buyer-properties-form">
-                            <button class="btn btn-info" type="submit" disabled>My favourite properties</button>
+                        <form id="buyer-properties-form" method="get" action="frontServlet">
+                            <input type="hidden" name="command" value="ListProperties">
+                            <button class="btn btn-info" type="submit"
+                                    <% if (isAgent) { %>
+                                    disabled
+                                    <% }%>
+                            >My favourite properties</button>
                         </form>
                     </div>
                 </div>
@@ -57,8 +63,13 @@
                         </p>
                     </div>
                     <div class="card-footer text-center">
-                        <form id="tenant-properties-form">
-                            <button class="btn btn-info" type="submit" disabled>My favourite properties</button>
+                        <form id="tenant-properties-form" method="get" action="frontServlet">
+                            <input type="hidden" name="command" value="ListProperties">
+                            <button class="btn btn-info" type="submit"
+                                    <% if (isAgent) { %>
+                                    disabled
+                                    <% }%>
+                            >My favourite properties</button>
                         </form>
                     </div>
                 </div>
@@ -74,8 +85,12 @@
                     </div>
                     <div class="card-footer text-center">
                         <form method="get" action="frontServlet">
-                            <input type="hidden" id="command" name="command" value="ListProperties">
-                            <button class="btn btn-info mt-1" type="submit">My published properties</button>
+                            <input type="hidden" name="command" value="ListProperties">
+                            <button class="btn btn-info mt-1" type="submit"
+                                    <% if (!isAgent) { %>
+                                    disabled
+                                    <% }%>
+                            >My published properties</button>
                         </form>
                     </div>
                 </div>
@@ -91,35 +106,17 @@
             </div>
         </div>
 
-        <form>
+        <form action="frontServlet" method="post">
+            <input type="hidden" id="command" name="command" value="UpdateProfile">
             <div class="row">
                 <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your name</p>
+                    <p class="h5 font-weight-light text-black-50">Your full name</p>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-lg-3">
-                    <label for="first-name"></label>
-                    <input id="first-name" type="text" class="form-control" placeholder="First name">
-                </div>
-                <div class="form-group col-lg-3">
-                    <label for="middle-name"></label>
-                    <input id="middle-name" type="text" class="form-control" placeholder="Middle name">
-                </div>
-                <div class="form-group col-lg-3">
-                    <label for="last-name"></label>
-                    <input id="last-name" type="text" class="form-control" placeholder="Last name">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your username</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-5">
-                    <label for="username"></label>
-                    <input id="username" type='text' placeholder="Your displayed name" class="form-control" />
+                    <label for="name"></label>
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Full name" value="${currentUser.name}">
                 </div>
             </div>
             <div class="row">
@@ -130,18 +127,7 @@
             <div class="row">
                 <div class="form-group col-lg-5">
                     <label for="email"></label>
-                    <input id="email" type='email' placeholder="XXX@XXX" class="form-control" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your date of birth</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-5">
-                    <label for="date-of-birth"></label>
-                    <input id="date-of-birth" type='date' placeholder="YYYY/MM/DD" class="form-control" />
+                    <input id="email" name="email" type='email' placeholder="XXX@XXX" class="form-control" value="${currentUser.email}"/>
                 </div>
             </div>
             <div class="row">
@@ -151,8 +137,42 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-5">
-                    <label for="number"></label>
-                    <input id="number" type='number' placeholder="Your mobile number" class="form-control" />
+                    <label for="phone"></label>
+                    <input id="phone" name="phone" type='text' placeholder="Your mobile number" class="form-control" value="${currentUser.phone}"/>
+                </div>
+            </div>
+            <% if (isAgent) { %>
+            <div class="row">
+                <div class="col">
+                    <p class="h5 font-weight-light text-black-50">Company name</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-5">
+                    <label for="company-name"></label>
+                    <input id="company-name" name="company-name" type='text' placeholder="Who do you work for?" class="form-control" value="${currentUser.company.name}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="h5 font-weight-light text-black-50">Company address</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-5">
+                    <label for="company-name"></label>
+                    <input id="company-address" type='text' placeholder="Where is your company located?" class="form-control" value="${currentUser.company.address}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="h5 font-weight-light text-black-50">Company website</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-5">
+                    <label for="company-name"></label>
+                    <input id="company-website" type='text' placeholder="Does you company have a website?" class="form-control" value="${currentUser.company.website}"/>
                 </div>
             </div>
             <div class="row">
@@ -163,9 +183,10 @@
             <div class="row">
                 <div class="form-group col-lg-10">
                     <label for="biography"></label>
-                    <textarea id="biography" placeholder="Tell something about yourself" class="form-control"></textarea>
+                    <textarea id="biography" name="biography" placeholder="Tell something about yourself" class="form-control">${currentUser.email}</textarea>
                 </div>
             </div>
+            <% } %>
             <div class="row">
                 <div class="form-group col-lg">
                     <button class="btn btn-primary" type="submit">Save changes</button>

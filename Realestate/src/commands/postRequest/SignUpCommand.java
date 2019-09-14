@@ -1,4 +1,6 @@
-package commands;
+package commands.postRequest;
+
+import commands.FrontCommand;
 
 import javax.servlet.ServletException;
 import java.io.IOException;

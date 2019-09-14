@@ -27,9 +27,6 @@
                     <a class="nav-link" href="frontServlet?command=ViewEnquiry">Enquiries </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="frontServlet?command=ViewProfile">Username <i class="far fa-user-circle"></i></a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="signin.jsp">
                         Sign in <i class="fas fa-sign-in-alt"></i>
                     </a>

@@ -13,9 +13,9 @@
     <tags:head/>
 </head>
 <body>
-    <tags:navbar-log-out/>
-
+    <tags:navbar-log-in/>
     <div class="container">
+        <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3 font-weight-light">My Enquiries <i class="fas fa-satellite-dish"></i>
             <small>List View</small>

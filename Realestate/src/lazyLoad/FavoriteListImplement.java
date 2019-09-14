@@ -1,4 +1,4 @@
-package lazyLoadUtils;
+package lazyLoad;
 
 import dbConfig.DBConnection;
 import models.Property;

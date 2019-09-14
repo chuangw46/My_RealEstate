@@ -13,11 +13,15 @@
     <tags:head/>
 </head>
 <body>
-    <tags:navbar-log-out/>
+    <tags:navbar-log-in/>
+    <% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
 
     <div class="container">
+        <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
-        <h1 class="mt-4 mb-3 font-weight-light">Property <i class="fas fa-list"></i>
+        <h1 class="mt-4 mb-3 font-weight-light">
+            <% if (isAgent) { %> Published Property <% } else { %> Favourite properties <% } %>
+            <i class="fas fa-list"></i>
             <small>List View</small>
         </h1>
 
@@ -25,7 +29,9 @@
             <li class="breadcrumb-item">
                 <a href="frontServlet?command=IndexPage">Home</a>
             </li>
-            <li class="breadcrumb-item active">List of Properties</li>
+            <li class="breadcrumb-item active">
+                <% if (isAgent) { %> Published Properties <% } else { %> Favourite properties <% } %>
+            </li>
         </ol>
 
         <hr>
@@ -51,39 +57,15 @@
                         <td>$1,000,000</td>
                         <td>01/09/2019</td>
                         <td>
-                            <div class="form-inline">
+                            <form method="post" action="frontServlet" class="form-inline">
                                 <a href="frontServlet?command=PropertyInfo" class="btn btn-success btn-sm mr-2" role="button">View</a>
-                                <a href="frontServlet?command=PublishProperty&action=edit" class="btn btn-warning btn-sm mr-2" role="button">Edit</a>
-                                <a href="frontServlet?command=PublishProperty&action=delete" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Apartment & Unit - Rent</td>
-                        <td>288 Queen Street, CBD, VIC, Australia, 3011</td>
-                        <td>$450 PW</td>
-                        <td>28/08/2019</td>
-                        <td>
-                            <div class="form-inline">
-                                <a href="frontServlet?command=PropertyInfo" class="btn btn-success btn-sm mr-2" role="button">View</a>
-                                <a href="frontServlet?command=PublishProperty&action=edit" class="btn btn-warning btn-sm mr-2" role="button">Edit</a>
-                                <a href="frontServlet?command=PublishProperty&action=delete" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Apartment & Unit - Rent</td>
-                        <td>62 Little Collin Street, CBD, VIC, Australia, 3009</td>
-                        <td>$375 PW</td>
-                        <td>15/09/2019</td>
-                        <td>
-                            <div class="form-inline">
-                                <a href="frontServlet?command=PropertyInfo" class="btn btn-success btn-sm mr-2" role="button">View</a>
-                                <a href="frontServlet?command=PublishProperty&action=edit" class="btn btn-warning btn-sm mr-2" role="button">Edit</a>
-                                <a href="frontServlet?command=PublishProperty&action=delete" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            </div>
+                                <% if (isAgent) { %>
+                                <a href="frontServlet?command=RedirectPublish" class="btn btn-warning btn-sm mr-2" role="button">Edit</a>
+                                <input type="hidden" id="command" name="command" value="DeleteProperty">
+                                <button class="btn btn-danger btn-sm" type="submit"
+                                        onclick="return confirm('Are you sure you want to delete this property?')" >Delete</button>
+                                <% } %>
+                            </form>
                         </td>
                     </tr>
                     </tbody>

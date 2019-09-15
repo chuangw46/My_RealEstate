@@ -103,7 +103,8 @@
                         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                     </div>
                     <input id="price" name="price" type="number" class="form-control"
-                           placeholder="Renting or selling price" value="${currentProperty.price}" required>
+                           placeholder="Renting or selling price" max="999999999" value="${currentProperty.price}"
+                           required>
                 </div>
                 <div class="input-group col-lg-4">
                     <select class="custom-select" id="rent-sell" name="rent-sell" aria-label="Property Type" required>

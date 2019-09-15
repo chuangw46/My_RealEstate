@@ -10,9 +10,8 @@ import utils.ConstructPropertySQLStmt;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Chuang Wang
@@ -52,11 +51,11 @@ public class PropertyMapper implements PropertyMapperI {
      * @return a list of properties that the agent posted before
      */
     @Override
-    public Set<Property> searchByAgentID(int agentID) {
-        Set<Property> result = PropertyIdentityMapUtil.getPropertyByAgentID(agentID);
+    public List<Property> searchByAgentID(int agentID) {
+        List<Property> result = PropertyIdentityMapUtil.getPropertyByAgentID(agentID);
         try {
             if (result == null) {
-                result = new HashSet<>();
+                result = new ArrayList<>();
                 // get all objects from database
                 String selectStatement = "SELECT * FROM properties WHERE fk_agent_id = " + agentID;
                 PreparedStatement stmt = DBConnection.prepare(selectStatement);

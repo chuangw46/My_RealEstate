@@ -15,10 +15,10 @@ import java.util.*;
  */
 
 public class PropertyIdentityMapUtil {
-    private static Map<Integer, Set<Property>> propertyAgentMap= new HashMap<>();
+    private static Map<Integer, List<Property>> propertyAgentMap= new HashMap<>();
     private static Map<Integer, Property> propertyIDMap = new HashMap<>();
 
-    public static Set<Property> getPropertyByAgentID(int agentID){
+    public static List<Property> getPropertyByAgentID(int agentID){
         return propertyAgentMap.get(agentID);
     }
 
@@ -27,12 +27,21 @@ public class PropertyIdentityMapUtil {
      * @param p
      */
     public static void addToPropertyAgentMap(Property p){
-        Set<Property> old = propertyAgentMap.get(p.getAgent_id());
+        List<Property> old = propertyAgentMap.get(p.getAgent_id());
+        boolean found = false;
         if (old == null) {
-            old = new HashSet<>();
+            old = new ArrayList<>();
         }
-        old.remove(p);
-        old.add(p);
+
+        for (int i = 0; i < old.size(); i++) {
+            if (old.get(i).getId() == p.getId()) {
+                old.set(i, p);
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+            old.add(p);
         propertyAgentMap.put(p.getAgent_id(), old);
     }
 
@@ -54,7 +63,7 @@ public class PropertyIdentityMapUtil {
      * @param p_id
      */
     public static void deleteFromPropertyAgentMap(int agent_id, int p_id){
-        Set<Property> old = propertyAgentMap.get(agent_id);
+        List<Property> old = propertyAgentMap.get(agent_id);
         for (Property p : old){
             if (p.getId() == p_id) {
                 old.remove(p);

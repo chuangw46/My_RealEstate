@@ -5,6 +5,12 @@ package models;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct a company object, but it will be a small object. As such, we used the embedded
+ * value pattern
+ */
+
 public class AgencyCompany {
     private String name;
     private String address;

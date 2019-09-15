@@ -1,11 +1,16 @@
+import commands.FrontCommand;
+import commands.UnknownCommand;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import commands.FrontCommand;
-import commands.UnknownCommand;
+
+/**
+ * the class represents a servlet which handles GET and POST requests from users
+ */
 
 @WebServlet(name = "FrontServlet", urlPatterns = {"/frontServlet"})
 public class FrontServlet extends HttpServlet {

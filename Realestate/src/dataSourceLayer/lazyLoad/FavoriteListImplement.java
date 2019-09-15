@@ -16,6 +16,10 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * lazy load utility for client property favorite list
+ */
 public class FavoriteListImplement implements FavoriteList{
     private User client;
     private List<Property> favorites;

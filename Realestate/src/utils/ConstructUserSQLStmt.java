@@ -9,6 +9,10 @@ import models.User;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct sql statement for client or agent table
+ */
 public class ConstructUserSQLStmt {
     public static String getClientSELECTStmt(String email) {
         return "SELECT * FROM client WHERE email = '" + email + "'";

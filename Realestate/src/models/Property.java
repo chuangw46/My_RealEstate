@@ -12,6 +12,11 @@ import java.util.Set;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct object based on information retrieved from properties table in database
+ */
+
 public class Property {
     private int id;
     private String type;

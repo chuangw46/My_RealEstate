@@ -11,6 +11,11 @@ import java.sql.SQLException;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * Favorite List data mapper implementation
+ */
+
 public class FavoriteListMapper implements FavoriteListMapperI{
     @Override
     public boolean deleteRowByPropertyID(int p_id) {

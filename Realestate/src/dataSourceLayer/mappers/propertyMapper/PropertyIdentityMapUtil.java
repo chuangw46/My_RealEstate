@@ -2,10 +2,7 @@ package dataSourceLayer.mappers.propertyMapper;
 
 import models.Property;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Chuang Wang
@@ -13,18 +10,19 @@ import java.util.Map;
  * @institution University of Melbourne
  */
 public class PropertyIdentityMapUtil {
-    private static Map<Integer, List<Property>> propertyAgentMap= new HashMap<>();
+    private static Map<Integer, Set<Property>> propertyAgentMap= new HashMap<>();
     private static Map<Integer, Property> propertyIDMap = new HashMap<>();
 
-    public static List<Property> getPropertyByAgentID(int agentID){
+    public static Set<Property> getPropertyByAgentID(int agentID){
         return propertyAgentMap.get(agentID);
     }
 
     public static void addToPropertyAgentMap(Property p){
-        List<Property> old = propertyAgentMap.get(p.getAgent_id());
+        Set<Property> old = propertyAgentMap.get(p.getAgent_id());
         if (old == null) {
-            old = new ArrayList<>();
+            old = new HashSet<>();
         }
+        old.remove(p);
         old.add(p);
         propertyAgentMap.put(p.getAgent_id(), old);
     }
@@ -42,7 +40,7 @@ public class PropertyIdentityMapUtil {
     }
 
     public static void deleteFromPropertyAgentMap(int agent_id, int p_id){
-        List<Property> old = propertyAgentMap.get(agent_id);
+        Set<Property> old = propertyAgentMap.get(agent_id);
         for (Property p : old){
             if (p.getId() == p_id) {
                 old.remove(p);

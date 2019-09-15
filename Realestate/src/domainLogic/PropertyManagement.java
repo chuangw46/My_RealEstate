@@ -10,6 +10,7 @@ import models.Address;
 import models.Property;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class PropertyManagement {
     }
 
     public static List<Property> viewMyPropertyList(int agentID){
-        return propertyMapper.searchByAgentID(agentID);
+        return new ArrayList<>(propertyMapper.searchByAgentID(agentID));
     }
 
     public static Property viewSpecificProperty(int property_id) {

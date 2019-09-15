@@ -10,8 +10,9 @@ import utils.ConstructPropertySQLStmt;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Chuang Wang
@@ -47,11 +48,11 @@ public class PropertyMapper implements PropertyMapperI {
      * @return a list of properties that the agent posted before
      */
     @Override
-    public List<Property> searchByAgentID(int agentID) {
-        List<Property> result = PropertyIdentityMapUtil.getPropertyByAgentID(agentID);
+    public Set<Property> searchByAgentID(int agentID) {
+        Set<Property> result = PropertyIdentityMapUtil.getPropertyByAgentID(agentID);
         try {
             if (result == null) {
-                result = new ArrayList<>();
+                result = new HashSet<>();
                 // get all objects from database
                 String selectStatement = "SELECT * FROM properties WHERE fk_agent_id = " + agentID;
                 PreparedStatement stmt = DBConnection.prepare(selectStatement);
@@ -80,9 +81,13 @@ public class PropertyMapper implements PropertyMapperI {
             AddressMapperI am = new AddressMapper();
             // update the address first
             if (am.updateAddress(property.retrieveTheAddressObj())){
-                // update property
+                // update the property in db row
                 PreparedStatement stmt = DBConnection.prepare(updatePropertyStatement);
                 stmt.executeUpdate();
+
+                // update the property in memory(identity map)
+                PropertyIdentityMapUtil.addToPropertyIDMap(property);
+                PropertyIdentityMapUtil.addToPropertyAgentMap(property);
                 return true;
             }
         } catch (SQLException e) {

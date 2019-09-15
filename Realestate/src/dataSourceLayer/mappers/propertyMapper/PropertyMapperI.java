@@ -3,6 +3,7 @@ package dataSourceLayer.mappers.propertyMapper;
 import models.Property;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Chuang Wang
@@ -23,7 +24,7 @@ public interface PropertyMapperI {
      * @param agentID
      * @return a list of properties that the agent posted before
      */
-    public List<Property> searchByAgentID(int agentID);
+    public Set<Property> searchByAgentID(int agentID);
 
     /**
      * Feature A - only agents have the permission to update a property information

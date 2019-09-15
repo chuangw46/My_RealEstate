@@ -1,7 +1,9 @@
 package models;
 
-import lazyLoadUtils.FavoriteList;
-import lazyLoadUtils.FavoriteListImplement;
+
+import dataSourceLayer.lazyLoad.FavoriteList;
+import dataSourceLayer.lazyLoad.FavoriteListImplement;
+
 
 /**
  * @author Chuang Wang
@@ -10,6 +12,18 @@ import lazyLoadUtils.FavoriteListImplement;
  */
 public class Client extends User{
     private FavoriteList favorites;
+
+    public Client(int id) {
+        super(id);
+    }
+
+    public Client(int id, String name) {
+        super(id, name);
+    }
+
+    public Client(String email, String password, String name) {
+        super(email, password, name);
+    }
 
     public Client(int id, String email, String password, String name) {
         super(id, email, password, name);

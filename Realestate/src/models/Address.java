@@ -18,6 +18,16 @@ public class Address {
     public Address() {
     }
 
+    // the constructor without id -- for INSERT only
+    public Address(String street, String city, String state, int postal_code, String country) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.postal_code = postal_code;
+        this.country = country;
+    }
+
+    // the constructor with id -- for SELECT, UPDATE
     public Address(int id, String street, String city, String state, int postal_code, String country) {
         this.id = id;
         this.street = street;

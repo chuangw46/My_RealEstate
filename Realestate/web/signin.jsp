@@ -14,6 +14,7 @@
 </head>
 <body class="bg-secondary">
     <div class="container">
+        <tags:flash-message/>
         <div class="row">
             <div class="d-flex justify-content-center align-items-center container">
                 <form method="get" action="frontServlet" class="bg-white p-5 shadow col-lg-6">

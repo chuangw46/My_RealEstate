@@ -14,6 +14,7 @@
 </head>
 <body class="bg-secondary">
     <div class="container">
+        <tags:flash-message/>
         <div class="row">
             <div class="d-flex justify-content-center align-items-center container">
                 <form method="post" action="frontServlet" class="bg-white p-5 shadow col-lg-6">
@@ -30,21 +31,24 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-envelope"></i></span>
                         </div>
-                        <input type="email" class="form-control" id="email" aria-labelledby="email" placeholder="Email address" required>
+                        <input type="email" class="form-control" id="email" name="email"
+                               aria-labelledby="email" placeholder="Email address" required>
                     </div>
                     <div class="form-group input-group col-lg-12">
                         <label for="email"></label>
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user-circle"></i></span>
                         </div>
-                        <input type="text" class="form-control" id="username" aria-labelledby="username" placeholder="Username" required>
+                        <input type="text" class="form-control" id="name" name="name"
+                               aria-labelledby="name" placeholder="Full name" required>
                     </div>
                     <div class="form-group input-group col-lg-12">
                         <label for="password"></label>
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
                         </div>
-                        <input type="password" class="form-control" id="password" aria-labelledby="password" placeholder="Password" required>
+                        <input type="password" class="form-control" id="password" name="password"
+                               aria-labelledby="password" placeholder="Password" required>
                         <div class="input-group-append">
                             <button type="button" class="bg-transparent" id="show-hide" onclick="showOrHide()">
                                 <i id="show-hide-icon" class="fas fa-eye-slash" style="color: red"></i>
@@ -57,8 +61,7 @@
                         </div>
                         <select class="custom-select" id="user-type" name="user-type">
                             <option selected>My user type...</option>
-                            <option value="Buyer">Buyer</option>
-                            <option value="Tenant">Tenant</option>
+                            <option value="Client">Buyer/Tenant</option>
                             <option value="Agent">Agent</option>
                         </select>
                     </div>

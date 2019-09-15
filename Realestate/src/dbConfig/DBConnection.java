@@ -17,7 +17,7 @@ public class DBConnection {
     // Database credentials
     private static final String DB_USER = "postgres";
     private static final String DB_PASSWORD = "postgres";
-    
+
     static Connection dbConnection = null;
     
     public static PreparedStatement prepare(String stm) throws SQLException{
@@ -39,7 +39,7 @@ public class DBConnection {
             // open a connection
             dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
 
-            dbConnection.setAutoCommit(false);
+//            dbConnection.setAutoCommit(false);
             return dbConnection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

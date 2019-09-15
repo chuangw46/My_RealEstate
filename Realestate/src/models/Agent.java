@@ -5,6 +5,11 @@ package models;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct object based on information retrieved from agent table in database
+ */
+
 public class Agent extends User{
     private AgencyCompany company = new AgencyCompany();
     private String phone;

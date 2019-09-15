@@ -7,6 +7,10 @@ import models.Property;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct sql statement for properties table
+ */
 public class ConstructPropertySQLStmt{
 
     /**
@@ -71,6 +75,11 @@ public class ConstructPropertySQLStmt{
         return "DELETE FROM properties WHERE property_id = " + p_id;
     }
 
+    /**
+     * get a select statement
+     * @param p_id
+     * @return a SQL SELECT statement which retrieves the information of a property in db table
+     */
     public static String getSelectStmt(int p_id) {
         return "SELECT * FROM properties WHERE property_id = " + p_id;
     }

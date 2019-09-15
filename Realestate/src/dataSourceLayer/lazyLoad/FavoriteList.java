@@ -9,6 +9,10 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * lazy load utility for client property favorite list
+ */
 public interface FavoriteList {
     public List<Property> getFavoriteList();
 

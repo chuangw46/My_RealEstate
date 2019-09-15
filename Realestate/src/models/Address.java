@@ -7,6 +7,11 @@ import java.util.Objects;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct object based on information retrieved from address table in database
+ */
+
 public class Address {
     private int id;
     private String street;

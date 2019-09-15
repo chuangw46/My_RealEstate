@@ -9,6 +9,10 @@ import java.util.*;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * address identity map
+ */
 public class AddressIdentityMapUtil {
     private static Map<Integer, Address> addressPKMap = new HashMap<>();
     private static Map<Integer, List<Address>> addressPostCodeMap = new HashMap<>();

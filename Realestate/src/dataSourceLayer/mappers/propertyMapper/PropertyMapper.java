@@ -19,6 +19,10 @@ import java.util.Set;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * Property data mapper implementation
+ */
 public class PropertyMapper implements PropertyMapperI {
 
     /**
@@ -141,6 +145,11 @@ public class PropertyMapper implements PropertyMapperI {
         return null;
     }
 
+    /**
+     * search a property information from identity map or database
+     * @param property_id
+     * @return a property object
+     */
     @Override
     public Property searchByPropertyID(int property_id) {
         Property result = PropertyIdentityMapUtil.getPropertyByPID(property_id);

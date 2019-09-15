@@ -10,6 +10,10 @@ import java.sql.SQLException;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * connect to database
+ */
 public class DBConnection {
     // JDBC driver name and database URL
     private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/Realestate";

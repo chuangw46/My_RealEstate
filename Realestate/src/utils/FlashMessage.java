@@ -2,6 +2,10 @@ package utils;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * create various flash messages in a session
+ */
+
 public final class FlashMessage {
     public static void createAlertMessage(HttpSession session, String messageKey) {
         session.setAttribute("alertMessage", messageKey);

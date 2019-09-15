@@ -10,6 +10,10 @@ import java.util.Set;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * Property data mapper interface
+ */
 public interface PropertyMapperI {
     /**
      * Feature A - only agents have the permission to create a property information

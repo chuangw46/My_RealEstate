@@ -11,6 +11,11 @@ import java.sql.SQLException;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct an object for corresponding tables in db
+ */
+
 public class ConstructObjectFromDB {
     /**
      * retrieve data from db and create an address object

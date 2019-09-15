@@ -18,13 +18,17 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * contains core functionality of managing properties published by agents
+ */
 public class PropertyManagement {
     private static AddressMapperI addressMapper = new AddressMapper();
     private static PropertyMapperI propertyMapper = new PropertyMapper();
     private static FavoriteListMapperI favoriteListMapper = new FavoriteListMapper();
 
-    /*
-    TODO uok
+    /**
+     * agents publish new properties
      */
     public static boolean publishProperty(String type, String num_bed, String num_bath, String num_carpark, String date_available, String date_inspection, String description, String street, String city, String state, int postal_code, String country, String rent_or_buy, String price, String agent_id) {
 
@@ -42,16 +46,28 @@ public class PropertyManagement {
         return propertyMapper.createProperty(property);
     }
 
+    /**
+     * to retrieve a list of properties published by a specific agent
+     * @param agentID
+     * @return a list of properties objects
+     */
     public static List<Property> viewMyPropertyList(int agentID){
         return new ArrayList<>(propertyMapper.searchByAgentID(agentID));
     }
 
+    /**
+     * to retrieve a specific property
+     * @param property_id
+     * @return a property object
+     */
     public static Property viewSpecificProperty(int property_id) {
         return propertyMapper.searchByPropertyID(property_id);
     }
 
-    /*
-    TODO uok
+
+    /**
+     * to update a property's details
+     * @return updated property object
      */
     public static Property updateProperty(Property old_property, String type, String num_bed,
                                    String num_bath, String num_carpark, String date_available,
@@ -80,8 +96,12 @@ public class PropertyManagement {
 
     }
 
-    /*
-    TODO uok
+    /**
+     * to delete a published property
+     * @param agent_id
+     * @param property_id
+     * @param address_id
+     * @return boolean value: delete operation success or fail
      */
     public static boolean deleteProperty(int agent_id, int property_id, int address_id) {
         // 1. delete property from association table(favorite list) - AST stands for association

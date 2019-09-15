@@ -7,6 +7,10 @@ import java.util.Objects;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * the parent class for Client and Agent
+ */
 public class User {
     private int id;
     private String email;

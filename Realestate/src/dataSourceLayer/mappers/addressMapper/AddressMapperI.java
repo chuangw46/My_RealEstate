@@ -9,7 +9,7 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public interface AddressMapperInterface {
+public interface AddressMapperI {
 
     public int createAddress(Address address); // create
 
@@ -20,6 +20,6 @@ public interface AddressMapperInterface {
 
     public boolean updateAddress(Address address); // update
 
-    public void deleteAddress(Address address); // delete
+    public boolean deleteAddressByID(int a_id); // delete
 
 }

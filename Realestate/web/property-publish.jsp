@@ -45,23 +45,24 @@
         <div class="row">
             <div class="form-group col-lg-4">
                 <label for="street"></label>
-                <input id="street" name="street" type="text" class="form-control" placeholder="Street number and name">
+                <input id="street" name="street" type="text" class="form-control"
+                       placeholder="Street number and name" required>
             </div>
             <div class="form-group col-lg-2">
                 <label for="city"></label>
-                <input id="city" name="city" type="text" class="form-control" placeholder="City">
+                <input id="city" name="city" type="text" class="form-control" placeholder="City" required>
             </div>
             <div class="form-group col-lg-2">
                 <label for="state"></label>
-                <input id="state" name="state" type="text" class="form-control" placeholder="State">
+                <input id="state" name="state" type="text" class="form-control" placeholder="State" required>
             </div>
             <div class="form-group col-lg-2">
                 <label for="country"></label>
-                <input id="country" name="country" type="text" class="form-control" placeholder="Country">
+                <input id="country" name="country" type="text" class="form-control" placeholder="Country" required>
             </div>
             <div class="form-group col-lg-2">
                 <label for="post-code"></label>
-                <input id="post-code" name="post-code" type="number" class="form-control" placeholder="Post code">
+                <input id="post-code" name="post-code" type="number" class="form-control" placeholder="Post code" required>
             </div>
         </div>
         <div class="row">
@@ -71,7 +72,7 @@
         </div>
         <div class="row">
             <div class="form-group col-lg-6">
-                <select class="custom-select" id="type" name="type" aria-label="Property Type">
+                <select class="custom-select" id="type" name="type" aria-label="Property Type" required>
                     <option selected>Choose Property Type</option>
                     <option value="House">House</option>
                     <option value="Apartment & Unit">Apartment & Unit</option>
@@ -97,10 +98,11 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                 </div>
-                <input id="price" name="price" type="number" class="form-control" placeholder="Renting or selling price">
+                <input id="price" name="price" type="number" class="form-control"
+                       placeholder="Renting or selling price" required>
             </div>
             <div class="input-group col-lg-4">
-                <select class="custom-select" id="rent-sell" name="rent-sell" aria-label="Property Type">
+                <select class="custom-select" id="rent-sell" name="rent-sell" aria-label="Property Type" required>
                     <option selected>Choose..</option>
                     <option value="Rent">Rent</option>
                     <option value="Sell">Sell</option>
@@ -119,7 +121,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-bed"></i></span>
                 </div>
-                <input id="bed-num" name="bed-num" type="number" class="form-control" placeholder="Number of bedrooms">
+                <input id="bed-num" name="bed-num" type="number" class="form-control"
+                       placeholder="Number of bedrooms" required>
             </div>
             <div class="input-group col-lg-3">
                 <label for="bath-num"></label>
@@ -127,7 +130,7 @@
                     <span class="input-group-text"><i class="fas fa-bath"></i></span>
                 </div>
                 <input id="bath-num" name="bath-num" type="number" class="form-control"
-                       placeholder="Number of bathrooms">
+                       placeholder="Number of bathrooms" required>
             </div>
             <div class="input-group col-lg-3">
                 <label for="car-park-num"></label>
@@ -135,7 +138,7 @@
                     <span class="input-group-text"><i class="fas fa-car-side"></i></span>
                 </div>
                 <input id="car-park-num" name="car-park-num" type="number" class="form-control"
-                       placeholder="Number of car parks">
+                       placeholder="Number of car parks" required>
             </div>
         </div>
 
@@ -144,21 +147,21 @@
                 <label for="inspection-date"></label>
                 <p class="h5 font-weight-light text-black-50">Inspection date</p>
                 <input id="inspection-date" name="inspection-date" type="date" class="form-control"
-                       placeholder="Inspection date">
+                       placeholder="Inspection date" required>
             </div>
             <div class="form-group col-lg-4">
                 <label for="available-date"></label>
                 <p class="h5 font-weight-light text-black-50">Available date</p>
                 <input id="available-date" name="available-date" type="date" class="form-control"
-                       placeholder="Available date">
+                       placeholder="Available date" required>
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-lg-10">
-                <p class="h5 font-weight-light text-black-50">Additional Description</p>
+                <p class="h5 font-weight-light text-black-50">Additional Description (Optional)</p>
                 <textarea id="description" name="description" type="text" class="form-control"
-                          placeholder="Give some more information."></textarea>
+                          placeholder="Give some more information." maxlength="100"></textarea>
             </div>
         </div>
 

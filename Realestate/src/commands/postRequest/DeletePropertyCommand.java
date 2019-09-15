@@ -17,9 +17,10 @@ public class DeletePropertyCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("currentUser");
         if (user != null) {
-            if (request.getParameter("property_id") != null) {
-                int property_id = Integer.parseInt(request.getParameter("property_id"));
-                if (PropertyManagement.deleteProperty(user.getId(), property_id)) {
+            if (request.getParameter("property-id") != null && request.getParameter("address-id") != null) {
+                int property_id = Integer.parseInt(request.getParameter("property-id"));
+                int address_id = Integer.parseInt(request.getParameter("address-id"));
+                if (PropertyManagement.deleteProperty(user.getId(), property_id, address_id)) {
                     FlashMessage.createSuccessMessage(request.getSession(), "Property has been deleted.");
                 }
             }

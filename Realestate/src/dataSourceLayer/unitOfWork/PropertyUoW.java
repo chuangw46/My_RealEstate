@@ -1,6 +1,6 @@
 package dataSourceLayer.unitOfWork;
 
-import dataSourceLayer.mappers.propertyMapper.PropertyMapperInterface;
+import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
 import models.Property;
 
 import java.util.ArrayList;
@@ -14,9 +14,9 @@ import java.util.Map;
  */
 public class PropertyUoW implements UnitOfWorkI<Property> {
     private Map<String, List<Property>> readyToCommit;
-    private PropertyMapperInterface propertyMapper;
+    private PropertyMapperI propertyMapper;
 
-    public PropertyUoW(Map<String, List<Property>> readyToCommit, PropertyMapperInterface propertyMapper) {
+    public PropertyUoW(Map<String, List<Property>> readyToCommit, PropertyMapperI propertyMapper) {
         this.readyToCommit = readyToCommit;
         this.propertyMapper = propertyMapper;
     }
@@ -101,7 +101,7 @@ public class PropertyUoW implements UnitOfWorkI<Property> {
     private void commitDelete() {
         List<Property> propertiesToBeDeleted = readyToCommit.get(UnitOfWorkI.DELETE);
         for (Property p : propertiesToBeDeleted) {
-            propertyMapper.deleteProperty(p.getAgent_id(), p.getId());
+            propertyMapper.deleteProperty(p.getAgent_id(), p.getId(), p.getAddress_id());
         }
     }
 }

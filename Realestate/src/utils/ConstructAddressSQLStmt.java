@@ -30,8 +30,12 @@ public class ConstructAddressSQLStmt {
                 "SET street = '" + address.getStreet() + "', " +
                         "city = '" + address.getCity() + "', " +
                         "state = '" + address.getState() + "', " +
-                        "postal_code = " + address.getPostal_code() + "', " +
-                        "country = '" + address.getCountry() + "\n" +
+                        "postal_code = " + address.getPostal_code() + ", " +
+                        "country = '" + address.getCountry() + "'\n" +
                 "WHERE address_id = " + address.getId() + ";" ;
+    }
+
+    public static String getDeleteStmt(int a_id) {
+        return "DELETE FROM address WHERE address_id = " + a_id;
     }
 }

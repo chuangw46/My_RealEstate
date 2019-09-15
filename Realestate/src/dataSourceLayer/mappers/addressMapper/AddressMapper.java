@@ -15,7 +15,7 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public class AddressMapper implements AddressMapperInterface {
+public class AddressMapper implements AddressMapperI {
 
     @Override
     public int createAddress(Address address) {
@@ -24,6 +24,9 @@ public class AddressMapper implements AddressMapperInterface {
             PreparedStatement stmt = DBConnection.prepare(insertStatetment);
             ResultSet rs = stmt.executeQuery();
             rs.next();
+            //TODO: Add to identity map
+            AddressIdentityMapUtil.addToPKMap(address);
+            AddressIdentityMapUtil.addToPostCodeMap(address);
             return rs.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,7 +95,16 @@ public class AddressMapper implements AddressMapperInterface {
     }
 
     @Override
-    public void deleteAddress(Address address) {
+    public boolean deleteAddressByID(int a_id) {
+        try {
+            String deleteStatement = ConstructAddressSQLStmt.getDeleteStmt(a_id);
+            System.out.println(deleteStatement);
+            PreparedStatement stmt = DBConnection.prepare(deleteStatement);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
 
     }
 

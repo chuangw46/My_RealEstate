@@ -1,9 +1,9 @@
 package domainLogic;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
-import dataSourceLayer.mappers.addressMapper.AddressMapperInterface;
+import dataSourceLayer.mappers.addressMapper.AddressMapperI;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
-import dataSourceLayer.mappers.propertyMapper.PropertyMapperInterface;
+import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
 import models.Address;
 import models.Property;
 
@@ -16,8 +16,8 @@ import java.util.List;
  * @institution University of Melbourne
  */
 public class PropertyManagement {
-    private static AddressMapperInterface addressMapper = new AddressMapper();
-    private static PropertyMapperInterface propertyMapper = new PropertyMapper();
+    private static AddressMapperI addressMapper = new AddressMapper();
+    private static PropertyMapperI propertyMapper = new PropertyMapper();
 
     public static boolean publishProperty(String type, String num_bed, String num_bath, String num_carpark, String date_available, String date_inspection, String description, String street, String city, String state, int postal_code, String country, String rent_or_buy, String price, String agent_id) {
         // create an address object
@@ -64,12 +64,12 @@ public class PropertyManagement {
         old_property.setPrice(Integer.parseInt(price));
         // update the property in db
         if (propertyMapper.updateProperty(old_property)){
-            return old_property;
+            return propertyMapper.searchByPropertyID(old_property.getId());
         }
         return null;
 
     }
-    public static boolean deleteProperty(int agent_id, int property_id) {
-        return propertyMapper.deleteProperty(agent_id, property_id);
+    public static boolean deleteProperty(int agent_id, int property_id, int address_id) {
+        return propertyMapper.deleteProperty(agent_id, property_id, address_id);
     }
 }

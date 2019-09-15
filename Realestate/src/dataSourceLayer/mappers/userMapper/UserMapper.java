@@ -17,7 +17,7 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public class UserMapper implements UserMapperInterface{
+public class UserMapper implements UserMapperI {
 
     @Override
     public boolean createUser(User user) {

@@ -9,7 +9,7 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public interface PropertyMapperInterface {
+public interface PropertyMapperI {
     /**
      * Feature A - only agents have the permission to create a property information
      * the permission check is done on the domain logic layer
@@ -40,7 +40,7 @@ public interface PropertyMapperInterface {
      * @param p_id
      * @return
      */
-    public boolean deleteProperty(int agent_id, int p_id);
+    public boolean deleteProperty(int agent_id, int p_id, int address_id);
 
     // TODO: Feature B
     public List<Property> searchByPostCode(int postCode);

@@ -1,7 +1,7 @@
 package test;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
-import dataSourceLayer.mappers.addressMapper.AddressMapperInterface;
+import dataSourceLayer.mappers.addressMapper.AddressMapperI;
 import models.Address;
 
 /**
@@ -11,13 +11,13 @@ import models.Address;
  */
 public class TestAddress {
     public static void main(String[] args) {
-        AddressMapperInterface mapper = new AddressMapper();
+        AddressMapperI mapper = new AddressMapper();
 //        testGetByPostcode(mapper);
         testCreateAddress(mapper);
 
     }
 
-    private static void testGetByPostcode(AddressMapperInterface mapper) {
+    private static void testGetByPostcode(AddressMapperI mapper) {
         Address address = mapper.getAddressByID(1);
         System.out.println(address);
 
@@ -29,7 +29,7 @@ public class TestAddress {
         }
     }
 
-    private static void testCreateAddress(AddressMapperInterface mapper){
+    private static void testCreateAddress(AddressMapperI mapper){
         Address address = new Address("123 eli", "melb", "vic",3000,"au");
         mapper.createAddress(address);
     }

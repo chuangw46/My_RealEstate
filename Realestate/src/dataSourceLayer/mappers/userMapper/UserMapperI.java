@@ -9,7 +9,7 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public interface UserMapperInterface {
+public interface UserMapperI {
 
     // TODO: sign up
     public boolean createUser(User user); // create

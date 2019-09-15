@@ -44,7 +44,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Property Type</th>
-                        <th scope="col" class="col-lg-2">Address</th>
+                        <th scope="col">Address</th>
                         <th scope="col">Price</th>
                         <th scope="col">Available Date</th>
                         <th scope="col">Actions</th>
@@ -70,7 +70,8 @@
                                            class="btn btn-warning btn-sm m-1" role="button">Edit</a>
 
                                         <input type="hidden" id="command" name="command" value="DeleteProperty">
-                                        <input type="hidden" id="property_id" name="property_id" value="<%=p.getId()%>">
+                                        <input type="hidden" id="property-id" name="property-id" value="<%=p.getId()%>">
+                                        <input type="hidden" id="address-id" name="address-id" value="<%=p.getAddress_id()%>">
                                         <button class="btn btn-danger btn-sm m-1" type="submit"
                                                 onclick="return confirm('Are you sure you want to delete this property?')">Delete
                                         </button>
@@ -99,5 +100,10 @@
     </div>
 
     <tags:footer-copyright/>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, "frontServlet?command=ListProperties");
+        }
+    </script>
 </body>
 </html>

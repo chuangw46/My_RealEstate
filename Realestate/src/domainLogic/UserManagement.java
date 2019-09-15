@@ -1,7 +1,7 @@
 package domainLogic;
 
 import dataSourceLayer.mappers.userMapper.UserMapper;
-import dataSourceLayer.mappers.userMapper.UserMapperInterface;
+import dataSourceLayer.mappers.userMapper.UserMapperI;
 import models.Agent;
 import models.Client;
 import models.User;
@@ -12,7 +12,7 @@ import models.User;
  * @institution University of Melbourne
  */
 public class UserManagement {
-    private static UserMapperInterface userMapper = new UserMapper();
+    private static UserMapperI userMapper = new UserMapper();
 
 
     public static User login(String email, String password) {

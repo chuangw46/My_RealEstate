@@ -1,10 +1,11 @@
 package dataSourceLayer.mappers.propertyMapper;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
-import dataSourceLayer.mappers.addressMapper.AddressMapperInterface;
+import dataSourceLayer.mappers.addressMapper.AddressMapperI;
+import dataSourceLayer.mappers.clientLikesPropertiesMapper.FavoriteListMapper;
+import dataSourceLayer.mappers.clientLikesPropertiesMapper.FavoriteListMapperI;
 import dbConfig.DBConnection;
 import models.Property;
-import utils.ConstructASTSQLStmt;
 import utils.ConstructObjectFromDB;
 import utils.ConstructPropertySQLStmt;
 
@@ -19,7 +20,7 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public class PropertyMapper implements PropertyMapperInterface {
+public class PropertyMapper implements PropertyMapperI {
 
     /**
      * Feature A - only agents have the permission to create a property information
@@ -32,6 +33,8 @@ public class PropertyMapper implements PropertyMapperInterface {
             String insertStatetment = ConstructPropertySQLStmt.getInsertStmt(property);
             PreparedStatement stmt = DBConnection.prepare(insertStatetment);
             stmt.executeUpdate();
+            PropertyIdentityMapUtil.addToPropertyIDMap(property);
+            PropertyIdentityMapUtil.addToPropertyAgentMap(property);
         } catch (SQLException e) {
             return false;
         }
@@ -76,36 +79,44 @@ public class PropertyMapper implements PropertyMapperInterface {
     public boolean updateProperty(Property property) {
         try {
             String updatePropertyStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
-            AddressMapperInterface am = new AddressMapper();
+            AddressMapperI am = new AddressMapper();
             // update the address first
             if (am.updateAddress(property.retrieveTheAddressObj())){
                 // update property
                 PreparedStatement stmt = DBConnection.prepare(updatePropertyStatement);
                 stmt.executeUpdate();
+                return true;
             }
         } catch (SQLException e) {
             return false;
         }
-        return true;
+        return false;
     }
 
     /**
      * Feature A - only agents have the permission to delete a property
      * the permission check is done on the domain logic layer
-     * @param p_id
+     * @param property_id
      */
     @Override
-    public boolean deleteProperty(int a_id, int p_id) {
+    public boolean deleteProperty(int agent_id, int property_id, int address_id) {
         try {
-            String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(p_id);
-            PreparedStatement stmt = DBConnection.prepare(deleteFromPropertyTable);
-            stmt.executeUpdate();
-            PropertyIdentityMapUtil.deleteFromPropertyIDMap(p_id);
-            PropertyIdentityMapUtil.deleteFromPropertyAgentMap(a_id, p_id);
+            // 1. delete from association table for favorite list - AST stands for association table
+            FavoriteListMapperI fm = new FavoriteListMapper();
+            fm.deleteRowByPropertyID(property_id);
 
-            String deleteFromASTable = ConstructASTSQLStmt.getDeleteStmt(p_id);
-            stmt = DBConnection.prepare(deleteFromASTable);
-            stmt.executeUpdate();
+            // 2. delete from property table - PT stands for property table
+            String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(property_id);
+//            System.out.println(deleteFromPropertyTable);
+            PreparedStatement stmtForPT = DBConnection.prepare(deleteFromPropertyTable);
+            stmtForPT.executeUpdate();
+            PropertyIdentityMapUtil.deleteFromPropertyIDMap(property_id);
+            PropertyIdentityMapUtil.deleteFromPropertyAgentMap(agent_id, property_id);
+
+            // 3. delete from address table
+            AddressMapperI am = new AddressMapper();
+            am.deleteAddressByID(address_id);
+
 
         } catch (SQLException e) {
             return false;

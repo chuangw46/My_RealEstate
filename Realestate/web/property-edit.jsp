@@ -46,27 +46,27 @@
                 <div class="form-group col-lg-4">
                     <label for="street"></label>
                     <input id="street" name="street" type="text" class="form-control"
-                           placeholder="Street number and name" value="<%=p.retrieveTheAddressObj().getStreet()%>">
+                           placeholder="Street number and name" value="<%=p.retrieveTheAddressObj().getStreet()%>" required>
                 </div>
                 <div class="form-group col-lg-2">
                     <label for="city"></label>
                     <input id="city" name="city" type="text" class="form-control"
-                           placeholder="City" value="<%=p.retrieveTheAddressObj().getCity()%>">
+                           placeholder="City" value="<%=p.retrieveTheAddressObj().getCity()%>" required>
                 </div>
                 <div class="form-group col-lg-2">
                     <label for="state"></label>
                     <input id="state" name="state" type="text" class="form-control"
-                           placeholder="State" value="<%=p.retrieveTheAddressObj().getState()%>">
+                           placeholder="State" value="<%=p.retrieveTheAddressObj().getState()%>" required>
                 </div>
                 <div class="form-group col-lg-2">
                     <label for="country"></label>
                     <input id="country" name="country" type="text" class="form-control"
-                           placeholder="Country" value="<%=p.retrieveTheAddressObj().getCountry()%>">
+                           placeholder="Country" value="<%=p.retrieveTheAddressObj().getCountry()%>" required>
                 </div>
                 <div class="form-group col-lg-2">
                     <label for="post-code"></label>
                     <input id="post-code" name="post-code" type="number" class="form-control"
-                           placeholder="Post code" value="<%=p.retrieveTheAddressObj().getPostal_code()%>">
+                           placeholder="Post code" value="<%=p.retrieveTheAddressObj().getPostal_code()%>" required>
                 </div>
             </div>
             <div class="row">
@@ -76,7 +76,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <select class="custom-select" id="type" name="type" aria-label="Property Type">
+                    <select class="custom-select" id="type" name="type" aria-label="Property Type" required>
                         <option >Choose Property Type</option>
                         <option value="House" <% if (p.getType().equals("House")) { %> selected <% } %>>House</option>
                         <option value="Apartment & Unit"<% if (p.getType().equals("Apartment & Unit")) { %> selected <% } %>>Apartment & Unit</option>
@@ -103,10 +103,10 @@
                         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                     </div>
                     <input id="price" name="price" type="number" class="form-control"
-                           placeholder="Renting or selling price" value="${currentProperty.price}">
+                           placeholder="Renting or selling price" value="${currentProperty.price}" required>
                 </div>
                 <div class="input-group col-lg-4">
-                    <select class="custom-select" id="rent-sell" name="rent-sell" aria-label="Property Type">
+                    <select class="custom-select" id="rent-sell" name="rent-sell" aria-label="Property Type" required>
                         <option >Choose..</option>
                         <option value="Rent" <% if (p.getRent_or_buy().equals("Rent")) { %> selected <% } %>>Rent</option>
                         <option value="Sell" <% if (p.getRent_or_buy().equals("Sell")) { %> selected <% } %>>Sell</option>
@@ -126,7 +126,7 @@
                         <span class="input-group-text"><i class="fas fa-bed"></i></span>
                     </div>
                     <input id="bed-num" name="bed-num" type="number" class="form-control" placeholder="Number of bedrooms"
-                           value="${currentProperty.num_bed}">
+                           value="${currentProperty.num_bed}" required>
                 </div>
                 <div class="input-group col-lg-3">
                     <label for="bath-num"></label>
@@ -134,7 +134,7 @@
                         <span class="input-group-text"><i class="fas fa-bath"></i></span>
                     </div>
                     <input id="bath-num" name="bath-num" type="number" class="form-control"
-                           placeholder="Number of bathrooms" value="${currentProperty.num_bath}">
+                           placeholder="Number of bathrooms" value="${currentProperty.num_bath}" required>
                 </div>
                 <div class="input-group col-lg-3">
                     <label for="car-park-num"></label>
@@ -142,7 +142,7 @@
                         <span class="input-group-text"><i class="fas fa-car-side"></i></span>
                     </div>
                     <input id="car-park-num" name="car-park-num" type="number" class="form-control"
-                           placeholder="Number of car parks" value="${currentProperty.num_carpark}">
+                           placeholder="Number of car parks" value="${currentProperty.num_carpark}" required>
                 </div>
             </div>
 
@@ -151,21 +151,22 @@
                     <label for="inspection-date"></label>
                     <p class="h5 font-weight-light text-black-50">Inspection date</p>
                     <input id="inspection-date" name="inspection-date" type="date" class="form-control"
-                           placeholder="Inspection date" value="${currentProperty.date_inspection}">
+                           placeholder="Inspection date" value="${currentProperty.date_inspection}" required>
                 </div>
                 <div class="form-group col-lg-4">
                     <label for="available-date"></label>
                     <p class="h5 font-weight-light text-black-50">Available date</p>
                     <input id="available-date" name="available-date" type="date" class="form-control"
-                           placeholder="Available date" value="${currentProperty.date_available}">
+                           placeholder="Available date" value="${currentProperty.date_available}" required>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-lg-10">
-                    <p class="h5 font-weight-light text-black-50">Additional Description</p>
+                    <p class="h5 font-weight-light text-black-50">Additional Description (Optional)</p>
                     <textarea id="description" name="description" type="text" class="form-control"
-                              placeholder="Give some more information.">${currentProperty.description}</textarea>
+                              placeholder="Give some more information."
+                              maxlength="100">${currentProperty.description}</textarea>
                 </div>
             </div>
 

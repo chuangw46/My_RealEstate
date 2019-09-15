@@ -15,7 +15,7 @@ In this project, we are aiming to build a web-based and enterprise-scale propert
 
 ### **Diagrams**
 ---
-* [UML class diagram]()
+* [UML class diagram](https://github.com/chuangw46/SWEN90007_Project/blob/master/diagrams/realestate_classDiagram_milestone2.pdf)
 
 
 

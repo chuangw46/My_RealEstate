@@ -66,42 +66,52 @@ public class PropertyUoW implements UnitOfWorkI<Property> {
      * All UnitOfWork operations batched together executed in commit only.
      */
     @Override
-    public void commit() {
+    public boolean commit() {
+        boolean insertDone = true;
+        boolean updateDone = true;
+        boolean deleteDone = true;
         if (readyToCommit == null || readyToCommit.size() == 0) {
-            return;
+            return true;
         }
         // Commit started
         if (readyToCommit.containsKey(UnitOfWorkI.INSERT)) {
-            commitInsert();
+            insertDone = commitInsert();
         }
         if (readyToCommit.containsKey(UnitOfWorkI.UPDATE)) {
-            commitUpdate();
+            updateDone = commitUpdate();
         }
         if (readyToCommit.containsKey(UnitOfWorkI.DELETE)) {
-            commitDelete();
+            deleteDone = commitDelete();
         }
+        return insertDone && updateDone && deleteDone;
 
     }
 
-    private void commitInsert() {
+    private boolean commitInsert() {
         List<Property> propertiesToBeInserted = readyToCommit.get(UnitOfWorkI.INSERT);
         for (Property p : propertiesToBeInserted) {
-            propertyMapper.createProperty(p);
+            if (!propertyMapper.createProperty(p))
+                return false;
         }
+        return true;
     }
 
-    private void commitUpdate() {
+    private boolean commitUpdate() {
         List<Property> propertiesToBeUpdated = readyToCommit.get(UnitOfWorkI.UPDATE);
         for (Property p : propertiesToBeUpdated) {
-            propertyMapper.updateProperty(p);
+            if (!propertyMapper.updateProperty(p))
+                return false;
         }
+        return true;
 
     }
 
-    private void commitDelete() {
+    private boolean commitDelete() {
         List<Property> propertiesToBeDeleted = readyToCommit.get(UnitOfWorkI.DELETE);
         for (Property p : propertiesToBeDeleted) {
-            propertyMapper.deleteProperty(p.getAgent_id(), p.getId(), p.getAddress_id());
+            if (!propertyMapper.deleteProperty(p.getAgent_id(), p.getId()))
+                return false;
         }
+        return true;
     }
 }

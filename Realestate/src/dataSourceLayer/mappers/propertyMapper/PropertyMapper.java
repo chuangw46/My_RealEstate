@@ -2,8 +2,6 @@ package dataSourceLayer.mappers.propertyMapper;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapperI;
-import dataSourceLayer.mappers.clientLikesPropertiesMapper.FavoriteListMapper;
-import dataSourceLayer.mappers.clientLikesPropertiesMapper.FavoriteListMapperI;
 import dbConfig.DBConnection;
 import models.Property;
 import utils.ConstructObjectFromDB;
@@ -99,24 +97,14 @@ public class PropertyMapper implements PropertyMapperI {
      * @param property_id
      */
     @Override
-    public boolean deleteProperty(int agent_id, int property_id, int address_id) {
+    public boolean deleteProperty(int agent_id, int property_id) {
         try {
-            // 1. delete from association table for favorite list - AST stands for association table
-            FavoriteListMapperI fm = new FavoriteListMapper();
-            fm.deleteRowByPropertyID(property_id);
-
-            // 2. delete from property table - PT stands for property table
+            // delete from property table - PT stands for property table
             String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(property_id);
-//            System.out.println(deleteFromPropertyTable);
             PreparedStatement stmtForPT = DBConnection.prepare(deleteFromPropertyTable);
             stmtForPT.executeUpdate();
             PropertyIdentityMapUtil.deleteFromPropertyIDMap(property_id);
             PropertyIdentityMapUtil.deleteFromPropertyAgentMap(agent_id, property_id);
-
-            // 3. delete from address table
-            AddressMapperI am = new AddressMapper();
-            am.deleteAddressByID(address_id);
-
 
         } catch (SQLException e) {
             return false;

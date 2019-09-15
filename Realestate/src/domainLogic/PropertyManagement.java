@@ -2,6 +2,8 @@ package domainLogic;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapperI;
+import dataSourceLayer.mappers.clientLikesPropertiesMapper.FavoriteListMapper;
+import dataSourceLayer.mappers.clientLikesPropertiesMapper.FavoriteListMapperI;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
 import models.Address;
@@ -18,8 +20,13 @@ import java.util.List;
 public class PropertyManagement {
     private static AddressMapperI addressMapper = new AddressMapper();
     private static PropertyMapperI propertyMapper = new PropertyMapper();
+    private static FavoriteListMapperI favoriteListMapper = new FavoriteListMapper();
 
+    /*
+    TODO uok
+     */
     public static boolean publishProperty(String type, String num_bed, String num_bath, String num_carpark, String date_available, String date_inspection, String description, String street, String city, String state, int postal_code, String country, String rent_or_buy, String price, String agent_id) {
+
         // create an address object
         Address address = new Address(street, city, state, postal_code, country);
 
@@ -42,7 +49,9 @@ public class PropertyManagement {
         return propertyMapper.searchByPropertyID(property_id);
     }
 
-
+    /*
+    TODO uok
+     */
     public static Property updateProperty(Property old_property, String type, String num_bed,
                                    String num_bath, String num_carpark, String date_available,
                                           String date_inspection, String description, String street,
@@ -69,7 +78,22 @@ public class PropertyManagement {
         return null;
 
     }
+
+    /*
+    TODO uok
+     */
     public static boolean deleteProperty(int agent_id, int property_id, int address_id) {
-        return propertyMapper.deleteProperty(agent_id, property_id, address_id);
+        // 1. delete property from association table(favorite list) - AST stands for association
+        // table
+        favoriteListMapper.deleteRowByPropertyID(property_id);
+
+        // 2. delete property from property table - PT stands for property table
+        propertyMapper.deleteProperty(agent_id, property_id);
+
+        // 3. delete from address table
+        addressMapper.deleteAddressByID(address_id);
+
+
+        return propertyMapper.deleteProperty(agent_id, property_id);
     }
 }

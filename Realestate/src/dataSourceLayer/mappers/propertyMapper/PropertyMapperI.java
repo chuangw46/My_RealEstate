@@ -40,7 +40,7 @@ public interface PropertyMapperI {
      * @param p_id
      * @return
      */
-    public boolean deleteProperty(int agent_id, int p_id, int address_id);
+    public boolean deleteProperty(int agent_id, int p_id);
 
     // TODO: Feature B
     public List<Property> searchByPostCode(int postCode);

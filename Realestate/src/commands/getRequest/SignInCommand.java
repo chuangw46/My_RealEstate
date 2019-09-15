@@ -28,7 +28,7 @@ public class SignInCommand extends FrontCommand {
                 request.getSession().setAttribute("userType", "Client");
             }
             FlashMessage.createSuccessMessage(request.getSession(), "Hi " + user.getName() + ", " +
-                    "Welcome to Realestate welsite.  Enjoy your journey here :)");
+                    "Welcome to Realestate website.  Enjoy your journey here :)");
             forward("/index.jsp");
         }
         else {

@@ -9,7 +9,11 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public interface UserMapperInterface {
+
+/**
+ * user data mapper interface
+ */
+public interface UserMapperI {
 
     // TODO: sign up
     public boolean createUser(User user); // create
@@ -21,7 +25,7 @@ public interface UserMapperInterface {
     public List<User> getUserByName(String name);
 
     // TODO: update user info
-    public void updateUser(User user); // update
+    public boolean updateUser(User user); // update
 
     // TODO: delete a user
     public void deleteUser(User user); // delete

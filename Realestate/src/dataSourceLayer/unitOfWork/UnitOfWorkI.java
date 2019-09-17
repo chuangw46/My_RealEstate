@@ -29,5 +29,5 @@ public interface UnitOfWorkI<T> {
     /***
      * All UnitOfWork operations batched together executed in commit only.
      */
-    void commit();
+    boolean commit();
 }

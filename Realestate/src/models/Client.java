@@ -1,15 +1,30 @@
 package models;
 
+
 import dataSourceLayer.lazyLoad.FavoriteList;
 import dataSourceLayer.lazyLoad.FavoriteListImplement;
+
 
 /**
  * @author Chuang Wang
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct object based on information retrieved from client table in database
+ */
+
 public class Client extends User{
     private FavoriteList favorites;
+
+    public Client(int id) {
+        super(id);
+    }
+
+    public Client(int id, String name) {
+        super(id, name);
+    }
 
     public Client(String email, String password, String name) {
         super(email, password, name);

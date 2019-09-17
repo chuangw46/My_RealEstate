@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: junhanyang
   Date: 2019-09-12
@@ -7,17 +7,22 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ page import="models.*" %>
 <html>
 <head>
     <title>My Real Estate - Property list</title>
     <tags:head/>
 </head>
 <body>
-    <tags:navbar-log-out/>
+    <tags:navbar-log-in/>
+    <% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
 
     <div class="container">
+        <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
-        <h1 class="mt-4 mb-3 font-weight-light">Property <i class="fas fa-list"></i>
+        <h1 class="mt-4 mb-3 font-weight-light">
+            <% if (isAgent) { %> Published Property <% } else { %> Favourite properties <% } %>
+            <i class="fas fa-list"></i>
             <small>List View</small>
         </h1>
 
@@ -25,7 +30,9 @@
             <li class="breadcrumb-item">
                 <a href="frontServlet?command=IndexPage">Home</a>
             </li>
-            <li class="breadcrumb-item active">List of Properties</li>
+            <li class="breadcrumb-item active">
+                <% if (isAgent) { %> Published Properties <% } else { %> Favourite properties <% } %>
+            </li>
         </ol>
 
         <hr>
@@ -44,54 +51,59 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>House - Sell</td>
-                        <td>888 Swanston Street, Carlton, VIC, Australia, 3033</td>
-                        <td>$1,000,000</td>
-                        <td>01/09/2019</td>
-                        <td>
-                            <div class="form-inline">
-                                <a href="frontServlet?command=PropertyInfo" class="btn btn-success btn-sm mr-2" role="button">View</a>
-                                <a href="frontServlet?command=PublishProperty&action=edit" class="btn btn-warning btn-sm mr-2" role="button">Edit</a>
-                                <a href="frontServlet?command=PublishProperty&action=delete" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Apartment & Unit - Rent</td>
-                        <td>288 Queen Street, CBD, VIC, Australia, 3011</td>
-                        <td>$450 PW</td>
-                        <td>28/08/2019</td>
-                        <td>
-                            <div class="form-inline">
-                                <a href="frontServlet?command=PropertyInfo" class="btn btn-success btn-sm mr-2" role="button">View</a>
-                                <a href="frontServlet?command=PublishProperty&action=edit" class="btn btn-warning btn-sm mr-2" role="button">Edit</a>
-                                <a href="frontServlet?command=PublishProperty&action=delete" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Apartment & Unit - Rent</td>
-                        <td>62 Little Collin Street, CBD, VIC, Australia, 3009</td>
-                        <td>$375 PW</td>
-                        <td>15/09/2019</td>
-                        <td>
-                            <div class="form-inline">
-                                <a href="frontServlet?command=PropertyInfo" class="btn btn-success btn-sm mr-2" role="button">View</a>
-                                <a href="frontServlet?command=PublishProperty&action=edit" class="btn btn-warning btn-sm mr-2" role="button">Edit</a>
-                                <a href="frontServlet?command=PublishProperty&action=delete" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
+                        <%  if (request.getSession().getAttribute("propertyList") != null) {
+                                ArrayList ps = (ArrayList) request.getSession().getAttribute("propertyList");
+                                for (int i=0; i<ps.size(); i++) {
+                                    Property p = (Property) ps.get(i); %>
+                            <tr>
+                                <th scope="row"><%= i+1 %></th>
+                                <td><%=p.getType()%> - <%= p.getRent_or_buy() %></td>
+                                <td><%=p.retrieveTheAddressString()%></td>
+                                <td><%=p.getPrice()%></td>
+                                <td><%=p.getDate_available()%></td>
+                                <td>
+                                    <form method="post" action="frontServlet" class="form-inline">
+                                        <a href="frontServlet?command=PropertyInfo&id=<%=p.getId()%>"
+                                           class="btn btn-success btn-sm m-1" role="button">View</a>
+                                        <% if (isAgent) { %>
+                                        <a href="frontServlet?command=RedirectEditProperty&id=<%=p.getId()%>"
+                                           class="btn btn-warning btn-sm m-1" role="button">Edit</a>
+
+                                        <input type="hidden" id="command" name="command" value="DeleteProperty">
+                                        <input type="hidden" id="property-id" name="property-id" value="<%=p.getId()%>">
+                                        <input type="hidden" id="address-id" name="address-id" value="<%=p.getAddress_id()%>">
+                                        <button class="btn btn-danger btn-sm m-1" type="submit"
+                                                onclick="return confirm('Are you sure you want to delete this property?')">Delete
+                                        </button>
+                                        <% } %>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% } %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <% if (isAgent) { %>
+        <div class="row mb-3">
+            <form method="get" action="frontServlet">
+                <input type="hidden" name="command" value="RedirectPublish">
+                <div class="form-group col-lg">
+                    <button class="btn btn-primary" type="submit">Publish a new property</button>
+                </div>
+            </form>
+        </div>
+        <% } %>
+
     </div>
 
     <tags:footer-copyright/>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, "frontServlet?command=ListProperties");
+        }
+    </script>
 </body>
 </html>

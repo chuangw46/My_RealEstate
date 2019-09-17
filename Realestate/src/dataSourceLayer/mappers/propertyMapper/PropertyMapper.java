@@ -1,5 +1,7 @@
 package dataSourceLayer.mappers.propertyMapper;
 
+import dataSourceLayer.mappers.addressMapper.AddressMapper;
+import dataSourceLayer.mappers.addressMapper.AddressMapperI;
 import dbConfig.DBConnection;
 import models.Property;
 import utils.ConstructObjectFromDB;
@@ -16,7 +18,11 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public class PropertyMapper implements PropertyMapperInterface {
+
+/**
+ * Property data mapper implementation
+ */
+public class PropertyMapper implements PropertyMapperI {
 
     /**
      * Feature A - only agents have the permission to create a property information
@@ -24,14 +30,17 @@ public class PropertyMapper implements PropertyMapperInterface {
      * @param property
      */
     @Override
-    public void createProperty(Property property) {
+    public boolean createProperty(Property property) {
         try {
             String insertStatetment = ConstructPropertySQLStmt.getInsertStmt(property);
             PreparedStatement stmt = DBConnection.prepare(insertStatetment);
             stmt.executeUpdate();
+            PropertyIdentityMapUtil.addToPropertyIDMap(property);
+            PropertyIdentityMapUtil.addToPropertyAgentMap(property);
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
 
@@ -69,34 +78,46 @@ public class PropertyMapper implements PropertyMapperInterface {
      * @param property
      */
     @Override
-    public void updateProperty(Property property) {
+    public boolean updateProperty(Property property) {
         try {
-            String updateStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
-            System.out.println(updateStatement);
-            PreparedStatement stmt = DBConnection.prepare(updateStatement);
-            int i = stmt.executeUpdate();
-            System.out.println(i + " row is changed");
+            String updatePropertyStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
+            AddressMapperI am = new AddressMapper();
+            // update the address first
+            if (am.updateAddress(property.retrieveTheAddressObj())){
+                // update the property in db row
+                PreparedStatement stmt = DBConnection.prepare(updatePropertyStatement);
+                stmt.executeUpdate();
+
+                // update the property in memory(identity map)
+                PropertyIdentityMapUtil.addToPropertyIDMap(property);
+                PropertyIdentityMapUtil.addToPropertyAgentMap(property);
+                return true;
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return false;
     }
 
     /**
      * Feature A - only agents have the permission to delete a property
      * the permission check is done on the domain logic layer
-     * @param property
+     * @param property_id
      */
     @Override
-    public void deleteProperty(Property property) {
+    public boolean deleteProperty(int agent_id, int property_id) {
         try {
-            String deleteStatement = ConstructPropertySQLStmt.getDeleteStmt(property);
-            System.out.println(deleteStatement);
-            PreparedStatement stmt = DBConnection.prepare(deleteStatement);
-            int i = stmt.executeUpdate();
-            System.out.println(i + " row is changed");
+            // delete from property table - PT stands for property table
+            String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(property_id);
+            PreparedStatement stmtForPT = DBConnection.prepare(deleteFromPropertyTable);
+            stmtForPT.executeUpdate();
+            PropertyIdentityMapUtil.deleteFromPropertyIDMap(property_id);
+            PropertyIdentityMapUtil.deleteFromPropertyAgentMap(agent_id, property_id);
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     // TODO: Feature B
@@ -121,5 +142,32 @@ public class PropertyMapper implements PropertyMapperInterface {
     @Override
     public List<Property> searchByPrice(int minPrice, int maxPrice) {
         return null;
+    }
+
+    /**
+     * search a property information from identity map or database
+     * @param property_id
+     * @return a property object
+     */
+    @Override
+    public Property searchByPropertyID(int property_id) {
+        Property result = PropertyIdentityMapUtil.getPropertyByPID(property_id);
+        try {
+            if (result == null) {
+                // get the object from database
+                String selectStatement = ConstructPropertySQLStmt.getSelectStmt(property_id);
+                PreparedStatement stmt = DBConnection.prepare(selectStatement);
+
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    result = ConstructObjectFromDB.constructPropertyByRS(rs);
+                    // add the object to IdentityMap
+                    PropertyIdentityMapUtil.addToPropertyIDMap(result);
+                }
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+        return result;
     }
 }

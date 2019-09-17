@@ -5,6 +5,11 @@ package models;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct object based on information retrieved from enquiries table in database
+ */
+
 public class Enquiry {
     private int id;
     private Client client;

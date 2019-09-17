@@ -13,9 +13,13 @@
     <tags:head/>
 </head>
 <body>
+    <% if (request.getSession().getAttribute("currentUser") != null) { %>
+    <tags:navbar-log-in/>
+    <% } else { %>
     <tags:navbar-log-out/>
-
+    <% } %>
     <div class="container">
+        <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3 font-weight-light">Property <i class="fas fa-building"></i>
             <small>Search Results</small>

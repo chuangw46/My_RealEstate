@@ -10,6 +10,10 @@ import java.util.Map;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * user identity map
+ */
 public class UserIdentityMapUtil {
     private static Map<Integer, User> userIDMap = new HashMap<>();
     private static Map<String, User> userEmailMap = new HashMap<>();

@@ -13,168 +13,201 @@
     <tags:head/>
 </head>
 <body>
-    <tags:navbar-log-out/>
+<tags:navbar-log-in/>
+<% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
+<div class="container">
+    <tags:flash-message/>
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3 font-weight-light">My Profile <i class="fas fa-users-cog"></i>
+        <small>Manage profile</small>
+    </h1>
 
-    <div class="container">
-        <!-- Page Heading/Breadcrumbs -->
-        <h1 class="mt-4 mb-3 font-weight-light">My Profile <i class="fas fa-users-cog"></i>
-            <small>Manage profile</small>
-        </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="frontServlet?command=IndexPage">Home</a>
+        </li>
+        <li class="breadcrumb-item active">My Profile</li>
+    </ol>
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="frontServlet?command=IndexPage">Home</a>
-            </li>
-            <li class="breadcrumb-item active">My Profile</li>
-        </ol>
+    <hr>
 
-        <hr>
-
-        <div class="row">
-            <div class="col-lg-4 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="images/dmitry-demidko-eBWzFKahEaU-unsplash.jpg" class="card-img-top" alt="Agent picture">
-                    <div class="card-body">
-                        <h5 class="card-title">Buyer</h5>
-                        <p class="card-text">
-                            I want to check out properties that are marked in my favourite list.
-                        </p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <form id="buyer-properties-form">
-                            <button class="btn btn-info" type="submit" disabled>My favourite properties</button>
-                        </form>
-                    </div>
+    <div class="row">
+        <div class="col-lg-4 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="images/dmitry-demidko-eBWzFKahEaU-unsplash.jpg" class="card-img-top" alt="Agent picture">
+                <div class="card-body">
+                    <h5 class="card-title">Buyer</h5>
+                    <p class="card-text">
+                        I want to check out properties that are marked in my favourite list.
+                    </p>
                 </div>
-            </div>
-            <div class="col-lg-4 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="images/nordwood-themes-bJjsKbToY34-unsplash.jpg" class="card-img-top" alt="Agent picture">
-                    <div class="card-body">
-                        <h5 class="card-title">Tenant</h5>
-                        <p class="card-text">
-                            I want to check out properties that are marked in my favourite list.
-                        </p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <form id="tenant-properties-form">
-                            <button class="btn btn-info" type="submit" disabled>My favourite properties</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="images/kobu-agency-7okkFhxrxNw-unsplash.jpg" class="card-img-top" alt="Agent picture">
-                    <div class="card-body">
-                        <h5 class="card-title">Agent</h5>
-                        <p class="card-text">
-                            I want to publish some properties on this website.
-                        </p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <form method="get" action="frontServlet">
-                            <input type="hidden" id="command" name="command" value="ListProperties">
-                            <button class="btn btn-info mt-1" type="submit">My published properties</button>
-                        </form>
-                    </div>
+                <div class="card-footer text-center">
+                    <form id="buyer-properties-form" method="get" action="frontServlet">
+                        <input type="hidden" name="command" value="ListProperties">
+                        <button class="btn btn-info" type="submit"
+<%--                                <% if (isAgent) { %>--%>
+<%--                                disabled--%>
+<%--                                <% }%>--%>
+                        disabled>My favourite properties
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
-
-
-        <hr>
-
-        <div class="row">
-            <div class="col-lg-12 p-3 text-center">
-                <p class="h3 font-weight-light ">Your details</p>
+        <div class="col-lg-4 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="images/nordwood-themes-bJjsKbToY34-unsplash.jpg" class="card-img-top" alt="Agent picture">
+                <div class="card-body">
+                    <h5 class="card-title">Tenant</h5>
+                    <p class="card-text">
+                        I want to check out properties that are marked in my favourite list.
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <form id="tenant-properties-form" method="get" action="frontServlet">
+                        <input type="hidden" name="command" value="ListProperties">
+                        <button class="btn btn-info" type="submit"
+<%--                                <% if (isAgent) { %>--%>
+<%--                                disabled--%>
+<%--                                <% }%>--%>
+                        disabled>My favourite properties
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-
-        <form>
-            <div class="row">
-                <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your name</p>
+        <div class="col-lg-4 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="images/kobu-agency-7okkFhxrxNw-unsplash.jpg" class="card-img-top" alt="Agent picture">
+                <div class="card-body">
+                    <h5 class="card-title">Agent</h5>
+                    <p class="card-text">
+                        I want to publish some properties on this website.
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <form method="get" action="frontServlet">
+                        <input type="hidden" name="command" value="ListProperties">
+                        <button class="btn btn-info mt-1" type="submit"
+                                <% if (!isAgent) { %>
+                                disabled
+                                <% }%>
+                        >My published properties
+                        </button>
+                    </form>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-lg-3">
-                    <label for="first-name"></label>
-                    <input id="first-name" type="text" class="form-control" placeholder="First name">
-                </div>
-                <div class="form-group col-lg-3">
-                    <label for="middle-name"></label>
-                    <input id="middle-name" type="text" class="form-control" placeholder="Middle name">
-                </div>
-                <div class="form-group col-lg-3">
-                    <label for="last-name"></label>
-                    <input id="last-name" type="text" class="form-control" placeholder="Last name">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your username</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-5">
-                    <label for="username"></label>
-                    <input id="username" type='text' placeholder="Your displayed name" class="form-control" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your email</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-5">
-                    <label for="email"></label>
-                    <input id="email" type='email' placeholder="XXX@XXX" class="form-control" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your date of birth</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-5">
-                    <label for="date-of-birth"></label>
-                    <input id="date-of-birth" type='date' placeholder="YYYY/MM/DD" class="form-control" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your contact number</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-5">
-                    <label for="number"></label>
-                    <input id="number" type='number' placeholder="Your mobile number" class="form-control" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p class="h5 font-weight-light text-black-50">Your biography</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-10">
-                    <label for="biography"></label>
-                    <textarea id="biography" placeholder="Tell something about yourself" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg">
-                    <button class="btn btn-primary" type="submit">Save changes</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 
 
-    <tags:footer-copyright/>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-12 p-3 text-center">
+            <p class="h3 font-weight-light ">Your details</p>
+        </div>
+    </div>
+
+    <form action="frontServlet" method="post">
+        <input type="hidden" id="command" name="command" value="UpdateProfile">
+        <div class="row">
+            <div class="col">
+                <p class="h5 font-weight-light text-black-50">Your full name</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label for="name"></label>
+                <input id="name" name="name" type="text" class="form-control" placeholder="Full name"
+                       value="${currentUser.name}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="h5 font-weight-light text-black-50">Your email</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-5">
+                <label for="email"></label>
+                <input id="email" name="email" type='email' placeholder="XXX@XXX" class="form-control"
+                       value="${currentUser.email}" disabled/>
+            </div>
+        </div>
+        <% if (isAgent) { %>
+        <div class="row">
+            <div class="col">
+                <p class="h5 font-weight-light text-black-50">Your contact number</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-5">
+                <label for="phone"></label>
+                <input id="phone" name="phone" type='text' placeholder="Your mobile number" class="form-control"
+                       value="${currentUser.phone}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="h5 font-weight-light text-black-50">Company name</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-5">
+                <label for="company-name"></label>
+                <input id="company-name" name="company-name" type='text' placeholder="Who do you work for?"
+                       class="form-control" value="${currentUser.company.name}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="h5 font-weight-light text-black-50">Company address</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-5">
+                <label for="company-address"></label>
+                <input id="company-address" name="company-address" type='text'
+                       placeholder="Where is your company located?"
+                       class="form-control" value="${currentUser.company.address}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="h5 font-weight-light text-black-50">Company website</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-5">
+                <label for="company-website"></label>
+                <input id="company-website" name="company-website" type='text'
+                       placeholder="Does you company have a website?"
+                       class="form-control" value="${currentUser.company.website}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="h5 font-weight-light text-black-50">Your biography</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-10">
+                <label for="biography"></label>
+                <textarea id="biography" name="biography" placeholder="Tell something about yourself"
+                          class="form-control">${currentUser.bio}</textarea>
+            </div>
+        </div>
+        <% } %>
+        <div class="row">
+            <div class="form-group col-lg">
+                <button class="btn btn-primary" type="submit">Save changes</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<tags:footer-copyright/>
 </body>
 </html>

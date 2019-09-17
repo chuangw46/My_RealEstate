@@ -6,10 +6,16 @@
     <tags:head/>
   </head>
   <body>
-    <tags:navbar-log-out/>
+
+    <% if (request.getSession().getAttribute("currentUser") != null) { %>
+        <tags:navbar-log-in/>
+    <% } else { %>
+        <tags:navbar-log-out/>
+    <% } %>
 
     <div class="container">
-      <div class="row">
+        <tags:flash-message/>
+        <div class="row">
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                   <div class="carousel-item active">
@@ -230,7 +236,7 @@
                       </p>
                   </div>
                   <div class="card-footer">
-                      <a href="#" class="btn btn-info">Manage my enquires</a>
+                      <a href="frontServlet?command=ViewEnquiry" class="btn btn-info disabled">Manage my enquires</a>
                   </div>
               </div>
           </div>
@@ -266,7 +272,7 @@
                       </p>
                   </div>
                   <div class="card-footer">
-                      <a href="frontServlet?command=PublishProperty&action=redirect" class="btn btn-info">Publish a property</a>
+                      <a href="frontServlet?command=RedirectPublish" class="btn btn-info">Publish a property</a>
                   </div>
               </div>
           </div>

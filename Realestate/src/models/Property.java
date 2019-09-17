@@ -1,5 +1,8 @@
 package models;
 
+import dataSourceLayer.mappers.addressMapper.AddressMapper;
+import dataSourceLayer.mappers.addressMapper.AddressMapperI;
+
 import java.sql.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -9,6 +12,11 @@ import java.util.Set;
  * @studentID 791793
  * @institution University of Melbourne
  */
+
+/**
+ * to construct object based on information retrieved from properties table in database
+ */
+
 public class Property {
     private int id;
     private String type;
@@ -23,8 +31,6 @@ public class Property {
     private int price;
     private int agent_id;
     private Set<Client> favoriteBy;
-//    private
-
 
     public Property() {
     }
@@ -177,6 +183,18 @@ public class Property {
     public void removeClient(Client client){
         favoriteBy.remove(client);
     }
+
+    public String retrieveTheAddressString() {
+        AddressMapperI am = new AddressMapper();
+        Address a = am.getAddressByID(getAddress_id());
+        return a.getStreet() + ", " + a.getCity() + " " + a.getState() + " " + a.getPostal_code() + " " + a.getCountry();
+    }
+
+    public Address retrieveTheAddressObj(){
+        AddressMapperI am = new AddressMapper();
+        return am.getAddressByID(getAddress_id());
+    }
+
 
     @Override
     public String toString() {

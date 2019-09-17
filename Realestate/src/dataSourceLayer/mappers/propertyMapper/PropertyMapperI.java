@@ -9,13 +9,17 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public interface PropertyMapperInterface {
+
+/**
+ * Property data mapper interface
+ */
+public interface PropertyMapperI {
     /**
      * Feature A - only agents have the permission to create a property information
      * the permission check is done on the domain logic layer
      * @param property
      */
-    public void createProperty(Property property); // create
+    public boolean createProperty(Property property); // create
 
     /**
      * Feature A - return a list of properties that the agent posted before
@@ -30,14 +34,17 @@ public interface PropertyMapperInterface {
      * the permission check is done on the domain logic layer
      * @param property
      */
-    public void updateProperty(Property property);
+    public boolean updateProperty(Property property);
+
 
     /**
      * Feature A - only agents have the permission to delete a property
      * the permission check is done on the domain logic layer
-     * @param property
+     * @param agent_id
+     * @param p_id
+     * @return
      */
-    public void deleteProperty(Property property);
+    public boolean deleteProperty(int agent_id, int p_id);
 
     // TODO: Feature B
     public List<Property> searchByPostCode(int postCode);
@@ -51,4 +58,5 @@ public interface PropertyMapperInterface {
     // TODO: Feature B
     public List<Property> searchByPrice(int minPrice, int maxPrice);
 
+    public Property searchByPropertyID(int property_id);
 }

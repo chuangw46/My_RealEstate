@@ -1,7 +1,7 @@
 package test;
 
 import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
-import dataSourceLayer.mappers.propertyMapper.PropertyMapperInterface;
+import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
 import models.Property;
 
 import java.sql.Date;
@@ -13,27 +13,27 @@ import java.sql.Date;
  */
 public class TestPropertyMapper {
     public static void main(String[] args) {
-        PropertyMapperInterface mapper = new PropertyMapper();
+        PropertyMapperI mapper = new PropertyMapper();
 //        testSearchByAgentID(mapper);
 //        testInsertProperty(mapper);
 //        testUpdateProperty(mapper);
         testDeleteProperty(mapper);
     }
 
-    private static void testSearchByAgentID(PropertyMapperInterface mapper) {
+    private static void testSearchByAgentID(PropertyMapperI mapper) {
 
         for (Property p : mapper.searchByAgentID(1)){
             System.out.println(p);
         }
     }
 
-    private static void testInsertProperty(PropertyMapperInterface mapper){
+    private static void testInsertProperty(PropertyMapperI mapper){
         Property p = new Property(4,1);
         mapper.createProperty(p);
 
     }
 
-    private static void testUpdateProperty(PropertyMapperInterface mapper) {
+    private static void testUpdateProperty(PropertyMapperI mapper) {
         Date available = Date.valueOf("2020-01-01");
         Date inspect = Date.valueOf("2020-02-02");
 
@@ -42,8 +42,7 @@ public class TestPropertyMapper {
         mapper.updateProperty(p);
     }
 
-    private static void testDeleteProperty(PropertyMapperInterface mapper) {
-        Property p = new Property(40);
-        mapper.deleteProperty(p);
+    private static void testDeleteProperty(PropertyMapperI mapper) {
+//        mapper.deleteProperty(40);
     }
 }

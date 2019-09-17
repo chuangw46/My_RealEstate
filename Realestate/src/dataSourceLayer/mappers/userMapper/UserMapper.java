@@ -17,8 +17,17 @@ import java.util.List;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public class UserMapper implements UserMapperInterface{
 
+/**
+ * user data mapper implementation
+ */
+public class UserMapper implements UserMapperI {
+
+    /**
+     * create a new user in database either in client table or in agent table
+     * @param user
+     * @return true if success, false if failed
+     */
     @Override
     public boolean createUser(User user) {
         try {
@@ -28,7 +37,6 @@ public class UserMapper implements UserMapperInterface{
             } else if (user instanceof Agent){
                 insertStatement = ConstructUserSQLStmt.getAgentINSERTStmt(user);
             }
-//            System.out.println(insertStatement);
             PreparedStatement stmt = DBConnection.prepare(insertStatement);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -37,6 +45,11 @@ public class UserMapper implements UserMapperInterface{
         return true;
     }
 
+    /**
+     * retrieve a user information based on user email which is unique in table
+     * @param email
+     * @return a user object
+     */
     @Override
     public User getUserByEmail(String email) {
         User user = UserIdentityMapUtil.getUserByEmail(email);
@@ -67,16 +80,27 @@ public class UserMapper implements UserMapperInterface{
         return null;
     }
 
+    /**
+     * update a user information and update the row in database
+     * @param user
+     * @return true if success, false if failed
+     */
     @Override
-    public void updateUser(User user) {
+    public boolean updateUser(User user) {
         if (user instanceof Client) {
-            updateClient((Client)user);
+            return updateClient((Client)user);
         } else if (user instanceof Agent) {
-            updateAgent((Agent)user);
+            return updateAgent((Agent)user);
         }
+        return false;
     }
 
-    private void updateClient(Client client) {
+    /**
+     * helper function for updateUser
+     * @param client
+     * @return true if success, false if failed
+     */
+    private boolean updateClient(Client client) {
         try {
             String updateStatement = ConstructUserSQLStmt.getClientUPDATEStmt(client);
             System.out.println(updateStatement);
@@ -84,25 +108,39 @@ public class UserMapper implements UserMapperInterface{
             int i = stmt.executeUpdate();
             System.out.println(i + " rows changed");
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    private void updateAgent(Agent agent) {
+    /**
+     * helper function for updateUser
+     * @param agent
+     * @return true if success, false if failed
+     */
+    private boolean updateAgent(Agent agent) {
         try {
             String updateStatement = ConstructUserSQLStmt.getAgentUPDATEStmt(agent);
             PreparedStatement stmt = DBConnection.prepare(updateStatement);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
 
+    // TODO - Feature B
     @Override
     public void deleteUser(User user) {
     }
 
+    /**
+     * helper function for getUserByEmail function
+     * @param email
+     * @return a user object
+     * @throws SQLException
+     */
     private User findUserByEmailFromClient(String email) throws SQLException {
         String selectStatement = ConstructUserSQLStmt.getClientSELECTStmt(email);
         PreparedStatement stmt = DBConnection.prepare(selectStatement);
@@ -114,6 +152,12 @@ public class UserMapper implements UserMapperInterface{
         return null;
     }
 
+    /**
+     * helper function for getUserByEmail function
+     * @param email
+     * @return a user object
+     * @throws SQLException
+     */
     private User findUserByEmailFromAgent(String email) throws SQLException {
         String selectStatement = ConstructUserSQLStmt.getAgentSELECTStmt(email);
         PreparedStatement stmt = DBConnection.prepare(selectStatement);

@@ -1,7 +1,7 @@
 package dataSourceLayer.mappers.favoriteList;
 
-import dbConfig.DBConnection;
-import domainModels.Property;
+import dataSourceLayer.dbConfig.DBConnection;
+import model.Property;
 import utils.ConstructFavoriteListSQLStmt;
 import utils.ConstructObjectFromDB;
 import utils.ConstructPropertySQLStmt;

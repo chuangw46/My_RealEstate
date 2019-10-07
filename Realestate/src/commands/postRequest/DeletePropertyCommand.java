@@ -1,9 +1,9 @@
 package commands.postRequest;
 
 import commands.FrontCommand;
-import domainLogic.PropertyManagement;
-import domainModels.Property;
-import domainModels.User;
+import service.PropertyManagement;
+import model.Property;
+import model.User;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;

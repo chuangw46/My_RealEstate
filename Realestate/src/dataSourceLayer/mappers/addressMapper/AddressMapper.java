@@ -1,7 +1,7 @@
 package dataSourceLayer.mappers.addressMapper;
 
-import dbConfig.DBConnection;
-import domainModels.Address;
+import dataSourceLayer.dbConfig.DBConnection;
+import model.Address;
 import utils.ConstructAddressSQLStmt;
 import utils.ConstructObjectFromDB;
 

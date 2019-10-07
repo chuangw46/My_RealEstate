@@ -1,6 +1,6 @@
 package dataSourceLayer.mappers.userMapper;
 
-import domainModels.User;
+import model.User;
 
 import java.util.List;
 

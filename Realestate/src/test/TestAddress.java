@@ -2,7 +2,7 @@ package test;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapperI;
-import domainModels.Address;
+import model.Address;
 
 /**
  * @author Chuang Wang

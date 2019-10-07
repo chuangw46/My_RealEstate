@@ -2,10 +2,10 @@ package test;
 
 import dataSourceLayer.mappers.userMapper.UserMapper;
 import dataSourceLayer.mappers.userMapper.UserMapperI;
-import domainLogic.UserManagement;
-import domainModels.Agent;
-import domainModels.Client;
-import domainModels.User;
+import service.UserManagement;
+import model.Agent;
+import model.Client;
+import model.User;
 
 /**
  * @author Chuang Wang

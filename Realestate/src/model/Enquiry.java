@@ -1,4 +1,4 @@
-package domainModels;
+package model;
 
 /**
  * @author Chuang Wang

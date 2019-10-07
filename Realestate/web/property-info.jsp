@@ -1,4 +1,4 @@
-<%@ page import="domainModels.Property" %><%--
+<%@ page import="model.Property" %><%--
   Created by IntelliJ IDEA.
   User: junhanyang
   Date: 2019-09-12

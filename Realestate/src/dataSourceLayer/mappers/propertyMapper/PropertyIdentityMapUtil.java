@@ -1,6 +1,6 @@
 package dataSourceLayer.mappers.propertyMapper;
 
-import domainModels.Property;
+import model.Property;
 
 import java.util.*;
 

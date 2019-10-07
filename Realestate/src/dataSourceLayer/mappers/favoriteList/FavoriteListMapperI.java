@@ -6,7 +6,7 @@ package dataSourceLayer.mappers.favoriteList;
  * @institution University of Melbourne
  */
 
-import domainModels.Property;
+import model.Property;
 
 import java.util.List;
 

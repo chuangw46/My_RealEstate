@@ -1,6 +1,6 @@
 package utils;
 
-import domainModels.Property;
+import model.Property;
 
 /**
  * @author Chuang Wang

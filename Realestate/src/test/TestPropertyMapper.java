@@ -2,7 +2,7 @@ package test;
 
 import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
-import domainModels.Property;
+import model.Property;
 
 import java.sql.Date;
 

@@ -1,8 +1,8 @@
 package commands.getRequest;
 
 import commands.FrontCommand;
-import domainLogic.PropertyManagement;
-import domainModels.Property;
+import service.PropertyManagement;
+import model.Property;
 
 import javax.servlet.ServletException;
 import java.io.IOException;

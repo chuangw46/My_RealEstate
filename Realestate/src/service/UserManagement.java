@@ -1,10 +1,10 @@
-package domainLogic;
+package service;
 
 import dataSourceLayer.mappers.userMapper.UserMapper;
 import dataSourceLayer.mappers.userMapper.UserMapperI;
-import domainModels.Agent;
-import domainModels.Client;
-import domainModels.User;
+import model.Agent;
+import model.Client;
+import model.User;
 
 /**
  * @author Chuang Wang

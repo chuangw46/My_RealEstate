@@ -2,9 +2,9 @@ package dataSourceLayer.mappers.propertyMapper;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapperI;
-import dbConfig.DBConnection;
-import domainModels.Address;
-import domainModels.Property;
+import dataSourceLayer.dbConfig.DBConnection;
+import model.Address;
+import model.Property;
 import utils.ConstructObjectFromDB;
 import utils.ConstructPropertySQLStmt;
 

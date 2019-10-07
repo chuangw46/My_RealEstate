@@ -1,4 +1,4 @@
-package domainLogic;
+package service;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapperI;
@@ -6,8 +6,8 @@ import dataSourceLayer.mappers.favoriteList.FavoriteListMapper;
 import dataSourceLayer.mappers.favoriteList.FavoriteListMapperI;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
-import domainModels.Address;
-import domainModels.Property;
+import model.Address;
+import model.Property;
 
 import java.sql.Date;
 import java.util.List;

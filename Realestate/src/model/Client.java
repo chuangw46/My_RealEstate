@@ -1,4 +1,4 @@
-package domainModels;
+package model;
 
 
 import dataSourceLayer.lazyLoad.FavoriteList;

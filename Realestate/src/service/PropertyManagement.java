@@ -1,11 +1,11 @@
 package service;
 
-import dataSourceLayer.mappers.addressMapper.AddressMapper;
-import dataSourceLayer.mappers.addressMapper.AddressMapperI;
-import dataSourceLayer.mappers.favoriteList.FavoriteListMapper;
-import dataSourceLayer.mappers.favoriteList.FavoriteListMapperI;
-import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
-import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
+import dataAccess.mappers.addressMapper.AddressMapper;
+import dataAccess.mappers.addressMapper.AddressMapperI;
+import dataAccess.mappers.favoriteList.FavoriteListMapper;
+import dataAccess.mappers.favoriteList.FavoriteListMapperI;
+import dataAccess.mappers.propertyMapper.PropertyMapper;
+import dataAccess.mappers.propertyMapper.PropertyMapperI;
 import model.Address;
 import model.Property;
 

@@ -1,4 +1,4 @@
-package dataSourceLayer.dbConfig;
+package dataAccess.dbConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

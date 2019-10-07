@@ -1,6 +1,6 @@
-package dataSourceLayer.mappers.userMapper;
+package dataAccess.mappers.userMapper;
 
-import dataSourceLayer.dbConfig.DBConnection;
+import dataAccess.dbConfig.DBConnection;
 import model.Agent;
 import model.Client;
 import model.User;

@@ -1,4 +1,4 @@
-package dataSourceLayer.lazyLoad;
+package dataAccess.lazyLoad;
 
 import model.Property;
 

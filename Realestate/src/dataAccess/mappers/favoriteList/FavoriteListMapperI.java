@@ -1,4 +1,4 @@
-package dataSourceLayer.mappers.favoriteList;
+package dataAccess.mappers.favoriteList;
 
 /**
  * @author Chuang Wang

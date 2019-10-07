@@ -1,6 +1,6 @@
-package dataSourceLayer.mappers.addressMapper;
+package dataAccess.mappers.addressMapper;
 
-import dataSourceLayer.dbConfig.DBConnection;
+import dataAccess.dbConfig.DBConnection;
 import model.Address;
 import utils.ConstructAddressSQLStmt;
 import utils.ConstructObjectFromDB;

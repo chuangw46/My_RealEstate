@@ -1,4 +1,4 @@
-package dataSourceLayer.mappers.propertyMapper;
+package dataAccess.mappers.propertyMapper;
 
 import model.Property;
 

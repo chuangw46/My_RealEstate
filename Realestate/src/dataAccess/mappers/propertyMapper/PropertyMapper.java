@@ -1,8 +1,8 @@
-package dataSourceLayer.mappers.propertyMapper;
+package dataAccess.mappers.propertyMapper;
 
-import dataSourceLayer.mappers.addressMapper.AddressMapper;
-import dataSourceLayer.mappers.addressMapper.AddressMapperI;
-import dataSourceLayer.dbConfig.DBConnection;
+import dataAccess.mappers.addressMapper.AddressMapper;
+import dataAccess.mappers.addressMapper.AddressMapperI;
+import dataAccess.dbConfig.DBConnection;
 import model.Address;
 import model.Property;
 import utils.ConstructObjectFromDB;

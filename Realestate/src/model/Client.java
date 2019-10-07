@@ -1,8 +1,8 @@
 package model;
 
 
-import dataSourceLayer.lazyLoad.FavoriteList;
-import dataSourceLayer.lazyLoad.FavoriteListImplement;
+import dataAccess.lazyLoad.FavoriteList;
+import dataAccess.lazyLoad.FavoriteListImplement;
 
 
 /**

@@ -1,6 +1,6 @@
-package dataSourceLayer.mappers.favoriteList;
+package dataAccess.mappers.favoriteList;
 
-import dataSourceLayer.dbConfig.DBConnection;
+import dataAccess.dbConfig.DBConnection;
 import model.Property;
 import utils.ConstructFavoriteListSQLStmt;
 import utils.ConstructObjectFromDB;

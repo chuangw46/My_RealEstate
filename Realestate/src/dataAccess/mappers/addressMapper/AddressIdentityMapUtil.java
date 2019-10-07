@@ -1,4 +1,4 @@
-package dataSourceLayer.mappers.addressMapper;
+package dataAccess.mappers.addressMapper;
 
 import model.Address;
 

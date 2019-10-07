@@ -1,6 +1,6 @@
-package dataSourceLayer.unitOfWork;
+package dataAccess.unitOfWork;
 
-import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
+import dataAccess.mappers.propertyMapper.PropertyMapperI;
 import model.Property;
 
 import java.util.ArrayList;

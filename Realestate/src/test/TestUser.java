@@ -1,7 +1,7 @@
 package test;
 
-import dataSourceLayer.mappers.userMapper.UserMapper;
-import dataSourceLayer.mappers.userMapper.UserMapperI;
+import dataAccess.mappers.userMapper.UserMapper;
+import dataAccess.mappers.userMapper.UserMapperI;
 import service.UserManagement;
 import model.Agent;
 import model.Client;

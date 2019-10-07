@@ -1,7 +1,7 @@
 package model;
 
-import dataSourceLayer.mappers.addressMapper.AddressMapper;
-import dataSourceLayer.mappers.addressMapper.AddressMapperI;
+import dataAccess.mappers.addressMapper.AddressMapper;
+import dataAccess.mappers.addressMapper.AddressMapperI;
 
 import java.sql.Date;
 import java.util.Objects;

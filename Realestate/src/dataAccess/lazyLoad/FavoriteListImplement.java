@@ -1,6 +1,6 @@
-package dataSourceLayer.lazyLoad;
+package dataAccess.lazyLoad;
 
-import dataSourceLayer.dbConfig.DBConnection;
+import dataAccess.dbConfig.DBConnection;
 import model.Property;
 import model.User;
 import utils.ConstructObjectFromDB;

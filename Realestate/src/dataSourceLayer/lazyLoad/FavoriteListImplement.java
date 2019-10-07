@@ -1,8 +1,8 @@
 package dataSourceLayer.lazyLoad;
 
 import dbConfig.DBConnection;
-import models.Property;
-import models.User;
+import domainModels.Property;
+import domainModels.User;
 import utils.ConstructObjectFromDB;
 
 import java.sql.PreparedStatement;

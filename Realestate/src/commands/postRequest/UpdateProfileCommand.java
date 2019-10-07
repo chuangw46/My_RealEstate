@@ -2,8 +2,8 @@ package commands.postRequest;
 
 import commands.FrontCommand;
 import domainLogic.UserManagement;
-import models.Agent;
-import models.User;
+import domainModels.Agent;
+import domainModels.User;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;

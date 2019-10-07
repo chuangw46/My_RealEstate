@@ -1,8 +1,8 @@
 package utils;
 
-import models.Agent;
-import models.Client;
-import models.User;
+import domainModels.Agent;
+import domainModels.Client;
+import domainModels.User;
 
 /**
  * @author Chuang Wang

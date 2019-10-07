@@ -1,12 +1,10 @@
 package commands.getRequest;
 
 import commands.FrontCommand;
-import models.Property;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.sql.Date;
 
 /**
  * Get Publish Property Page Command

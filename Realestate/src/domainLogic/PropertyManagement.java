@@ -6,8 +6,8 @@ import dataSourceLayer.mappers.favoriteList.FavoriteListMapper;
 import dataSourceLayer.mappers.favoriteList.FavoriteListMapperI;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
-import models.Address;
-import models.Property;
+import domainModels.Address;
+import domainModels.Property;
 
 import java.sql.Date;
 import java.util.List;

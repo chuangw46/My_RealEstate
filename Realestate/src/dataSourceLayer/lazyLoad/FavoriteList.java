@@ -1,6 +1,6 @@
 package dataSourceLayer.lazyLoad;
 
-import models.Property;
+import domainModels.Property;
 
 import java.util.List;
 

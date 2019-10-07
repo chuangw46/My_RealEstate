@@ -2,9 +2,9 @@ package commands.getRequest;
 
 import commands.FrontCommand;
 import domainLogic.UserManagement;
-import models.Agent;
-import models.Client;
-import models.User;
+import domainModels.Agent;
+import domainModels.Client;
+import domainModels.User;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;

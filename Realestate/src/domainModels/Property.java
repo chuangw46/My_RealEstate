@@ -1,4 +1,4 @@
-package models;
+package domainModels;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapperI;

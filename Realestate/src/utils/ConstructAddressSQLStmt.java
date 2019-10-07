@@ -1,6 +1,6 @@
 package utils;
 
-import models.Address;
+import domainModels.Address;
 
 /**
  * @author Chuang Wang

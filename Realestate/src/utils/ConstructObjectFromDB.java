@@ -1,6 +1,6 @@
 package utils;
 
-import models.*;
+import domainModels.*;
 
 import java.sql.Date;
 import java.sql.ResultSet;

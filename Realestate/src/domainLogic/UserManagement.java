@@ -2,9 +2,9 @@ package domainLogic;
 
 import dataSourceLayer.mappers.userMapper.UserMapper;
 import dataSourceLayer.mappers.userMapper.UserMapperI;
-import models.Agent;
-import models.Client;
-import models.User;
+import domainModels.Agent;
+import domainModels.Client;
+import domainModels.User;
 
 /**
  * @author Chuang Wang

@@ -1,4 +1,4 @@
-<%@ page import="models.Property" %><%--
+<%@ page import="domainModels.Property" %><%--
   Created by IntelliJ IDEA.
   User: junhanyang
   Date: 2019-09-12
@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<%@ page import="models.*" %>
+<%@ page import="domainModels.*" %>
 <html>
 <head>
     <title>My Real Estate - Update property details</title>

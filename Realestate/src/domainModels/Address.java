@@ -1,4 +1,4 @@
-package models;
+package domainModels;
 
 import java.util.Objects;
 

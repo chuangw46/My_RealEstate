@@ -1,7 +1,7 @@
 package dataSourceLayer.unitOfWork;
 
 import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
-import models.Property;
+import domainModels.Property;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package dataSourceLayer.mappers.addressMapper;
 
-import models.Address;
+import domainModels.Address;
 
 import java.util.List;
 

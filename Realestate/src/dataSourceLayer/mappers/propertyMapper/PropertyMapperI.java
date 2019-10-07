@@ -46,17 +46,19 @@ public interface PropertyMapperI {
      */
     public boolean deleteProperty(int agent_id, int p_id);
 
-    // TODO: Feature B
-    public List<Property> searchByPostCode(int postCode);
 
-    // TODO: Feature B
-    public List<Property> searchByPropertyType(String type);
-
-    // TODO: Feature B
-    public List<Property> searchByRoomSize(int minBed, int maxBed);
-
-    // TODO: Feature B
-    public List<Property> searchByPrice(int minPrice, int maxPrice);
+    /**
+     * retrieve properties by adding those filters
+     * @param property_type
+     * @param minBed
+     * @param maxBed
+     * @param minPrice
+     * @param maxPrice
+     * @param postCode
+     * @return a list of properties that satisfy those criteria
+     */
+    public List<Property> searchByAllFilters(String property_type, int minBed, int maxBed,
+                                             int minPrice, int maxPrice, int postCode);
 
     public Property searchByPropertyID(int property_id);
 }

@@ -15,9 +15,13 @@ import java.util.*;
  */
 
 public class PropertyIdentityMapUtil {
+    // Map<agent id, property>
     private static Map<Integer, List<Property>> propertyAgentMap= new HashMap<>();
+    // Map<property id, property>
     private static Map<Integer, Property> propertyIDMap = new HashMap<>();
 
+
+    // -----------------------operations on Map <agent id, property>-----------------------------
     public static List<Property> getPropertyByAgentID(int agentID){
         return propertyAgentMap.get(agentID);
     }
@@ -45,18 +49,6 @@ public class PropertyIdentityMapUtil {
         propertyAgentMap.put(p.getAgent_id(), old);
     }
 
-    public static void deleteFromPropertyIDMap(int p_id) {
-        propertyIDMap.remove(p_id);
-    }
-
-    public static Property getPropertyByPID(int propertyID){
-        return propertyIDMap.get(propertyID);
-    }
-
-    public static void addToPropertyIDMap(Property p){
-        propertyIDMap.put(p.getId(), p);
-    }
-
     /**
      * delete a property in the map identified by agent id and property id
      * @param agent_id
@@ -72,4 +64,19 @@ public class PropertyIdentityMapUtil {
             }
         }
     }
+
+    // -----------------------operations on Map <property id, property>-----------------------------
+    public static Property getPropertyByPID(int propertyID){
+        return propertyIDMap.get(propertyID);
+    }
+
+    public static void addToPropertyIDMap(Property p){
+        propertyIDMap.put(p.getId(), p);
+    }
+
+    public static void deleteFromPropertyIDMap(int p_id) {
+        propertyIDMap.remove(p_id);
+    }
+
+
 }

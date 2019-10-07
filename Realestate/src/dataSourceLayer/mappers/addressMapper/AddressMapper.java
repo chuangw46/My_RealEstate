@@ -45,7 +45,7 @@ public class AddressMapper implements AddressMapperI {
         try {
             if (result == null) {
                 // get the object from database
-                String selectStatement = "SELECT * FROM address WHERE address_id = " + id;
+                String selectStatement = ConstructAddressSQLStmt.getSelectByIDStmt(id);
                 PreparedStatement stmt = DBConnection.prepare(selectStatement);
 
                 ResultSet rs = stmt.executeQuery();
@@ -68,7 +68,7 @@ public class AddressMapper implements AddressMapperI {
         try {
             if (result == null) {
                 // get all objects from database
-                String selectStatement = "SELECT * FROM address WHERE postal_code = " + postcode;
+                String selectStatement = ConstructAddressSQLStmt.getSelectByPostCodeStmt(postcode);
                 PreparedStatement stmt = DBConnection.prepare(selectStatement);
                 ResultSet rs = stmt.executeQuery();
 

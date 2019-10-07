@@ -2,8 +2,8 @@ package domainLogic;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapperI;
-import dataSourceLayer.mappers.clientLikesPropertiesMapper.FavoriteListMapper;
-import dataSourceLayer.mappers.clientLikesPropertiesMapper.FavoriteListMapperI;
+import dataSourceLayer.mappers.favoriteList.FavoriteListMapper;
+import dataSourceLayer.mappers.favoriteList.FavoriteListMapperI;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
 import dataSourceLayer.mappers.propertyMapper.PropertyMapperI;
 import models.Address;
@@ -104,17 +104,20 @@ public class PropertyManagement {
      * @return boolean value: delete operation success or fail
      */
     public static boolean deleteProperty(int agent_id, int property_id, int address_id) {
+        boolean b1 = false;
+        boolean b2 = false;
+        boolean b3 = false;
         // 1. delete property from association table(favorite list) - AST stands for association
         // table
-        favoriteListMapper.deleteRowByPropertyID(property_id);
+        b1 = favoriteListMapper.deleteRowsByPropertyID(property_id);
 
         // 2. delete property from property table - PT stands for property table
-        propertyMapper.deleteProperty(agent_id, property_id);
+        b2 = propertyMapper.deleteProperty(agent_id, property_id);
 
         // 3. delete from address table
-        addressMapper.deleteAddressByID(address_id);
+        b3 = addressMapper.deleteAddressByID(address_id);
 
 
-        return propertyMapper.deleteProperty(agent_id, property_id);
+        return b1 && b2 && b3;
     }
 }

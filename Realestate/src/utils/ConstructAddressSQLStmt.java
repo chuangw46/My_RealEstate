@@ -14,9 +14,28 @@ import models.Address;
 public class ConstructAddressSQLStmt {
 
     /**
+     * construct select statement which selects row by address id
+     * @param id
+     * @return a select sql statement
+     */
+    public static String getSelectByIDStmt(int id){
+        return "SELECT * FROM address WHERE address_id = " + id;
+    }
+
+    /**
+     * construct select statement which selects rows by postcode
+     * @param postcode
+     * @return a select sql statement
+     */
+    public static String getSelectByPostCodeStmt(int postcode){
+        return "SELECT * FROM address WHERE postal_code = " + postcode;
+    }
+
+
+    /**
      * get INSERT INTO statement
      * @param address
-     * @return string
+     * @return an insert sql statement
      */
     public static String getInsertStmt(Address address) {
         return "INSERT INTO address " +
@@ -37,7 +56,7 @@ public class ConstructAddressSQLStmt {
     /**
      * get UPDATE statement
      * @param address
-     * @return string
+     * @return an update sql statement
      */
     public static String getUpdateStmt(Address address) {
         return "UPDATE address\n" +
@@ -52,7 +71,7 @@ public class ConstructAddressSQLStmt {
     /**
      * get DELETE statement
      * @param a_id
-     * @return string
+     * @return a delete sql statement
      */
     public static String getDeleteStmt(int a_id) {
         return "DELETE FROM address WHERE address_id = " + a_id;

@@ -20,8 +20,8 @@ public class Address {
     private int postal_code;
     private String country;
 
-    public Address() {
-    }
+//    public Address() {
+//    }
 
     // the constructor without id -- for INSERT only
     public Address(String street, String city, String state, int postal_code, String country) {

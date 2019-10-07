@@ -3,6 +3,7 @@ package dataSourceLayer.mappers.propertyMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapperI;
 import dbConfig.DBConnection;
+import models.Address;
 import models.Property;
 import utils.ConstructObjectFromDB;
 import utils.ConstructPropertySQLStmt;
@@ -120,29 +121,44 @@ public class PropertyMapper implements PropertyMapperI {
         return true;
     }
 
-    // TODO: Feature B
+    /**
+     * retrieve properties by adding those filters
+     *
+     * @param property_type
+     * @param minBed
+     * @param maxBed
+     * @param minPrice
+     * @param maxPrice
+     * @param postCode
+     * @return a list of properties that satisfy those criteria
+     */
     @Override
-    public List<Property> searchByPostCode(int postCode) {
-        return null;
+    public List<Property> searchByAllFilters(String property_type, int minBed, int maxBed, int minPrice, int maxPrice, int postCode) {
+        List<Property> result = new ArrayList<>();
+        try {
+            String selectStmt = ConstructPropertySQLStmt.getSelectStmt(property_type, minBed,
+                    maxBed, minPrice, maxPrice, postCode);
+            PreparedStatement stmt = DBConnection.prepare(selectStmt);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Property property = ConstructObjectFromDB.constructPropertyByRS(rs);
+                int address_id = rs.getInt(13);
+                String street = rs.getString(14);
+                String city = rs.getString(15);
+                String state = rs.getString(16);
+                int postal_code = rs.getInt(17);
+                String country = rs.getString(18);
+                // TODO: depends on whether return a map<property, address> or just List<property>
+                Address address = new Address(address_id, street, city, state, postal_code, country);
+                result.add(property);
+            }
+
+        } catch (SQLException e) {
+            return null;
+        }
+        return result;
     }
 
-    // TODO: Feature B
-    @Override
-    public List<Property> searchByPropertyType(String type) {
-        return null;
-    }
-
-    // TODO: Feature B
-    @Override
-    public List<Property> searchByRoomSize(int minBed, int maxBed) {
-        return null;
-    }
-
-    // TODO: Feature B
-    @Override
-    public List<Property> searchByPrice(int minPrice, int maxPrice) {
-        return null;
-    }
 
     /**
      * search a property information from identity map or database

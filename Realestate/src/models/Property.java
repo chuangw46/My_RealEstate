@@ -191,8 +191,7 @@ public class Property {
     }
 
     public Address retrieveTheAddressObj(){
-        AddressMapperI am = new AddressMapper();
-        return am.getAddressByID(getAddress_id());
+        return new AddressMapper().getAddressByID(getAddress_id());
     }
 
 

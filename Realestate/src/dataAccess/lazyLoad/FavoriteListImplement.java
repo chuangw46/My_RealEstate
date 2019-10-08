@@ -1,5 +1,7 @@
 package dataAccess.lazyLoad;
 
+//import dbConfig.DBConnection;
+
 import dataAccess.dbConfig.DBConnection;
 import model.Property;
 import model.User;

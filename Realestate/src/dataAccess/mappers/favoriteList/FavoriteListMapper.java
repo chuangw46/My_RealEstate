@@ -1,5 +1,7 @@
 package dataAccess.mappers.favoriteList;
 
+//import dbConfig.DBConnection;
+
 import dataAccess.dbConfig.DBConnection;
 import model.Property;
 import utils.ConstructFavoriteListSQLStmt;

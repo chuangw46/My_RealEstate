@@ -1,8 +1,8 @@
 package dataAccess.mappers.propertyMapper;
 
+import dataAccess.dbConfig.DBConnection;
 import dataAccess.mappers.addressMapper.AddressMapper;
 import dataAccess.mappers.addressMapper.AddressMapperI;
-import dataAccess.dbConfig.DBConnection;
 import model.Address;
 import model.Property;
 import utils.ConstructObjectFromDB;
@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+//import dbConfig.DBConnection;
 
 /**
  * @author Chuang Wang

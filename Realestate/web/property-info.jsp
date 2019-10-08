@@ -1,10 +1,12 @@
-<%@ page import="models.Property" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: junhanyang
   Date: 2019-09-12
   Time: 18:38
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="models.Property" %>
+<%@ page import="service.AppSession" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
@@ -13,12 +15,11 @@
     <tags:head/>
 </head>
 <body>
-    <% if (request.getSession().getAttribute("currentUser") != null) { %>
+    <% if (AppSession.isAuthenticated()) { %>
     <tags:navbar-log-in/>
     <% } else { %>
     <tags:navbar-log-out/>
     <% } %>
-    <% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
     <div class="container">
         <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
@@ -83,7 +84,7 @@
                 </a>
             </div>
         </div>
-        <% if (isAgent) { %>
+        <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
         <div class="row mb-3">
             <a href="frontServlet?command=RedirectEditProperty&id=${currentProperty.id}"
                class="btn btn-warning m-3" role="button">Update details</a>

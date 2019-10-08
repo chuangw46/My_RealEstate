@@ -1,54 +1,50 @@
 package dataSourceLayer.dbConfig;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
-/**
- * @author Chuang Wang
- * @studentID 791793
- * @institution University of Melbourne
- */
 
-/**
- * connect to database
- */
 public class DBConnection {
-    // JDBC driver name and database URL
-    private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/Realestate";
 
-    // Database credentials
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
+    private static final String DB_CONNECTION = "jdbc:postgresql://ec2-50-19-127-115.compute-1.amazonaws.com:5432/df5uakcna1c3eu";
+
+    private static final String DB_USER = "lwwlyjnepkwqkh";
+
+    private static final String DB_PASSWORD = "0a11fef283e2e84c96c18b3b9b245ce61b30a26f8dca06a5b039f383f0ab8325";
 
     static Connection dbConnection = null;
-    
-    public static PreparedStatement prepare(String stm) throws SQLException{
-        PreparedStatement preparedStatement = null;
+
+    public static PreparedStatement prepare(String stm) throws SQLException {
+
         try {
             Connection dbConnection = getDBConnection();
-            preparedStatement = dbConnection.prepareStatement(stm);
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(stm);
+
+            return preparedStatement;
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return preparedStatement;
+
+        return null;
     }
 
     private static Connection getDBConnection() {
+
         try {
-            // register JDBC driver
             DriverManager.registerDriver(new org.postgresql.Driver());
 
-            // open a connection
             dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
 
-//            dbConnection.setAutoCommit(false);
             return dbConnection;
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Connection problem");
+        System.out.println("Connection Problem");
         return null;
+    }
+
+    public static Connection getConnection() {
+        return dbConnection;
     }
 }

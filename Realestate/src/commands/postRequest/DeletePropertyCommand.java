@@ -1,6 +1,7 @@
 package commands.postRequest;
 
 import commands.FrontCommand;
+import service.AppSession;
 import service.PropertyManagement;
 import models.Property;
 import models.User;
@@ -15,8 +16,8 @@ import java.util.List;
  */
 public class DeletePropertyCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("currentUser");
-        if (user != null) {
+        if (AppSession.isAuthenticated()) {
+            User user = AppSession.getUser();
             if (request.getParameter("property-id") != null && request.getParameter("address-id") != null) {
                 int property_id = Integer.parseInt(request.getParameter("property-id"));
                 int address_id = Integer.parseInt(request.getParameter("address-id"));

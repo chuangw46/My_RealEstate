@@ -1,3 +1,4 @@
+<%@ page import="service.AppSession" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html lang="en">
@@ -7,7 +8,7 @@
   </head>
   <body>
 
-    <% if (request.getSession().getAttribute("currentUser") != null) { %>
+    <% if (AppSession.isAuthenticated()) { %>
         <tags:navbar-log-in/>
     <% } else { %>
         <tags:navbar-log-out/>

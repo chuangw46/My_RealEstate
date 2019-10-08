@@ -5,6 +5,7 @@
   Time: 18:06
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="service.AppSession" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ page import="models.*" %>
@@ -15,13 +16,15 @@
 </head>
 <body>
     <tags:navbar-log-in/>
-    <% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
-
     <div class="container">
         <tags:flash-message/>
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3 font-weight-light">
-            <% if (isAgent) { %> Published Property <% } else { %> Favourite properties <% } %>
+            <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
+                Published Property
+            <% } else { %>
+                Favourite properties
+            <% } %>
             <i class="fas fa-list"></i>
             <small>List View</small>
         </h1>
@@ -31,7 +34,11 @@
                 <a href="frontServlet?command=IndexPage">Home</a>
             </li>
             <li class="breadcrumb-item active">
-                <% if (isAgent) { %> Published Properties <% } else { %> Favourite properties <% } %>
+                <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
+                    Published Properties
+                <% } else { %>
+                    Favourite properties
+                <% } %>
             </li>
         </ol>
 
@@ -65,7 +72,7 @@
                                     <form method="post" action="frontServlet" class="form-inline">
                                         <a href="frontServlet?command=PropertyInfo&id=<%=p.getId()%>"
                                            class="btn btn-success btn-sm m-1" role="button">View</a>
-                                        <% if (isAgent) { %>
+                                        <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
                                         <a href="frontServlet?command=RedirectEditProperty&id=<%=p.getId()%>"
                                            class="btn btn-warning btn-sm m-1" role="button">Edit</a>
 
@@ -86,7 +93,7 @@
             </div>
         </div>
 
-        <% if (isAgent) { %>
+        <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
         <div class="row mb-3">
             <form method="get" action="frontServlet">
                 <input type="hidden" name="command" value="RedirectPublish">

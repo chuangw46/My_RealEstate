@@ -1,6 +1,7 @@
 package commands.getRequest;
 
 import commands.FrontCommand;
+import service.AppSession;
 import service.PropertyManagement;
 import models.Property;
 import models.User;
@@ -15,9 +16,8 @@ import java.util.List;
  */
 public class ListPropertiesCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("currentUser");
-        if (user != null) {
-            List<Property> pl = PropertyManagement.viewMyPropertyList(user.getId());
+        if (AppSession.isAuthenticated()) {
+            List<Property> pl = PropertyManagement.viewMyPropertyList(AppSession.getUser().getId());
             request.getSession().setAttribute("propertyList", pl);
             forward("/property-list.jsp");
         }

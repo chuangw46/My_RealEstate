@@ -1,6 +1,7 @@
 package commands.getRequest;
 
 import commands.FrontCommand;
+import service.AppSession;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;
@@ -11,8 +12,8 @@ import java.io.IOException;
  */
 public class RedirectPublishCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
-        if (request.getSession().getAttribute("currentUser") != null) {
-            if (request.getSession().getAttribute("userType").equals("Agent")) {
+        if (AppSession.isAuthenticated()) {
+            if (AppSession.hasRole(AppSession.AGENT_ROLE)) {
                 if (request.getSession().getAttribute("currentProperty") != null)
                     request.getSession().removeAttribute("currentProperty");
                 forward("/property-publish.jsp");

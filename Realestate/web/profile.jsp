@@ -5,6 +5,7 @@
   Time: 16:10
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="service.AppSession" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
@@ -14,7 +15,6 @@
 </head>
 <body>
 <tags:navbar-log-in/>
-<% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
 <div class="container">
     <tags:flash-message/>
     <!-- Page Heading/Breadcrumbs -->
@@ -89,7 +89,7 @@
                     <form method="get" action="frontServlet">
                         <input type="hidden" name="command" value="ListProperties">
                         <button class="btn btn-info mt-1" type="submit"
-                                <% if (!isAgent) { %>
+                                <% if (AppSession.hasRole(AppSession.CLIENT_ROLE)) { %>
                                 disabled
                                 <% }%>
                         >My published properties
@@ -135,7 +135,7 @@
                        value="${currentUser.email}" disabled/>
             </div>
         </div>
-        <% if (isAgent) { %>
+        <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
         <div class="row">
             <div class="col">
                 <p class="h5 font-weight-light text-black-50">Your contact number</p>

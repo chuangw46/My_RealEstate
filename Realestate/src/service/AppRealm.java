@@ -26,7 +26,7 @@ public class AppRealm extends JdbcRealm {
             System.out.println("No account found for user with email " + email);
             return null;
         }
-        return new SimpleAuthenticationInfo(user.getId(), user.getPassword(), user.getName());
+        return new SimpleAuthenticationInfo(user, user.getPassword(), user.getName());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AppRealm extends JdbcRealm {
             System.out.println("Given principals to authorize are empty.");
             return null;
         }
-        String email = (String)principals.getPrimaryPrincipal();
+        String email = ((User)(principals.getPrimaryPrincipal())).getEmail();
         final User user = userMapper.getUserByEmail(email);
 
         if (user == null) {

@@ -1,6 +1,6 @@
-package commands.postRequest;
+package frontController.commands.postRequest;
 
-import commands.FrontCommand;
+import frontController.commands.FrontCommand;
 
 import models.User;
 

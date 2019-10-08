@@ -1,4 +1,4 @@
-package commands;
+package frontController.commands;
 
 import utils.FlashMessage;
 

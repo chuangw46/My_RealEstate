@@ -1,6 +1,6 @@
-package commands.getRequest;
+package frontController.commands.getRequest;
 
-import commands.FrontCommand;
+import frontController.commands.FrontCommand;
 
 import javax.servlet.ServletException;
 import java.io.IOException;

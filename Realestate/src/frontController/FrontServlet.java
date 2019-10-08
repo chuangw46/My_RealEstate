@@ -1,5 +1,7 @@
-import commands.FrontCommand;
-import commands.UnknownCommand;
+package frontController;
+
+import frontController.commands.FrontCommand;
+import frontController.commands.UnknownCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +14,7 @@ import java.io.IOException;
  * the class represents a servlet which handles GET and POST requests from users
  */
 
-@WebServlet(name = "FrontServlet", urlPatterns = {"/frontServlet"})
+@WebServlet(name = "frontController.FrontServlet", urlPatterns = {"/frontServlet"})
 public class FrontServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +41,7 @@ public class FrontServlet extends HttpServlet {
 
     private Class getCommandClass(HttpServletRequest request, String pkg){
         Class result;
-        final String commandClassName = "commands." + pkg + (String) request.getParameter("command") + "Command";
+        final String commandClassName = "frontController.commands." + pkg + (String) request.getParameter("command") + "Command";
         System.out.println(commandClassName);
         try{
             result = Class.forName(commandClassName);

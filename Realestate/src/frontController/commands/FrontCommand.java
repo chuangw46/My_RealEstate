@@ -1,11 +1,11 @@
-package commands;
+package frontController.commands;
 
-import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public abstract class FrontCommand {
     protected ServletContext context;

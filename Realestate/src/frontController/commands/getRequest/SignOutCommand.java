@@ -1,6 +1,6 @@
-package commands.getRequest;
+package frontController.commands.getRequest;
 
-import commands.FrontCommand;
+import frontController.commands.FrontCommand;
 import org.apache.shiro.SecurityUtils;
 import service.AppSession;
 

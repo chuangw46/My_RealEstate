@@ -1,10 +1,9 @@
-package commands.getRequest;
+package frontController.commands.getRequest;
 
-import commands.FrontCommand;
+import frontController.commands.FrontCommand;
 import service.AppSession;
 import service.PropertyManagement;
 import models.Property;
-import models.User;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;

@@ -1,6 +1,6 @@
-package commands.postRequest;
+package frontController.commands.postRequest;
 
-import commands.FrontCommand;
+import frontController.commands.FrontCommand;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;

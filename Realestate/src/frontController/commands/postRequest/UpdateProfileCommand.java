@@ -1,9 +1,8 @@
-package commands.postRequest;
+package frontController.commands.postRequest;
 
-import commands.FrontCommand;
+import frontController.commands.FrontCommand;
 import service.AppSession;
 import service.UserManagement;
-import models.Agent;
 import models.User;
 import utils.FlashMessage;
 

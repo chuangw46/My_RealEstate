@@ -1,6 +1,6 @@
-package commands.getRequest;
+package frontController.commands.getRequest;
 
-import commands.FrontCommand;
+import frontController.commands.FrontCommand;
 import service.AppSession;
 import utils.FlashMessage;
 

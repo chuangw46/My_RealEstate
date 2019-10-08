@@ -2,7 +2,7 @@ package commands.postRequest;
 
 import commands.FrontCommand;
 import service.PropertyManagement;
-import model.Property;
+import models.Property;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;

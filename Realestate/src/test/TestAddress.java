@@ -1,8 +1,8 @@
 package test;
 
-import dataAccess.mappers.addressMapper.AddressMapper;
-import dataAccess.mappers.addressMapper.AddressMapperI;
-import model.Address;
+import dataSourceLayer.mappers.addressMapper.AddressMapper;
+import dataSourceLayer.mappers.addressMapper.AddressMapperI;
+import models.Address;
 
 /**
  * @author Chuang Wang

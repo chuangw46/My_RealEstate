@@ -2,7 +2,7 @@ package commands.postRequest;
 
 import commands.FrontCommand;
 import service.UserManagement;
-import model.User;
+import models.User;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;

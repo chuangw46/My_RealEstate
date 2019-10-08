@@ -1,6 +1,6 @@
 package utils;
 
-import model.Property;
+import models.Property;
 
 /**
  * @author Chuang Wang

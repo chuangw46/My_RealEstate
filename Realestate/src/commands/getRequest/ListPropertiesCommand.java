@@ -2,8 +2,8 @@ package commands.getRequest;
 
 import commands.FrontCommand;
 import service.PropertyManagement;
-import model.Property;
-import model.User;
+import models.Property;
+import models.User;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;

@@ -17,7 +17,7 @@
         <tags:flash-message/>
         <div class="row">
             <div class="d-flex justify-content-center align-items-center container">
-                <form method="get" action="frontServlet" class="bg-white p-5 shadow col-lg-6">
+                <form method="post" action="frontServlet" class="bg-white p-5 shadow col-lg-6">
                     <input type="hidden" name="command" id="command" value="SignIn">
                     <a class="close bg-transparent float-lg-left" aria-label="Close" href="index.jsp">
                         <span aria-hidden="true">&times;</span>

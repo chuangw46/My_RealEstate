@@ -1,6 +1,6 @@
 package utils;
 
-import model.*;
+import models.*;
 
 import java.sql.Date;
 import java.sql.ResultSet;

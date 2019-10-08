@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<%@ page import="model.*" %>
+<%@ page import="models.*" %>
 <html>
 <head>
     <title>My Real Estate - Property list</title>

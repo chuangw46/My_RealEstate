@@ -21,7 +21,7 @@ import java.io.IOException;
  * Get Sign in Page Command
  */
 public class SignInCommand extends FrontCommand {
-    private UserMapper userMapper = new UserMapper();
+    private UserMapper userMapper = UserMapper.getInstance();
     public void process() throws ServletException, IOException{
         String email = this.request.getParameter("email");
         String password = this.request.getParameter("password");

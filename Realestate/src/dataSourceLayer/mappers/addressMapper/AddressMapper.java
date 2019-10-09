@@ -1,6 +1,7 @@
 package dataSourceLayer.mappers.addressMapper;
 
 import dataSourceLayer.dbConfig.DBConnection;
+import dataSourceLayer.mappers.DataMapper;
 import models.Address;
 import utils.ConstructAddressSQLStmt;
 import utils.ConstructObjectFromDB;
@@ -19,26 +20,67 @@ import java.util.List;
 /**
  * address data mapper implementation
  */
-public class AddressMapper implements AddressMapperI {
+public class AddressMapper extends DataMapper {
+    //---------------------------- singleton pattern setup ---------------------------------------
+    private static AddressMapper addressMapper;
+
+    private AddressMapper() {
+        //
+    }
+
+    public static AddressMapper getInstance() {
+        if (addressMapper == null) {
+            return new AddressMapper();
+        }
+        return addressMapper;
+    }
+
+    //------------------------- create, update, delete(Call by UoW) ------------------------------
 
     @Override
-    public int createAddress(Address address) {
+    public void create(Object o) {
         try {
-            String insertStatetment = ConstructAddressSQLStmt.getInsertStmt(address);
-            PreparedStatement stmt = DBConnection.prepare(insertStatetment);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            //TODO: Add to identity map
+            Address address = (Address) o;
+            String insertStatement = ConstructAddressSQLStmt.getInsertStmt(address);
+            PreparedStatement stmt = DBConnection.prepare(insertStatement);
+            stmt.executeQuery();
+
+            // Add to identity map
             AddressIdentityMapUtil.addToPKMap(address);
             AddressIdentityMapUtil.addToPostCodeMap(address);
-            return rs.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
     }
 
     @Override
+    public void update(Object o){
+        try {
+            Address address = (Address) o;
+            String updateStatement = ConstructAddressSQLStmt.getUpdateStmt(address);
+            PreparedStatement stmt = DBConnection.prepare(updateStatement);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(Object o){
+        try {
+            Address address = (Address) o;
+            int a_id = address.getId();
+            String deleteStatement = ConstructAddressSQLStmt.getDeleteStmt(a_id);
+            System.out.println(deleteStatement);
+            PreparedStatement stmt = DBConnection.prepare(deleteStatement);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //------------------- read operations (Called by service layer directly) -------------------
+
     public Address getAddressByID(int id) {
         Address result = AddressIdentityMapUtil.getAddressByID(id);
 
@@ -62,7 +104,6 @@ public class AddressMapper implements AddressMapperI {
         return result;
     }
 
-    @Override
     public List<Address> getAllAddressByPostCode(int postcode) {
         List<Address> result = AddressIdentityMapUtil.getAddressByPostCode(postcode);
         try {
@@ -84,32 +125,6 @@ public class AddressMapper implements AddressMapperI {
             System.out.println("SQLException thrown");
         }
         return result;
-    }
-
-    @Override
-    public boolean updateAddress(Address address) {
-        try {
-            String updateStatement = ConstructAddressSQLStmt.getUpdateStmt(address);
-            PreparedStatement stmt = DBConnection.prepare(updateStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean deleteAddressByID(int a_id) {
-        try {
-            String deleteStatement = ConstructAddressSQLStmt.getDeleteStmt(a_id);
-            System.out.println(deleteStatement);
-            PreparedStatement stmt = DBConnection.prepare(deleteStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-
     }
 
 

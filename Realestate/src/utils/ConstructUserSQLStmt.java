@@ -18,8 +18,12 @@ public class ConstructUserSQLStmt {
         return "SELECT * FROM client WHERE email = '" + email + "'";
     }
 
-    public static String getAgentSELECTStmt(String email) {
+    public static String getAgentSELECTStmtByEmail(String email) {
         return "SELECT * FROM agent WHERE email = '" + email + "'";
+    }
+
+    public static String getAgentSELECTStmtByName(String name) {
+        return "SELECT * FROM agent WHERE name = '" + name + "'";
     }
 
     public static String getClientINSERTStmt(User client){

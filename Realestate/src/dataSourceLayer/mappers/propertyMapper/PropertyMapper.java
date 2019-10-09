@@ -1,8 +1,8 @@
 package dataSourceLayer.mappers.propertyMapper;
 
 import dataSourceLayer.dbConfig.DBConnection;
+import dataSourceLayer.mappers.DataMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
-import dataSourceLayer.mappers.addressMapper.AddressMapperI;
 import models.Address;
 import models.Property;
 import utils.ConstructObjectFromDB;
@@ -25,35 +25,105 @@ import java.util.List;
 /**
  * Property data mapper implementation
  */
-public class PropertyMapper implements PropertyMapperI {
+public class PropertyMapper extends DataMapper {
+    //---------------------------- singleton pattern setup ---------------------------------------
+    private static PropertyMapper propertyMapper;
 
+    private PropertyMapper() {
+        //
+    }
+
+    public static PropertyMapper getInstance() {
+        if (propertyMapper == null) {
+            return new PropertyMapper();
+        }
+        return propertyMapper;
+    }
+
+    //------------------------- create, update, delete(Call by UoW) ------------------------------
     /**
      * Feature A - only agents have the permission to create a property information
      * the permission check is done on the domain logic layer
-     * @param property
+     * @param o
      */
     @Override
-    public boolean createProperty(Property property) {
+    public void create(Object o) {
         try {
-            String insertStatetment = ConstructPropertySQLStmt.getInsertStmt(property);
-            PreparedStatement stmt = DBConnection.prepare(insertStatetment);
+            Property property = (Property) o;
+            String insertStatement = ConstructPropertySQLStmt.getInsertStmt(property);
+            PreparedStatement stmt = DBConnection.prepare(insertStatement);
             stmt.executeUpdate();
+
+            // insert the property into memory(identity map)
             PropertyIdentityMapUtil.addToPropertyIDMap(property);
             PropertyIdentityMapUtil.addToPropertyAgentMap(property);
         } catch (SQLException e) {
-            return false;
+            e.printStackTrace();
         }
-        return true;
     }
 
+    /**
+     * Feature A - only agents have the permission to update a property information
+     * the permission check is done on the domain logic layer
+     *
+     * @param o
+     */
+    public void update(Object o){
+        try {
+            Property property = (Property) o;
+            String updatePropertyStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
+            AddressMapper am = AddressMapper.getInstance();
+            // update the address first
+            am.update(property.retrieveTheAddressObj());
+            // update the property in db row
+            PreparedStatement stmt = DBConnection.prepare(updatePropertyStatement);
+            stmt.executeUpdate();
+
+            // update the property in memory(identity map)
+            PropertyIdentityMapUtil.addToPropertyIDMap(property);
+            PropertyIdentityMapUtil.addToPropertyAgentMap(property);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Feature A - only agents have the permission to delete a property
+     * the permission check is done on the domain logic layer
+     * @param o
+     * @throws SQLException
+     */
+    @Override
+    public void delete(Object o) {
+        try {
+            Property property = (Property) o;
+            int property_id = property.getId();
+            // delete from property table - PT stands for property table
+            String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(property_id);
+            PreparedStatement stmtForPT = DBConnection.prepare(deleteFromPropertyTable);
+            stmtForPT.executeUpdate();
+
+            // delete the property from memory(identity map)
+            Property p = PropertyIdentityMapUtil.getPropertyByPID(property_id);
+            if (p != null) {
+                PropertyIdentityMapUtil.deleteFromPropertyIDMap(property_id);
+                PropertyIdentityMapUtil.deleteFromPropertyAgentMap(p.getAgent_id(), property_id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //------------------- read operations (Called by service layer directly) -------------------
 
     /**
      * Feature A - return a list of properties that the agent posted before
      * the permission check is done on the domain logic layer
+     *
      * @param agentID
      * @return a list of properties that the agent posted before
      */
-    @Override
     public List<Property> searchByAgentID(int agentID) {
         List<Property> result = PropertyIdentityMapUtil.getPropertyByAgentID(agentID);
         try {
@@ -76,54 +146,6 @@ public class PropertyMapper implements PropertyMapperI {
     }
 
     /**
-     * Feature A - only agents have the permission to update a property information
-     * the permission check is done on the domain logic layer
-     * @param property
-     */
-    @Override
-    public boolean updateProperty(Property property) {
-        try {
-            String updatePropertyStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
-            AddressMapperI am = new AddressMapper();
-            // update the address first
-            if (am.updateAddress(property.retrieveTheAddressObj())){
-                // update the property in db row
-                PreparedStatement stmt = DBConnection.prepare(updatePropertyStatement);
-                stmt.executeUpdate();
-
-                // update the property in memory(identity map)
-                PropertyIdentityMapUtil.addToPropertyIDMap(property);
-                PropertyIdentityMapUtil.addToPropertyAgentMap(property);
-                return true;
-            }
-        } catch (SQLException e) {
-            return false;
-        }
-        return false;
-    }
-
-    /**
-     * Feature A - only agents have the permission to delete a property
-     * the permission check is done on the domain logic layer
-     * @param property_id
-     */
-    @Override
-    public boolean deleteProperty(int agent_id, int property_id) {
-        try {
-            // delete from property table - PT stands for property table
-            String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(property_id);
-            PreparedStatement stmtForPT = DBConnection.prepare(deleteFromPropertyTable);
-            stmtForPT.executeUpdate();
-            PropertyIdentityMapUtil.deleteFromPropertyIDMap(property_id);
-            PropertyIdentityMapUtil.deleteFromPropertyAgentMap(agent_id, property_id);
-
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * retrieve properties by adding those filters
      *
      * @param property_type
@@ -134,15 +156,15 @@ public class PropertyMapper implements PropertyMapperI {
      * @param postCode
      * @return a list of properties that satisfy those criteria
      */
-    @Override
-    public List<Property> searchByAllFilters(String property_type, int minBed, int maxBed, int minPrice, int maxPrice, int postCode) {
+    public List<Property> searchByAllFilters(String property_type, int minBed, int maxBed,
+                                             int minPrice, int maxPrice, int postCode) {
         List<Property> result = new ArrayList<>();
         try {
             String selectStmt = ConstructPropertySQLStmt.getSelectStmt(property_type, minBed,
                     maxBed, minPrice, maxPrice, postCode);
             PreparedStatement stmt = DBConnection.prepare(selectStmt);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Property property = ConstructObjectFromDB.constructPropertyByRS(rs);
                 int address_id = rs.getInt(13);
                 String street = rs.getString(14);
@@ -167,7 +189,6 @@ public class PropertyMapper implements PropertyMapperI {
      * @param property_id
      * @return a property object
      */
-    @Override
     public Property searchByPropertyID(int property_id) {
         Property result = PropertyIdentityMapUtil.getPropertyByPID(property_id);
         try {

@@ -14,8 +14,9 @@ public class RedirectPublishCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
         if (AppSession.isAuthenticated()) {
             if (AppSession.hasRole(AppSession.AGENT_ROLE)) {
-                if (request.getSession().getAttribute("currentProperty") != null)
-                    request.getSession().removeAttribute("currentProperty");
+                if (AppSession.getProperty() != null)
+                    // remove the property in AppSession
+                    AppSession.removeProperty();
                 forward("/property-publish.jsp");
             }
             else {

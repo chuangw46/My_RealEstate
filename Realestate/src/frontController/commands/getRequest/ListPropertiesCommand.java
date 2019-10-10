@@ -18,6 +18,8 @@ public class ListPropertiesCommand extends FrontCommand {
         if (AppSession.isAuthenticated()) {
             List<Property> pl = PropertyManagement.viewMyPropertyList(AppSession.getUser().getId());
             request.getSession().setAttribute("propertyList", pl);
+            // update the property_list in AppSession
+            AppSession.setPropertyList(pl);
             forward("/property-list.jsp");
         }
         else {

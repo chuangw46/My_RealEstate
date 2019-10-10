@@ -1,6 +1,7 @@
 package frontController.commands.getRequest;
 
 import frontController.commands.FrontCommand;
+import service.AppSession;
 import service.PropertyManagement;
 import models.Property;
 
@@ -18,7 +19,8 @@ public class PropertyInfoCommand extends FrontCommand {
             // build a property object based on data retried from db
             Property p = PropertyManagement.viewSpecificProperty(property_id);
             if (p != null)
-                request.getSession().setAttribute("currentProperty", p);
+                // update the property in AppSession
+                AppSession.setProperty(p);
         }
         forward("/property-info.jsp");
     }

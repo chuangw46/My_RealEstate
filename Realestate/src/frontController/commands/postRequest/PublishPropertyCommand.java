@@ -2,6 +2,7 @@ package frontController.commands.postRequest;
 
 import frontController.commands.FrontCommand;
 import models.Address;
+import service.AppSession;
 import service.PropertyManagement;
 import models.Property;
 import utils.FlashMessage;
@@ -47,8 +48,9 @@ public class PublishPropertyCommand extends FrontCommand {
                 // if success, redirect to property list page
                 FlashMessage.createSuccessMessage(request.getSession(), "Property has been published.");
 
+                // update the property_list in AppSession
                 List<Property> pl = PropertyManagement.viewMyPropertyList(Integer.parseInt(agent_id));
-                request.getSession().setAttribute("propertyList", pl);
+                AppSession.setPropertyList(pl);
                 forward("/property-list.jsp");
             } catch (SQLException e) {
                 FlashMessage.createErrorMessage(request.getSession(), "Fail to publish the property.");
@@ -82,8 +84,9 @@ public class PublishPropertyCommand extends FrontCommand {
                 // give flash msg on the web interface
                 FlashMessage.createSuccessMessage(request.getSession(), "Property has been " +
                         "updated.");
-                // if the update is successful, update the currentProperty in session
-                request.getSession().setAttribute("currentProperty", property);
+
+                // if the update is successful, update the currentProperty in AppSession
+                AppSession.setProperty(property);
                 forward("/property-info.jsp");
             } catch (SQLException e) {
                 // if the update fails, prompt error

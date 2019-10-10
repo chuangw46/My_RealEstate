@@ -58,8 +58,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <%  if (request.getSession().getAttribute("propertyList") != null) {
-                                ArrayList ps = (ArrayList) request.getSession().getAttribute("propertyList");
+                        <%  if (AppSession.getPropertyList() != null) {
+                                ArrayList ps = (ArrayList) AppSession.getPropertyList();
                                 for (int i=0; i<ps.size(); i++) {
                                     Property p = (Property) ps.get(i); %>
                             <tr>

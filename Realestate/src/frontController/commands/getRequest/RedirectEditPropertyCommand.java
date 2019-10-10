@@ -1,6 +1,7 @@
 package frontController.commands.getRequest;
 
 import frontController.commands.FrontCommand;
+import service.AppSession;
 import service.PropertyManagement;
 import models.Property;
 
@@ -15,7 +16,8 @@ public class RedirectEditPropertyCommand extends FrontCommand {
         if (request.getParameter("id") != null) {
             int property_id = Integer.parseInt(request.getParameter("id"));
             Property p = PropertyManagement.viewSpecificProperty(property_id);
-            request.getSession().setAttribute("currentProperty", p);
+            // update property in AppSession
+            AppSession.setProperty(p);
         }
         forward("/property-edit.jsp");
     }

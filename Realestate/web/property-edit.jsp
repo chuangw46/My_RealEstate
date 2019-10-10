@@ -1,13 +1,15 @@
-<%@ page import="models.Property" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: junhanyang
   Date: 2019-09-12
   Time: 16:52
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="models.Property" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ page import="models.*" %>
+<%@ page import="service.AppSession" %>
 <html>
 <head>
     <title>My Real Estate - Update property details</title>
@@ -33,7 +35,7 @@
         </ol>
 
         <hr>
-        <% Property p = (Property) request.getSession().getAttribute("currentProperty");%>
+        <% Property p = AppSession.getProperty();%>
         <form method="post" action="frontServlet">
             <input type="hidden" id="command" name="command" value="PublishProperty">
             <input type="hidden" id="action" name="action" value="Edit">

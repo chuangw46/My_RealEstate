@@ -33,8 +33,9 @@ public class DeletePropertyCommand extends FrontCommand {
                 FlashMessage.createErrorMessage(request.getSession(), "Fail to delete the property.");
             }
 
+            // update the property_list in AppSession
             List<Property> pl = PropertyManagement.viewMyPropertyList(user.getId());
-            request.getSession().setAttribute("propertyList", pl);
+            AppSession.setPropertyList(pl);
             forward("/property-list.jsp");
         } else {
             FlashMessage.createAlertMessage(request.getSession(), "You are required to sign in.");

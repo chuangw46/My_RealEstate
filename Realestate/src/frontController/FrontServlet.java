@@ -14,7 +14,7 @@ import java.io.IOException;
  * the class represents a servlet which handles GET and POST requests from users
  */
 
-@WebServlet(name = "frontController.FrontServlet", urlPatterns = {"/frontServlet"})
+@WebServlet(name = "FrontServlet", urlPatterns = {"/frontServlet"})
 public class FrontServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

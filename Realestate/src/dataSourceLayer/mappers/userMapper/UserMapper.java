@@ -46,54 +46,48 @@ public class UserMapper extends DataMapper {
      * @param o
      */
     @Override
-    public void create(Object o){
-        try {
-            User user = (User) o;
+    public void create(Object o) throws SQLException {
+        User user = (User) o;
 
-            String insertStatement = "";
-            if (user instanceof Client) {
-                insertStatement = ConstructUserSQLStmt.getClientINSERTStmt(user);
-            } else if (user instanceof Agent) {
-                insertStatement = ConstructUserSQLStmt.getAgentINSERTStmt(user);
-            }
-            PreparedStatement stmt = DBConnection.prepare(insertStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String insertStatement = "";
+        if (user instanceof Client) {
+            insertStatement = ConstructUserSQLStmt.getClientINSERTStmt(user);
+        } else if (user instanceof Agent) {
+            insertStatement = ConstructUserSQLStmt.getAgentINSERTStmt(user);
         }
-
+        PreparedStatement stmt = DBConnection.prepare(insertStatement);
+        stmt.executeUpdate();
     }
 
     /**
      * update a user information and update the row in database
+     *
      * @param o
      */
     @Override
-    public void update(Object o) {
-        try {
-            User user = (User) o;
-            if (user instanceof Client) {
-                updateClient((Client) user);
-            } else if (user instanceof Agent) {
-                updateAgent((Agent) user);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public void update(Object o) throws SQLException {
+        User user = (User) o;
+        if (user instanceof Client) {
+            updateClient((Client) user);
+        } else if (user instanceof Agent) {
+            updateAgent((Agent) user);
         }
     }
 
     /**
      * There is no account delete operation available for users. As such this method is not
      * implemented.
+     *
      * @param o
      */
     @Override
-    public void delete(Object o){
+    public void delete(Object o) throws SQLException{
         //
     }
 
     /**
      * helper function for updateUser
+     *
      * @param client
      */
     private void updateClient(Client client) throws SQLException {
@@ -104,6 +98,7 @@ public class UserMapper extends DataMapper {
 
     /**
      * helper function for updateUser
+     *
      * @param agent
      */
     private void updateAgent(Agent agent) throws SQLException {

@@ -24,7 +24,21 @@ import java.util.List;
  * Favorite List data mapper implementation
  */
 
-public class FavoriteListMapper implements FavoriteListMapperI{
+public class FavoriteListMapper{
+    //---------------------------- singleton pattern setup ---------------------------------------
+    private static FavoriteListMapper favoriteListMapper;
+
+    private FavoriteListMapper() {
+        //
+    }
+
+    public static FavoriteListMapper getInstance() {
+        if (favoriteListMapper == null) {
+            return new FavoriteListMapper();
+        }
+        return favoriteListMapper;
+    }
+
 
     /**
      * get a list of properties objects based on client id
@@ -32,7 +46,6 @@ public class FavoriteListMapper implements FavoriteListMapperI{
      * @param client_id
      * @return A list of properties that the client likes
      */
-    @Override
     public List<Property> getFavoriteProperties(int client_id) {
         // create and initialize an empty list for result
         List<Property> result = new ArrayList<>();
@@ -71,7 +84,6 @@ public class FavoriteListMapper implements FavoriteListMapperI{
      * @param property_id
      * @return true if delete is done, false if exception is thrown
      */
-    @Override
     public boolean deleteRowsByPropertyID(int property_id) {
         try {
             String deleteStatement = ConstructFavoriteListSQLStmt.getDeleteStmtByPID(property_id);
@@ -90,7 +102,6 @@ public class FavoriteListMapper implements FavoriteListMapperI{
      * @param property_id
      * @return true if delete is done, false if exception is thrown
      */
-    @Override
     public boolean likeAProperty(int client_id, int property_id) {
         try {
             String insertStmt = ConstructFavoriteListSQLStmt.getInsertStmt(client_id, property_id);
@@ -109,7 +120,6 @@ public class FavoriteListMapper implements FavoriteListMapperI{
      * @param property_id
      * @return true if delete is done, false if exception is thrown
      */
-    @Override
     public boolean unlikeProperty(int client_id, int property_id) {
         try {
             String deleteStmt = ConstructFavoriteListSQLStmt.getDeleteStmtByPIDCID(client_id,property_id);

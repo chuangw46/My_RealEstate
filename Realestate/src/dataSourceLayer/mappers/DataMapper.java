@@ -7,6 +7,8 @@ import models.Address;
 import models.Property;
 import models.User;
 
+import java.sql.SQLException;
+
 /**
  * @author Chuang Wang
  * @studentID 791793
@@ -23,9 +25,9 @@ public abstract class DataMapper {
         }
         return null;
     }
-    public abstract void create(Object o);
+    public abstract void create(Object o) throws SQLException;
 
-    public abstract void update(Object o);
+    public abstract void update(Object o) throws SQLException;
 
-    public abstract void delete(Object o);
+    public abstract void delete(Object o) throws SQLException;
 }

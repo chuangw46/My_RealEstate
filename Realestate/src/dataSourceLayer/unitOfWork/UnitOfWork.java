@@ -2,6 +2,7 @@ package dataSourceLayer.unitOfWork;
 
 import dataSourceLayer.mappers.DataMapper;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class UnitOfWork {
     /***
      * All UnitOfWork operations batched together executed in commit only.
      */
-    public void commit(){
+    public void commit() throws SQLException {
         for (Object o : newObjects) {
             DataMapper.getMapper(o).create(o);
         }

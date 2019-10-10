@@ -38,45 +38,33 @@ public class AddressMapper extends DataMapper {
     //------------------------- create, update, delete(Call by UoW) ------------------------------
 
     @Override
-    public void create(Object o) {
-        try {
-            Address address = (Address) o;
-            String insertStatement = ConstructAddressSQLStmt.getInsertStmt(address);
-            PreparedStatement stmt = DBConnection.prepare(insertStatement);
-            stmt.executeQuery();
+    public void create(Object o) throws SQLException {
+        Address address = (Address) o;
+        String insertStatement = ConstructAddressSQLStmt.getInsertStmt(address);
+        PreparedStatement stmt = DBConnection.prepare(insertStatement);
+        stmt.executeQuery();
 
-            // Add to identity map
-            AddressIdentityMapUtil.addToPKMap(address);
-            AddressIdentityMapUtil.addToPostCodeMap(address);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // Add to identity map
+        AddressIdentityMapUtil.addToPKMap(address);
+        AddressIdentityMapUtil.addToPostCodeMap(address);
     }
 
     @Override
-    public void update(Object o){
-        try {
-            Address address = (Address) o;
-            String updateStatement = ConstructAddressSQLStmt.getUpdateStmt(address);
-            PreparedStatement stmt = DBConnection.prepare(updateStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void update(Object o) throws SQLException {
+        Address address = (Address) o;
+        String updateStatement = ConstructAddressSQLStmt.getUpdateStmt(address);
+        PreparedStatement stmt = DBConnection.prepare(updateStatement);
+        stmt.executeUpdate();
     }
 
     @Override
-    public void delete(Object o){
-        try {
-            Address address = (Address) o;
-            int a_id = address.getId();
-            String deleteStatement = ConstructAddressSQLStmt.getDeleteStmt(a_id);
-            System.out.println(deleteStatement);
-            PreparedStatement stmt = DBConnection.prepare(deleteStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void delete(Object o) throws SQLException {
+        Address address = (Address) o;
+        int a_id = address.getId();
+        String deleteStatement = ConstructAddressSQLStmt.getDeleteStmt(a_id);
+        System.out.println(deleteStatement);
+        PreparedStatement stmt = DBConnection.prepare(deleteStatement);
+        stmt.executeUpdate();
     }
 
     //------------------- read operations (Called by service layer directly) -------------------
@@ -125,6 +113,19 @@ public class AddressMapper extends DataMapper {
             System.out.println("SQLException thrown");
         }
         return result;
+    }
+
+    public int createAndGetID(Object o) throws SQLException {
+        Address address = (Address) o;
+
+        String insertStatetment = ConstructAddressSQLStmt.getInsertStmt(address);
+        PreparedStatement stmt = DBConnection.prepare(insertStatetment);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        //TODO: Add to identity map
+        AddressIdentityMapUtil.addToPKMap(address);
+        AddressIdentityMapUtil.addToPostCodeMap(address);
+        return rs.getInt(1);
     }
 
 

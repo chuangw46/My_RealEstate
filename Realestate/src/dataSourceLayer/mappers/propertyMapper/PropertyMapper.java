@@ -41,25 +41,23 @@ public class PropertyMapper extends DataMapper {
     }
 
     //------------------------- create, update, delete(Call by UoW) ------------------------------
+
     /**
      * Feature A - only agents have the permission to create a property information
      * the permission check is done on the domain logic layer
+     *
      * @param o
      */
     @Override
-    public void create(Object o) {
-        try {
-            Property property = (Property) o;
-            String insertStatement = ConstructPropertySQLStmt.getInsertStmt(property);
-            PreparedStatement stmt = DBConnection.prepare(insertStatement);
-            stmt.executeUpdate();
+    public void create(Object o) throws SQLException {
+        Property property = (Property) o;
+        String insertStatement = ConstructPropertySQLStmt.getInsertStmt(property);
+        PreparedStatement stmt = DBConnection.prepare(insertStatement);
+        stmt.executeUpdate();
 
-            // insert the property into memory(identity map)
-            PropertyIdentityMapUtil.addToPropertyIDMap(property);
-            PropertyIdentityMapUtil.addToPropertyAgentMap(property);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // insert the property into memory(identity map)
+        PropertyIdentityMapUtil.addToPropertyIDMap(property);
+        PropertyIdentityMapUtil.addToPropertyAgentMap(property);
     }
 
     /**
@@ -68,50 +66,42 @@ public class PropertyMapper extends DataMapper {
      *
      * @param o
      */
-    public void update(Object o){
-        try {
-            Property property = (Property) o;
-            String updatePropertyStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
-            AddressMapper am = AddressMapper.getInstance();
-            // update the address first
-            am.update(property.retrieveTheAddressObj());
-            // update the property in db row
-            PreparedStatement stmt = DBConnection.prepare(updatePropertyStatement);
-            stmt.executeUpdate();
+    public void update(Object o) throws SQLException {
+        Property property = (Property) o;
+        String updatePropertyStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
+        AddressMapper am = AddressMapper.getInstance();
+        // update the address first
+        am.update(property.retrieveTheAddressObj());
+        // update the property in db row
+        PreparedStatement stmt = DBConnection.prepare(updatePropertyStatement);
+        stmt.executeUpdate();
 
-            // update the property in memory(identity map)
-            PropertyIdentityMapUtil.addToPropertyIDMap(property);
-            PropertyIdentityMapUtil.addToPropertyAgentMap(property);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        // update the property in memory(identity map)
+        PropertyIdentityMapUtil.addToPropertyIDMap(property);
+        PropertyIdentityMapUtil.addToPropertyAgentMap(property);
     }
 
     /**
      * Feature A - only agents have the permission to delete a property
      * the permission check is done on the domain logic layer
+     *
      * @param o
      * @throws SQLException
      */
     @Override
-    public void delete(Object o) {
-        try {
-            Property property = (Property) o;
-            int property_id = property.getId();
-            // delete from property table - PT stands for property table
-            String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(property_id);
-            PreparedStatement stmtForPT = DBConnection.prepare(deleteFromPropertyTable);
-            stmtForPT.executeUpdate();
+    public void delete(Object o) throws SQLException {
+        Property property = (Property) o;
+        int property_id = property.getId();
+        // delete from property table - PT stands for property table
+        String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(property_id);
+        PreparedStatement stmtForPT = DBConnection.prepare(deleteFromPropertyTable);
+        stmtForPT.executeUpdate();
 
-            // delete the property from memory(identity map)
-            Property p = PropertyIdentityMapUtil.getPropertyByPID(property_id);
-            if (p != null) {
-                PropertyIdentityMapUtil.deleteFromPropertyIDMap(property_id);
-                PropertyIdentityMapUtil.deleteFromPropertyAgentMap(p.getAgent_id(), property_id);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        // delete the property from memory(identity map)
+        Property p = PropertyIdentityMapUtil.getPropertyByPID(property_id);
+        if (p != null) {
+            PropertyIdentityMapUtil.deleteFromPropertyIDMap(property_id);
+            PropertyIdentityMapUtil.deleteFromPropertyAgentMap(p.getAgent_id(), property_id);
         }
     }
 
@@ -186,6 +176,7 @@ public class PropertyMapper extends DataMapper {
 
     /**
      * search a property information from identity map or database
+     *
      * @param property_id
      * @return a property object
      */

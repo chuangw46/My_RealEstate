@@ -57,6 +57,12 @@ public class PropertyManagement {
         return propertyMapper.searchByAgentID(agentID);
     }
 
+    public static List<Property> searchPropertyByFilters(String rent_or_buy, String property_type, int minBed,
+                                                         int maxBed, int minPrice, int maxPrice, int postCode) {
+        return propertyMapper.searchByAllFilters(rent_or_buy, property_type, minBed, maxBed, minPrice, maxPrice,
+                postCode);
+    }
+
     /**
      * to retrieve a specific property
      * @param property_id

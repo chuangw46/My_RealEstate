@@ -23,8 +23,8 @@ import java.io.IOException;
  */
 public class SignInCommand extends FrontCommand {
     public void process() throws ServletException, IOException{
-        String email = this.request.getParameter("email");
-        String password = this.request.getParameter("password");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
         UsernamePasswordToken token = new UsernamePasswordToken(email, password);
         token.setRememberMe(true);
         Subject currentUser = SecurityUtils.getSubject();

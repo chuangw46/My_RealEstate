@@ -48,162 +48,169 @@
           <div class="col-lg-12 mx-auto bg-white p-3 rounded">
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
-                      <a class="nav-link active" id="buy-tab" data-toggle="tab" href="#buy" role="tab" aria-controls="home" aria-selected="true">Buy</a>
+                      <a class="nav-link active" id="buy-tab" data-toggle="tab" href="#buy" role="tab"
+                         aria-controls="buy" aria-selected="true">Buy</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" id="rent-tab" data-toggle="tab" href="#rent" role="tab" aria-controls="profile" aria-selected="false">Rent</a>
+                      <a class="nav-link" id="rent-tab" data-toggle="tab" href="#rent" role="tab" aria-controls="rent"
+                         aria-selected="false">Rent</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" id="find-agents-tab" data-toggle="tab" href="#find-agents" role="tab" aria-controls="contact" aria-selected="false">Find Agents</a>
+                      <a class="nav-link" id="find-agents-tab" data-toggle="tab" href="#find-agents" role="tab"
+                         aria-controls="agents" aria-selected="false">Find Agents</a>
                   </li>
               </ul>
               <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="buy" role="tabpanel" aria-labelledby="rent-tab">
-                      <form class="p-5">
+                      <form class="p-5" method="get" action="frontServlet">
+                          <input type="hidden" name="command" value="SearchProperty">
+                          <input type="hidden" name="rent-or-buy" value="Sell">
                           <div class="row">
                               <div class="input-group col-md-12">
-                                  <select class="custom-select" id="buy-property-type" aria-label="Property Type">
-                                      <option value="0" selected>All Property Types</option>
-                                      <option value="1">House</option>
-                                      <option value="2">Apartment & Unit</option>
-                                      <option value="3">Town House</option>
-                                      <option value="4">Villa</option>
-                                      <option value="5">Land</option>
-                                      <option value="6">Acreage</option>
-                                      <option value="7">Rural</option>
-                                      <option value="8">Block of Units</option>
-                                      <option value="9">Retirement Living</option>
+                                  <select class="custom-select" id="buy-property-type" name="type" aria-label="Property Type">
+                                      <option value="" selected>All Property Types</option>
+                                      <option value="House">House</option>
+                                      <option value="Apartment & Unit">Apartment & Unit</option>
+                                      <option value="Town House">Town House</option>
+                                      <option value="Villa">Villa</option>
+                                      <option value="Land">Land</option>
+                                      <option value="Acreage">Acreage</option>
+                                      <option value="Rural">Rural</option>
+                                      <option value="Block of Unit">Block of Units</option>
+                                      <option value="Retirement Living">Retirement Living</option>
                                   </select>
-                                  <select class="custom-select" id="buy-beds-max" aria-label="Beds Max">
-                                      <option selected>Beds (Max)</option>
-                                      <option value="1">Any</option>
-                                      <option value="2">Studio</option>
-                                      <option value="3">1 Bed</option>
-                                      <option value="4">2 Beds</option>
-                                      <option value="5">3 Beds</option>
-                                      <option value="6">4 Beds</option>
-                                      <option value="7">5 Beds</option>
+                                  <select class="custom-select" id="buy-beds-max" name="max-beds" aria-label="Beds Max">
+                                      <option value="" selected>Beds (Max)</option>
+<%--                                      <option value="studio">Studio</option>--%>
+                                      <option value="1">1 Bed</option>
+                                      <option value="2">2 Beds</option>
+                                      <option value="3">3 Beds</option>
+                                      <option value="4">4 Beds</option>
+                                      <option value="5">5 Beds</option>
                                   </select>
-                                  <select class="custom-select" id="buy-beds-min" aria-label="Beds Min">
-                                      <option selected>Beds (Min)</option>
-                                      <option value="1">Any</option>
-                                      <option value="2">Studio</option>
-                                      <option value="3">1 Bed</option>
-                                      <option value="4">2 Beds</option>
-                                      <option value="5">3 Beds</option>
-                                      <option value="6">4 Beds</option>
-                                      <option value="7">5 Beds</option>
+                                  <select class="custom-select" id="buy-beds-min" name="min-beds" aria-label="Beds Min">
+                                      <option value="" selected>Beds (Min)</option>
+<%--                                      <option value="studio">Studio</option>--%>
+                                      <option value="1">1 Bed</option>
+                                      <option value="2">2 Beds</option>
+                                      <option value="3">3 Beds</option>
+                                      <option value="4">4 Beds</option>
+                                      <option value="5">5 Beds</option>
                                   </select>
-                                  <select class="custom-select" id="buy-price-max" aria-label="Price Max">
-                                      <option selected>Price (Max)</option>
-                                      <option value="1">Any</option>
-                                      <option value="2">$50,000</option>
-                                      <option value="3">$75,000</option>
-                                      <option value="4">$100,000</option>
-                                      <option value="5">$125,000</option>
-                                      <option value="6">$150,000</option>
-                                      <option value="7">$175,000</option>
-                                      <option value="8">$200,000</option>
+                                  <select class="custom-select" id="buy-price-max" name="max-price"
+                                          aria-label="Price Max">
+                                      <option value="" selected>Price (Max)</option>
+                                      <option value="50000">$50,000</option>
+                                      <option value="75000">$75,000</option>
+                                      <option value="100000">$100,000</option>
+                                      <option value="125000">$125,000</option>
+                                      <option value="150000">$150,000</option>
+                                      <option value="175000">$175,000</option>
+                                      <option value="200000">$200,000</option>
                                   </select>
-                                  <select class="custom-select" id="buy-price-min" aria-label="Price Min">
-                                      <option selected>Price (Min)</option>
-                                      <option value="1">Any</option>
-                                      <option value="2">$50,000</option>
-                                      <option value="3">$75,000</option>
-                                      <option value="4">$100,000</option>
-                                      <option value="5">$125,000</option>
-                                      <option value="6">$150,000</option>
-                                      <option value="7">$175,000</option>
-                                      <option value="8">$200,000</option>
+                                  <select class="custom-select" id="buy-price-min" name="min-price"
+                                          aria-label="Price Min">
+                                      <option value="" selected>Price (Min)</option>
+                                      <option value="50000">$50,000</option>
+                                      <option value="75000">$75,000</option>
+                                      <option value="100000">$100,000</option>
+                                      <option value="125000">$125,000</option>
+                                      <option value="150000">$150,000</option>
+                                      <option value="175000">$175,000</option>
+                                      <option value="200000">$200,000</option>
                                   </select>
                               </div>
                           </div>
                           <div class="row mt-5">
                               <div class="input-group form-group col-md-10">
                                   <label for="buy-search"></label>
-                                  <input id="buy-search" type="text" placeholder="Search By Postcode"
+                                  <input id="buy-search" name="postal-code" type="text" placeholder="Search By Postcode"
                                          class="form-control form-control-underlined">
                               </div>
                               <div class="form-group col-md-2">
-                                  <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm" disabled>Search</button>
+                                  <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
                               </div>
                           </div>
                       </form>
                   </div>
                   <div class="tab-pane fade" id="rent" role="tabpanel" aria-labelledby="sell-tab">
-                      <form class="p-5">
+                      <form class="p-5" method="get" action="frontServlet">
+                          <input type="hidden" name="command" value="SearchProperty">
+                          <input type="hidden" name="rent-or-buy" value="Rent">
                           <div class="row">
                               <div class="input-group col-md-12">
-                                  <select class="custom-select" id="rent-property-type" aria-label="Property Type">
-                                      <option value="0" selected>All Property Types</option>
-                                      <option value="1">House</option>
-                                      <option value="2">Apartment & Unit</option>
-                                      <option value="3">Town House</option>
-                                      <option value="4">Villa</option>
-                                      <option value="5">Land</option>
-                                      <option value="6">Acreage</option>
-                                      <option value="7">Rural</option>
-                                      <option value="8">Block of Units</option>
-                                      <option value="9">Retirement Living</option>
+                                  <select class="custom-select" id="rent-property-type" name="type" aria-label="Property Type">
+                                      <option value="" selected>All Property Types</option>
+                                      <option value="House">House</option>
+                                      <option value="Apartment & Unit">Apartment & Unit</option>
+                                      <option value="Town House">Town House</option>
+                                      <option value="Villa">Villa</option>
+                                      <option value="Land">Land</option>
+                                      <option value="Acreage">Acreage</option>
+                                      <option value="Rural">Rural</option>
+                                      <option value="Block of Unit">Block of Units</option>
+                                      <option value="Retirement Living">Retirement Living</option>
                                   </select>
-                                  <select class="custom-select" id="rent-beds-max" aria-label="Beds Max">
-                                      <option selected>Beds (Max)</option>
-                                      <option value="1">Any</option>
-                                      <option value="2">Studio</option>
+                                  <select class="custom-select" id="rent-beds-max" name="max-beds"
+                                          aria-label="Beds Max">
+                                      <option value="" selected>Beds (Max)</option>
+<%--                                      <option value="studio">Studio</option>--%>
+                                      <option value="1">1 Bed</option>
+                                      <option value="2">2 Beds</option>
+                                      <option value="3">3 Beds</option>
+                                      <option value="4">4 Beds</option>
+                                      <option value="5">5 Beds</option>
+                                  </select>
+                                  <select class="custom-select" id="rent-beds-min" name="min-beds"
+                                          aria-label="Beds Min">
+                                      <option value="" selected>Beds (Min)</option>
+<%--                                      <option value="2">Studio</option>--%>
                                       <option value="3">1 Bed</option>
                                       <option value="4">2 Beds</option>
                                       <option value="5">3 Beds</option>
                                       <option value="6">4 Beds</option>
                                       <option value="7">5 Beds</option>
                                   </select>
-                                  <select class="custom-select" id="rent-beds-min" aria-label="Beds Min">
-                                      <option selected>Beds (Min)</option>
-                                      <option value="1">Any</option>
-                                      <option value="2">Studio</option>
-                                      <option value="3">1 Bed</option>
-                                      <option value="4">2 Beds</option>
-                                      <option value="5">3 Beds</option>
-                                      <option value="6">4 Beds</option>
-                                      <option value="7">5 Beds</option>
+                                  <select class="custom-select" id="rent-price-max" name="max-price"
+                                          aria-label="Price PW Max">
+                                      <option value="" selected>Price per week (Max)</option>
+                                      <option value="50">$50 pw</option>
+                                      <option value="100">$100 pw</option>
+                                      <option value="150">$150 pw</option>
+                                      <option value="200">$200 pw</option>
+                                      <option value="250">$250 pw</option>
+                                      <option value="500">$500 pw</option>
+                                      <option value="1000">$1000 pw</option>
                                   </select>
-                                  <select class="custom-select" id="rent-price-max" aria-label="Price PW Max">
-                                      <option selected>Price per week (Max)</option>
-                                      <option value="1">Any</option>
-                                      <option value="2">$50 pw</option>
-                                      <option value="3">$75 pw</option>
-                                      <option value="4">$100 pw</option>
-                                      <option value="5">$125 pw</option>
-                                      <option value="6">$150 pw</option>
-                                      <option value="7">$175 pw</option>
-                                      <option value="8">$200 pw</option>
-                                  </select>
-                                  <select class="custom-select" id="price-min" aria-label="Price PW Min">
-                                      <option selected>Price per week (Min)</option>
-                                      <option value="1">Any</option>
-                                      <option value="2">$50 pw</option>
-                                      <option value="3">$75 pw</option>
-                                      <option value="4">$100 pw</option>
-                                      <option value="5">$125 pw</option>
-                                      <option value="6">$150 pw</option>
-                                      <option value="7">$175 pw</option>
-                                      <option value="8">$200 pw</option>
+                                  <select class="custom-select" id="price-min" name="min-price"
+                                          aria-label="Price PW Min">
+                                      <option value="" selected>Price per week (Min)</option>
+                                      <option value="50">$50 pw</option>
+                                      <option value="100">$100 pw</option>
+                                      <option value="150">$150 pw</option>
+                                      <option value="200">$200 pw</option>
+                                      <option value="250">$250 pw</option>
+                                      <option value="500">$500 pw</option>
+                                      <option value="1000">$1000 pw</option>
                                   </select>
                               </div>
                           </div>
                           <div class="row mt-5">
                               <div class="input-group form-group col-md-10">
                                   <label for="rent-search"></label>
-                                  <input id="rent-search" type="text" placeholder="Search By Postcode"
+                                  <input id="rent-search" name="postal-code" type="text"
+                                         placeholder="Search By Postcode"
                                          class="form-control form-control-underlined">
                               </div>
                               <div class="form-group col-md-2">
-                                  <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm" disabled>Search</button>
+                                  <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
                               </div>
                           </div>
                       </form>
                   </div>
                   <div class="tab-pane fade p-5" id="find-agents" role="tabpanel" aria-labelledby="find-agents-tab">
-                      <form>
+                      <form method="get" action="frontServlet">
+                          <input type="hidden" name="command" value="SearchAgent">
                           <div class="row">
                               <div class="input-group form-group col-md-10">
                                   <label for="agent-search"></label>
@@ -211,7 +218,7 @@
                                          class="form-control form-control-underlined">
                               </div>
                               <div class="form-group col-md-2">
-                                  <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm" disabled>Search</button>
+                                  <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
                               </div>
                           </div>
                       </form>
@@ -223,26 +230,8 @@
       <hr>
 
       <div class="row">
-          <div class="col-lg-4 mb-6">
-              <div class="card h-100 text-center">
-                  <h4 class="card-header">
-                      Track my enquiry status
-                      <i class="far fa-question-circle"></i>
-                  </h4>
-                  <div class="card-body">
-                      <p class="card-text">
-                          As a buyer or tenant, you can create new enquires to a specific agent with regards to the
-                          property that I am interested. As an agent, you can view a list of the enquiries sent by
-                          a buyer or tenant and respond to any of them.
-                      </p>
-                  </div>
-                  <div class="card-footer">
-                      <a href="frontServlet?command=ViewEnquiry" class="btn btn-info disabled">Manage my enquires</a>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-4 mb-6">
-              <div class="card h-100 text-center">
+          <div class="col-lg-6 mb-6 d-flex justify-content-center">
+              <div class="card h-100 text-center w-75">
                   <h4 class="card-header">
                       Review my favourite list
                       <i class="fas fa-shopping-cart"></i>
@@ -255,12 +244,12 @@
                       </p>
                   </div>
                   <div class="card-footer">
-                      <a href="#" class="btn btn-info disabled">Check out favourite list</a>
+                      <a href="frontServlet?command=ViewFavouriteList" class="btn btn-info" >Check out my favourite list</a>
                   </div>
               </div>
           </div>
-          <div class="col-lg-4 mb-6">
-              <div class="card h-100 text-center">
+          <div class="col-lg-6 mb-6 d-flex justify-content-center">
+              <div class="card h-100 text-center w-75">
                   <h4 class="card-header">
                       Publish properties
                       <i class="fas fa-home"></i>

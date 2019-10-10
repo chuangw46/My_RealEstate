@@ -12,19 +12,9 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">About </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="frontServlet?command=SearchProperty">Buy </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="frontServlet?command=SearchProperty">Rent </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="frontServlet?command=SearchAgent">Find Agents </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="frontServlet?command=ViewEnquiry">Enquiries </a>
+                    <a class="nav-link" href="frontServlet?command=IndexPage">
+                        Home
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signin.jsp">

@@ -50,7 +50,7 @@ public class AppSession {
     }
 
     public static void setPropertyList(List<Property> ps) {
-        SecurityUtils.getSubject().getSession().setAttribute(PROPERTY_ATTRIBUTE_NAME, ps);
+        SecurityUtils.getSubject().getSession().setAttribute(PROPERTY_LIST_ATTRIBUTE_NAME, ps);
     }
 
     public static void removePropertyList() {

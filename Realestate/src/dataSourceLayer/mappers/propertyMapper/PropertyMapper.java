@@ -165,11 +165,11 @@ public class PropertyMapper extends DataMapper {
      * @param postCode
      * @return a list of properties that satisfy those criteria
      */
-    public List<Property> searchByAllFilters(String property_type, int minBed, int maxBed,
+    public List<Property> searchByAllFilters(String rent_or_buy, String property_type, int minBed, int maxBed,
                                              int minPrice, int maxPrice, int postCode) {
         List<Property> result = new ArrayList<>();
         try {
-            String selectStmt = ConstructPropertySQLStmt.getSelectStmt(property_type, minBed,
+            String selectStmt = ConstructPropertySQLStmt.getSelectStmt(rent_or_buy, property_type, minBed,
                     maxBed, minPrice, maxPrice, postCode);
             PreparedStatement stmt = DBConnection.prepare(selectStmt);
             ResultSet rs = stmt.executeQuery();

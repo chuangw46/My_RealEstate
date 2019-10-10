@@ -72,20 +72,6 @@ public class PropertyManagement {
      * @return updated property object
      */
     public static void updateProperty(Property new_property) throws SQLException {
-//        old_property.setType(type);
-//        old_property.setNum_bed(Integer.parseInt(num_bed));
-//        old_property.setNum_bath(Integer.parseInt(num_bath));
-//        old_property.setNum_carpark(Integer.parseInt(num_carpark));
-//        old_property.setDate_available(Date.valueOf(date_available));
-//        old_property.setDate_inspection(Date.valueOf(date_inspection));
-//        old_property.setDescription(description);
-//        old_property.retrieveTheAddressObj().setStreet(street);
-//        old_property.retrieveTheAddressObj().setCity(city);
-//        old_property.retrieveTheAddressObj().setState(state);
-//        old_property.retrieveTheAddressObj().setPostal_code(postal_code);
-//        old_property.retrieveTheAddressObj().setCountry(country);
-//        old_property.setRent_or_buy(rent_or_buy);
-//        old_property.setPrice(Integer.parseInt(price));
         // update the property in db
         UnitOfWork.newCurrent();
         UnitOfWork.getCurrent().registerDirty(new_property);

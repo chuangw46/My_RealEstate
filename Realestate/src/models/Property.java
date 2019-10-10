@@ -44,7 +44,7 @@ public class Property {
     }
 
     // the constructor without id -- for INSERT only
-    public Property(String type, int num_bed, int num_bath, int num_carpark, Date date_available, Date date_inspection, String description, int address_id, String rent_or_buy, int price, int agent_id) {
+    public Property(String type, int num_bed, int num_bath, int num_carpark, Date date_available, Date date_inspection, String description, String rent_or_buy, int price, int agent_id) {
         this.type = type;
         this.num_bed = num_bed;
         this.num_bath = num_bath;
@@ -52,7 +52,7 @@ public class Property {
         this.date_available = date_available;
         this.date_inspection = date_inspection;
         this.description = description;
-        this.address_id = address_id;
+//        this.address_id = address_id;
         this.rent_or_buy = rent_or_buy;
         this.price = price;
         this.agent_id = agent_id;

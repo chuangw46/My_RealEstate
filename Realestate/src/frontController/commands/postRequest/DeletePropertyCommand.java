@@ -9,6 +9,7 @@ import utils.FlashMessage;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -19,21 +20,24 @@ public class DeletePropertyCommand extends FrontCommand {
         if (AppSession.isAuthenticated()) {
             User user = AppSession.getUser();
             if (request.getParameter("property-id") != null && request.getParameter("address-id") != null) {
-                int property_id = Integer.parseInt(request.getParameter("property-id"));
-                int address_id = Integer.parseInt(request.getParameter("address-id"));
-                if (PropertyManagement.deleteProperty(user.getId(), property_id, address_id)) {
+                try {
+                    int property_id = Integer.parseInt(request.getParameter("property-id"));
+//                    int address_id = Integer.parseInt(request.getParameter("address-id"));
+                    PropertyManagement.deleteProperty(property_id);
                     FlashMessage.createSuccessMessage(request.getSession(), "Property has been deleted.");
+                } catch (SQLException e) {
+                    // exception is caught during the deleteProperty procedure
+                    FlashMessage.createErrorMessage(request.getSession(), "Fail to delete the property.");
                 }
-            }
-            else {
+            } else {
+                // id is missing, cannot delete the chosen property
                 FlashMessage.createErrorMessage(request.getSession(), "Fail to delete the property.");
             }
 
             List<Property> pl = PropertyManagement.viewMyPropertyList(user.getId());
             request.getSession().setAttribute("propertyList", pl);
             forward("/property-list.jsp");
-        }
-        else {
+        } else {
             FlashMessage.createAlertMessage(request.getSession(), "You are required to sign in.");
             forward("/signin.jsp");
         }

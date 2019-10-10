@@ -25,6 +25,10 @@ public class AppSession {
         SecurityUtils.getSubject().getSession().setAttribute(USER_ATTRIBUTE_NAME, user);
     }
 
+    public static String getSessionId() {
+        return (String)SecurityUtils.getSubject().getSession().getId();
+    }
+
     public static User getUser() {
         return (User)SecurityUtils.getSubject().getSession().getAttribute(USER_ATTRIBUTE_NAME);
     }

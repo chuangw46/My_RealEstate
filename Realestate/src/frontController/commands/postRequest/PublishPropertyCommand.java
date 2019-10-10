@@ -39,6 +39,7 @@ public class PublishPropertyCommand extends FrontCommand {
 
         Address address = new Address(street, city, state, Integer.parseInt(postal_code), country);
         if (action.equals("Publish")) {
+            // if the action is 'publish'
             try {
                 Property property = new Property(type, Integer.parseInt(num_bed), Integer.parseInt(num_bath),
                         Integer.parseInt(num_carpark), Date.valueOf(date_available), Date.valueOf(date_inspection),

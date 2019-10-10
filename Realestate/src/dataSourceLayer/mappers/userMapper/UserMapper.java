@@ -1,5 +1,6 @@
 package dataSourceLayer.mappers.userMapper;
 
+import dataSourceLayer.ConcurrencyUtil.LockingMapper;
 import dataSourceLayer.dbConfig.DBConnection;
 import dataSourceLayer.mappers.DataMapper;
 import models.Agent;
@@ -25,17 +26,17 @@ import java.util.List;
  */
 public class UserMapper extends DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
-    private static UserMapper userMapper;
+    private static DataMapper instance;
 
     private UserMapper() {
         //
     }
 
-    public static UserMapper getInstance() {
-        if (userMapper == null) {
-            return new UserMapper();
+    public static DataMapper getInstance() {
+        if (instance == null) {
+            return new LockingMapper(new UserMapper());
         }
-        return userMapper;
+        return instance;
     }
 
     //------------------------- create, update, delete(Call by UoW) ------------------------------

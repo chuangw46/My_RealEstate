@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * address data mapper implementation
  */
-public class AddressMapper extends DataMapper {
+public class AddressMapper implements DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
     private static DataMapper instance;
 

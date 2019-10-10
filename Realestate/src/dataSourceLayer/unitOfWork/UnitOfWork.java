@@ -1,6 +1,12 @@
 package dataSourceLayer.unitOfWork;
 
 import dataSourceLayer.mappers.DataMapper;
+import dataSourceLayer.mappers.addressMapper.AddressMapper;
+import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
+import dataSourceLayer.mappers.userMapper.UserMapper;
+import models.Address;
+import models.Property;
+import models.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -73,14 +79,25 @@ public class UnitOfWork {
      */
     public void commit() throws SQLException {
         for (Object o : newObjects) {
-            DataMapper.getMapper(o).create(o);
+            getMapper(o).create(o);
         }
         for (Object o : dirtyObjects) {
-            DataMapper.getMapper(o).update(o);
+            getMapper(o).update(o);
         }
         for (Object o : deletedObjects) {
-            DataMapper.getMapper(o).delete(o);
+            getMapper(o).delete(o);
         }
+    }
+
+    private DataMapper getMapper(Object o){
+        if (o instanceof User){
+            return UserMapper.getInstance();
+        } else if (o instanceof Property){
+            return PropertyMapper.getInstance();
+        } else if (o instanceof Address) {
+            return AddressMapper.getInstance();
+        }
+        return null;
     }
 
 }

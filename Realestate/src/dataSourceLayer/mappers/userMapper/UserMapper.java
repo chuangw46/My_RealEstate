@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * user data mapper implementation
  */
-public class UserMapper extends DataMapper {
+public class UserMapper implements DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
     private static DataMapper instance;
 

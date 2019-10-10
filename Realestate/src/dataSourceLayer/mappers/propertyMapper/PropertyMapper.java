@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Property data mapper implementation
  */
-public class PropertyMapper extends DataMapper {
+public class PropertyMapper implements DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
     private static DataMapper instance;
 

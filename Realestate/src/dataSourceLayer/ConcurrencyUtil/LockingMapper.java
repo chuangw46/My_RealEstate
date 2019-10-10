@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public class LockingMapper extends DataMapper{
+public class LockingMapper implements DataMapper{
     private DataMapper impl;
 
     public LockingMapper(DataMapper impl) {

@@ -21,22 +21,22 @@ import java.sql.SQLException;
  */
 public class UserManagement {
     private static UserMapper userMapper = UserMapper.getInstance();
-
-    /**
-     * log in
-     * @param email
-     * @param password
-     * @return a user object
-     */
-    public static User login(String email, String password) {
-        User user = userMapper.getUserByEmail(email);
-        if (user != null) {
-            if (password.equals(user.getPassword())){
-                return user;
-            }
-        }
-        return null;
-    }
+//
+//    /**
+//     * log in
+//     * @param email
+//     * @param password
+//     * @return a user object
+//     */
+//    public static User login(String email, String password) {
+//        User user = userMapper.getUserByEmail(email);
+//        if (user != null) {
+//            if (password.equals(user.getPassword())){
+//                return user;
+//            }
+//        }
+//        return null;
+//    }
 
     public static User getCurrentUser(String email){
         return userMapper.getUserByEmail(email);

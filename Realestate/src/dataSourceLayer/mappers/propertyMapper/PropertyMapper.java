@@ -51,13 +51,23 @@ public class PropertyMapper extends DataMapper {
     @Override
     public void create(Object o) throws SQLException {
         Property property = (Property) o;
+        int property_id = -1;
         String insertStatement = ConstructPropertySQLStmt.getInsertStmt(property);
         PreparedStatement stmt = DBConnection.prepare(insertStatement);
-        stmt.executeUpdate();
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
 
+        // set pk and add to identity map
+        property_id = rs.getInt(1);
+
+        property.setId(property_id);
+        System.out.println("------------------------" + property + "-------------------------");
         // insert the property into memory(identity map)
         PropertyIdentityMapUtil.addToPropertyIDMap(property);
         PropertyIdentityMapUtil.addToPropertyAgentMap(property);
+        rs.close();
+        stmt.close();
+        DBConnection.close();
     }
 
     /**
@@ -79,6 +89,8 @@ public class PropertyMapper extends DataMapper {
         // update the property in memory(identity map)
         PropertyIdentityMapUtil.addToPropertyIDMap(property);
         PropertyIdentityMapUtil.addToPropertyAgentMap(property);
+//        stmt.close();
+//        DBConnection.close();
     }
 
     /**
@@ -96,7 +108,6 @@ public class PropertyMapper extends DataMapper {
         String deleteFromPropertyTable = ConstructPropertySQLStmt.getDeleteStmt(property_id);
         PreparedStatement stmtForPT = DBConnection.prepare(deleteFromPropertyTable);
         stmtForPT.executeUpdate();
-
         // delete the property from memory(identity map)
         Property p = PropertyIdentityMapUtil.getPropertyByPID(property_id);
         if (p != null) {

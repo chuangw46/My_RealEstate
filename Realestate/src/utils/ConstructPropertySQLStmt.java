@@ -42,7 +42,8 @@ public class ConstructPropertySQLStmt{
                         property.getAddress_id() + ", '" +
                         property.getRent_or_buy() + "', " +
                         property.getPrice() + ", " +
-                        property.getAgent_id() + "); ";
+                        property.getAgent_id() + ")\n" +
+                "RETURNING property_id;";
     }
 
     /**

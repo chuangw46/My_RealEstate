@@ -40,13 +40,19 @@ public class AddressMapper extends DataMapper {
     @Override
     public void create(Object o) throws SQLException {
         Address address = (Address) o;
+        int address_id;
         String insertStatement = ConstructAddressSQLStmt.getInsertStmt(address);
         PreparedStatement stmt = DBConnection.prepare(insertStatement);
-        stmt.executeQuery();
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
 
-        // Add to identity map
+        address_id = rs.getInt(1);
+        address.setId(address_id);
         AddressIdentityMapUtil.addToPKMap(address);
         AddressIdentityMapUtil.addToPostCodeMap(address);
+        // close db connection
+//        rs.close();
+//        stmt.close();
     }
 
     @Override
@@ -117,15 +123,18 @@ public class AddressMapper extends DataMapper {
 
     public int createAndGetID(Object o) throws SQLException {
         Address address = (Address) o;
-
-        String insertStatetment = ConstructAddressSQLStmt.getInsertStmt(address);
-        PreparedStatement stmt = DBConnection.prepare(insertStatetment);
+        int address_id;
+        String insertStatement = ConstructAddressSQLStmt.getInsertStmt(address);
+        PreparedStatement stmt = DBConnection.prepare(insertStatement);
         ResultSet rs = stmt.executeQuery();
         rs.next();
+
         //TODO: Add to identity map
+        address_id = rs.getInt(1);
+        address.setId(address_id);
         AddressIdentityMapUtil.addToPKMap(address);
         AddressIdentityMapUtil.addToPostCodeMap(address);
-        return rs.getInt(1);
+        return address_id;
     }
 
 

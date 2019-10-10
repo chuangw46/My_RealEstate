@@ -57,6 +57,9 @@ public class UserMapper extends DataMapper {
         }
         PreparedStatement stmt = DBConnection.prepare(insertStatement);
         stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 
     /**
@@ -72,6 +75,7 @@ public class UserMapper extends DataMapper {
         } else if (user instanceof Agent) {
             updateAgent((Agent) user);
         }
+
     }
 
     /**
@@ -94,6 +98,9 @@ public class UserMapper extends DataMapper {
         String updateStatement = ConstructUserSQLStmt.getClientUPDATEStmt(client);
         PreparedStatement stmt = DBConnection.prepare(updateStatement);
         stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 
     /**
@@ -105,6 +112,9 @@ public class UserMapper extends DataMapper {
         String updateStatement = ConstructUserSQLStmt.getAgentUPDATEStmt(agent);
         PreparedStatement stmt = DBConnection.prepare(updateStatement);
         stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 
     //------------------- read operations (Called by service layer directly) -------------------

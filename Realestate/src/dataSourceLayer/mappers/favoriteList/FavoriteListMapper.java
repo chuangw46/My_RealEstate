@@ -72,6 +72,10 @@ public class FavoriteListMapper{
                     result.add(ConstructObjectFromDB.constructPropertyByRS(rsForPT));
                 }
             }
+            // close connections
+            rsAST.close();
+            stmtForAST.close();
+            DBConnection.close();
         } catch (SQLException e) {
             return null;
         }
@@ -89,6 +93,9 @@ public class FavoriteListMapper{
             String deleteStatement = ConstructFavoriteListSQLStmt.getDeleteStmtByPID(property_id);
             PreparedStatement stmt = DBConnection.prepare(deleteStatement);
             stmt.executeUpdate();
+            // close connections
+            stmt.close();
+            DBConnection.close();
         } catch (SQLException e) {
             return false;
         }
@@ -107,6 +114,9 @@ public class FavoriteListMapper{
             String insertStmt = ConstructFavoriteListSQLStmt.getInsertStmt(client_id, property_id);
             PreparedStatement stmt = DBConnection.prepare(insertStmt);
             stmt.executeUpdate();
+            // close connections
+            stmt.close();
+            DBConnection.close();
         } catch (SQLException e) {
             return false;
         }
@@ -125,6 +135,9 @@ public class FavoriteListMapper{
             String deleteStmt = ConstructFavoriteListSQLStmt.getDeleteStmtByPIDCID(client_id,property_id);
             PreparedStatement stmt = DBConnection.prepare(deleteStmt);
             stmt.executeUpdate();
+            // close connections
+            stmt.close();
+            DBConnection.close();
         } catch (SQLException e) {
             return false;
         }

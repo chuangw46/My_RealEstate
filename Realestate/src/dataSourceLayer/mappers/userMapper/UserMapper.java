@@ -149,6 +149,10 @@ public class UserMapper extends DataMapper {
             while (rs.next()) {
                 result.add(ConstructObjectFromDB.constructAgentByRS(rs));
             }
+            // close connections
+            rs.close();
+            stmt.close();
+            DBConnection.close();
         } catch (SQLException e) {
             return null;
         }
@@ -164,14 +168,19 @@ public class UserMapper extends DataMapper {
      * @throws SQLException
      */
     private User findUserByEmailFromClient(String email) throws SQLException {
+        User res = null;
         String selectStatement = ConstructUserSQLStmt.getClientSELECTStmt(email);
         PreparedStatement stmt = DBConnection.prepare(selectStatement);
         ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            return ConstructObjectFromDB.constructClientByRS(rs);
+        if (rs.next()) {
+            res = ConstructObjectFromDB.constructClientByRS(rs);
         }
+        // close connections
+        rs.close();
+        stmt.close();
+        DBConnection.close();
 
-        return null;
+        return res;
     }
 
     /**
@@ -182,12 +191,18 @@ public class UserMapper extends DataMapper {
      * @throws SQLException
      */
     private User findUserByEmailFromAgent(String email) throws SQLException {
+        User res = null;
         String selectStatement = ConstructUserSQLStmt.getAgentSELECTStmtByEmail(email);
         PreparedStatement stmt = DBConnection.prepare(selectStatement);
         ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            return ConstructObjectFromDB.constructAgentByRS(rs);
+        if (rs.next()) {
+            res = ConstructObjectFromDB.constructAgentByRS(rs);
         }
-        return null;
+        // close connections
+        rs.close();
+        stmt.close();
+        DBConnection.close();
+
+        return res;
     }
 }

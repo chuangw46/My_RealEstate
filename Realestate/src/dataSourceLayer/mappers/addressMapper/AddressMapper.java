@@ -50,9 +50,10 @@ public class AddressMapper extends DataMapper {
         address.setId(address_id);
         AddressIdentityMapUtil.addToPKMap(address);
         AddressIdentityMapUtil.addToPostCodeMap(address);
-        // close db connection
-//        rs.close();
-//        stmt.close();
+        // close connections
+        rs.close();
+        stmt.close();
+        DBConnection.close();
     }
 
     @Override
@@ -61,6 +62,9 @@ public class AddressMapper extends DataMapper {
         String updateStatement = ConstructAddressSQLStmt.getUpdateStmt(address);
         PreparedStatement stmt = DBConnection.prepare(updateStatement);
         stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 
     @Override
@@ -71,6 +75,9 @@ public class AddressMapper extends DataMapper {
         System.out.println(deleteStatement);
         PreparedStatement stmt = DBConnection.prepare(deleteStatement);
         stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 
     //------------------- read operations (Called by service layer directly) -------------------
@@ -90,6 +97,10 @@ public class AddressMapper extends DataMapper {
                     // add the object to IdentityMap
                     AddressIdentityMapUtil.addToPKMap(result);
                 }
+                // close connections
+                rs.close();
+                stmt.close();
+                DBConnection.close();
 
             }
         } catch (SQLException e) {
@@ -113,6 +124,10 @@ public class AddressMapper extends DataMapper {
                     AddressIdentityMapUtil.addToPostCodeMap(temp);
                 }
                 result = AddressIdentityMapUtil.getAddressByPostCode(postcode);
+                // close connections
+                rs.close();
+                stmt.close();
+                DBConnection.close();
             }
 
         } catch (SQLException e) {
@@ -134,6 +149,12 @@ public class AddressMapper extends DataMapper {
         address.setId(address_id);
         AddressIdentityMapUtil.addToPKMap(address);
         AddressIdentityMapUtil.addToPostCodeMap(address);
+
+        // close connections
+        rs.close();
+        stmt.close();
+        DBConnection.close();
+
         return address_id;
     }
 

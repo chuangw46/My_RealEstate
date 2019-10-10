@@ -51,12 +51,11 @@ public class PropertyMapper extends DataMapper {
     @Override
     public void create(Object o) throws SQLException {
         Property property = (Property) o;
-        int property_id = -1;
+        int property_id;
         String insertStatement = ConstructPropertySQLStmt.getInsertStmt(property);
         PreparedStatement stmt = DBConnection.prepare(insertStatement);
         ResultSet rs = stmt.executeQuery();
         rs.next();
-
         // set pk and add to identity map
         property_id = rs.getInt(1);
 
@@ -65,6 +64,7 @@ public class PropertyMapper extends DataMapper {
         // insert the property into memory(identity map)
         PropertyIdentityMapUtil.addToPropertyIDMap(property);
         PropertyIdentityMapUtil.addToPropertyAgentMap(property);
+        // close connections
         rs.close();
         stmt.close();
         DBConnection.close();
@@ -89,8 +89,9 @@ public class PropertyMapper extends DataMapper {
         // update the property in memory(identity map)
         PropertyIdentityMapUtil.addToPropertyIDMap(property);
         PropertyIdentityMapUtil.addToPropertyAgentMap(property);
-//        stmt.close();
-//        DBConnection.close();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 
     /**
@@ -114,6 +115,9 @@ public class PropertyMapper extends DataMapper {
             PropertyIdentityMapUtil.deleteFromPropertyIDMap(property_id);
             PropertyIdentityMapUtil.deleteFromPropertyAgentMap(p.getAgent_id(), property_id);
         }
+        // close connections
+        stmtForPT.close();
+        DBConnection.close();
     }
 
     //------------------- read operations (Called by service layer directly) -------------------
@@ -139,6 +143,10 @@ public class PropertyMapper extends DataMapper {
                     result.add(p);
                     PropertyIdentityMapUtil.addToPropertyAgentMap(p);
                 }
+                // close connections
+                resultSet.close();
+                stmt.close();
+                DBConnection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,6 +185,10 @@ public class PropertyMapper extends DataMapper {
                 Address address = new Address(address_id, street, city, state, postal_code, country);
                 result.add(property);
             }
+            // close connections
+            rs.close();
+            stmt.close();
+            DBConnection.close();
 
         } catch (SQLException e) {
             return null;
@@ -205,6 +217,10 @@ public class PropertyMapper extends DataMapper {
                     // add the object to IdentityMap
                     PropertyIdentityMapUtil.addToPropertyIDMap(result);
                 }
+                // close connections
+                rs.close();
+                stmt.close();
+                DBConnection.close();
             }
         } catch (SQLException e) {
             return null;

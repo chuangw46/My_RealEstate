@@ -124,7 +124,8 @@
                           <div class="row mt-5">
                               <div class="input-group form-group col-md-10">
                                   <label for="buy-search"></label>
-                                  <input id="buy-search" name="postal-code" type="text" placeholder="Search By Postcode"
+                                  <input id="buy-search" name="postal-code" type="number" placeholder="Search By Postcode"
+                                         min="0" oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                                          class="form-control form-control-underlined">
                               </div>
                               <div class="form-group col-md-2">
@@ -198,9 +199,9 @@
                           <div class="row mt-5">
                               <div class="input-group form-group col-md-10">
                                   <label for="rent-search"></label>
-                                  <input id="rent-search" name="postal-code" type="text"
-                                         placeholder="Search By Postcode"
-                                         class="form-control form-control-underlined">
+                                  <input id="rent-search" name="postal-code" type="number"
+                                         oninput="this.value=this.value.replace(/[^0-9]/g,'');" min="0"
+                                         placeholder="Search By Postcode" class="form-control form-control-underlined">
                               </div>
                               <div class="form-group col-md-2">
                                   <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>

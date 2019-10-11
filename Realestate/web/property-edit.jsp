@@ -68,6 +68,7 @@
                 <div class="form-group col-lg-2">
                     <label for="post-code"></label>
                     <input id="post-code" name="post-code" type="number" class="form-control"
+                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                            placeholder="Post code" value="<%=p.retrieveTheAddressObj().getPostal_code()%>" required>
                 </div>
             </div>
@@ -104,8 +105,9 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                     </div>
-                    <input id="price" name="price" type="number" class="form-control"
-                           placeholder="Renting or selling price" max="999999999" value="${currentProperty.price}"
+                    <input id="price" name="price" type="number" class="form-control" min="0" max="999999999"
+                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                           placeholder="Renting or selling price" value="${currentProperty.price}"
                            required>
                 </div>
                 <div class="input-group col-lg-4">
@@ -128,15 +130,17 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-bed"></i></span>
                     </div>
-                    <input id="bed-num" name="bed-num" type="number" class="form-control" placeholder="Number of bedrooms"
-                           value="${currentProperty.num_bed}" required>
+                    <input id="bed-num" name="bed-num" type="number" class="form-control" min="0"
+                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                           placeholder="Number of bedrooms" value="${currentProperty.num_bed}" required>
                 </div>
                 <div class="input-group col-lg-3">
                     <label for="bath-num"></label>
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-bath"></i></span>
                     </div>
-                    <input id="bath-num" name="bath-num" type="number" class="form-control"
+                    <input id="bath-num" name="bath-num" type="number" class="form-control" min="0"
+                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                            placeholder="Number of bathrooms" value="${currentProperty.num_bath}" required>
                 </div>
                 <div class="input-group col-lg-3">
@@ -144,7 +148,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-car-side"></i></span>
                     </div>
-                    <input id="car-park-num" name="car-park-num" type="number" class="form-control"
+                    <input id="car-park-num" name="car-park-num" type="number" class="form-control" min="0"
+                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                            placeholder="Number of car parks" value="${currentProperty.num_carpark}" required>
                 </div>
             </div>

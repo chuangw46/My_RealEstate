@@ -214,8 +214,8 @@
                           <div class="row">
                               <div class="input-group form-group col-md-10">
                                   <label for="agent-search"></label>
-                                  <input id="agent-search" type="text" placeholder="Search Agent By Name"
-                                         class="form-control form-control-underlined">
+                                  <input id="agent-search" name="name" type="text" placeholder="Search Agent By Name"
+                                         class="form-control form-control-underlined" required>
                               </div>
                               <div class="form-group col-md-2">
                                   <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>

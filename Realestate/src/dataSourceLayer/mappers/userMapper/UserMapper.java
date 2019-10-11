@@ -159,10 +159,11 @@ public class UserMapper implements DataMapper {
      * @param name
      * @return
      */
-    public List<User> getAgentByName(String name) {
+    public List<User> getAgentsByName(String name) {
         List<User> result = new ArrayList<>();
         try {
             String selectStatement = ConstructUserSQLStmt.getAgentSELECTStmtByName(name);
+            System.out.println(selectStatement);
             PreparedStatement stmt = DBConnection.prepare(selectStatement);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {

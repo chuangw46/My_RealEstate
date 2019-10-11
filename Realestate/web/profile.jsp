@@ -45,10 +45,9 @@
                     <form id="buyer-properties-form" method="get" action="frontServlet">
                         <input type="hidden" name="command" value="ListProperties">
                         <button class="btn btn-info" type="submit"
-<%--                                <% if (isAgent) { %>--%>
-<%--                                disabled--%>
-<%--                                <% }%>--%>
-                        disabled>My favourite properties
+                                <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
+                                disabled
+                                <% }%>>My favourite properties
                         </button>
                     </form>
                 </div>
@@ -67,10 +66,9 @@
                     <form id="tenant-properties-form" method="get" action="frontServlet">
                         <input type="hidden" name="command" value="ListProperties">
                         <button class="btn btn-info" type="submit"
-<%--                                <% if (isAgent) { %>--%>
-<%--                                disabled--%>
-<%--                                <% }%>--%>
-                        disabled>My favourite properties
+                                <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
+                                disabled
+                                <% }%>>My favourite properties
                         </button>
                     </form>
                 </div>
@@ -91,8 +89,7 @@
                         <button class="btn btn-info mt-1" type="submit"
                                 <% if (AppSession.hasRole(AppSession.CLIENT_ROLE)) { %>
                                 disabled
-                                <% }%>
-                        >My published properties
+                                <% }%>>My published properties
                         </button>
                     </form>
                 </div>

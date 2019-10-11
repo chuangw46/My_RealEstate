@@ -5,6 +5,7 @@ import dataSourceLayer.unitOfWork.UnitOfWork;
 import models.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author Chuang Wang
@@ -36,8 +37,16 @@ public class UserManagement {
 //        return null;
 //    }
 
-    public static User getCurrentUser(String email){
+    public static User getUserBasedOnEmail(String email){
         return userMapper.getUserByEmail(email);
+    }
+
+    public static User getUserBasedOnID(int id){
+        return userMapper.getAgentByID(id);
+    }
+
+    public static List<User> findAgents(String name) {
+        return userMapper.getAgentsByName(name);
     }
 
     /**

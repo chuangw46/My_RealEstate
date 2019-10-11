@@ -23,7 +23,7 @@ public class ConstructUserSQLStmt {
     }
 
     public static String getAgentSELECTStmtByName(String name) {
-        return "SELECT * FROM agent WHERE name = '" + name + "'";
+        return "SELECT * FROM agent WHERE UPPER(name) LIKE UPPER('%" + name + "%')";
     }
 
     public static String getClientINSERTStmt(User client){

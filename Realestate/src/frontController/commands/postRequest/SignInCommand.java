@@ -4,7 +4,6 @@ import frontController.commands.FrontCommand;
 
 import models.User;
 
-import dataSourceLayer.mappers.userMapper.UserMapper;
 import service.AppSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -32,7 +31,7 @@ public class SignInCommand extends FrontCommand {
             // do the login authentication
             currentUser.login(token);
             // get current user by using getCurrentUser method in the service layer
-            User user = UserManagement.getCurrentUser(email);
+            User user = UserManagement.getUserBasedOnEmail(email);
             AppSession.init(user);
             FlashMessage.createSuccessMessage(request.getSession(), "Hi " + user.getName() + ", " +
                     "Welcome to Realestate website.  Enjoy your journey here :)");

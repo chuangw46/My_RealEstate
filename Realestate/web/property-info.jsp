@@ -56,6 +56,11 @@
                         <i class="fas fa-bath"></i> ${currentProperty.num_bath}
                         <i class="fas fa-car-side"></i> ${currentProperty.num_carpark} </li>
                 </ul>
+<%--                <h3 class="my-3 text-muted">Agent Information</h3>--%>
+<%--                <ul class="text-black-50 font-weight-light">--%>
+<%--                    <li>Name: ${currentProperty.type} - ${currentProperty.rent_or_buy}</li>--%>
+<%--                    <li>Type: ${currentProperty.type} - ${currentProperty.rent_or_buy}</li>--%>
+<%--                </ul>--%>
             </div>
         </div>
 

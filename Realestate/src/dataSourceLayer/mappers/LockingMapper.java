@@ -1,6 +1,7 @@
 package dataSourceLayer.mappers;
 
-import dataSourceLayer.ConcurrencyUtil.LockManager;
+import dataSourceLayer.ConcurrencyUtil.LockerManager;
+import service.AppSession;
 
 import java.sql.SQLException;
 
@@ -11,42 +12,30 @@ import java.sql.SQLException;
  */
 public class LockingMapper implements DataMapper {
     private DataMapper impl;
+    private String sessionID;
 
     public LockingMapper(DataMapper impl) {
         this.impl = impl;
+        this.sessionID = AppSession.getSessionId();
     }
 
     // TODO: all retrieve - read lock  & favorite list all CRUD
     @Override
     public void create(Object o) throws SQLException {
-        try {
-            LockManager.getInstance().acquireWriteLock(o);
-            impl.create(o);
-            LockManager.getInstance().releaseWriteLock(o);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        impl.create(o);
     }
 
     @Override
     public void update(Object o) throws SQLException {
-        try {
-            LockManager.getInstance().acquireWriteLock(o);
-            impl.update(o);
-            LockManager.getInstance().releaseWriteLock(o);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        LockerManager.getInstance().acquireLock(o, sessionID);
+        impl.update(o);
+        LockerManager.getInstance().releaseLock(o, sessionID);
     }
 
     @Override
     public void delete(Object o) throws SQLException {
-        try {
-            LockManager.getInstance().acquireWriteLock(o);
-            impl.delete(o);
-            LockManager.getInstance().releaseWriteLock(o);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        LockerManager.getInstance().acquireLock(o, sessionID);
+        impl.delete(o);
+        LockerManager.getInstance().releaseLock(o, sessionID);
     }
 }

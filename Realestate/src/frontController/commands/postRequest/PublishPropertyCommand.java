@@ -1,10 +1,11 @@
 package frontController.commands.postRequest;
 
+import dataSourceLayer.ConcurrencyUtil.LockerManager;
 import frontController.commands.FrontCommand;
 import models.Address;
+import models.Property;
 import service.AppSession;
 import service.PropertyManagement;
-import models.Property;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;
@@ -44,8 +45,10 @@ public class PublishPropertyCommand extends FrontCommand {
                 Property property = new Property(type, Integer.parseInt(num_bed), Integer.parseInt(num_bath),
                         Integer.parseInt(num_carpark), Date.valueOf(date_available), Date.valueOf(date_inspection),
                         description, rent_or_buy, Integer.parseInt(price), Integer.parseInt(agent_id));
+
                 // insert the property into db, return true or false
                 PropertyManagement.publishProperty(property, address);
+
                 // if success, redirect to property list page
                 FlashMessage.createSuccessMessage("Property has been published.");
 
@@ -60,8 +63,8 @@ public class PublishPropertyCommand extends FrontCommand {
         } else {
             // if the action is 'edit'
             try {
-                // get the old property first
-                Property property = (Property) request.getSession().getAttribute("currentProperty");
+                // get the old property first from session
+                Property property = AppSession.getProperty();
 
                 // update new info
                 property.setType(type);
@@ -87,6 +90,9 @@ public class PublishPropertyCommand extends FrontCommand {
 
                 // if the update is successful, update the currentProperty in AppSession
                 AppSession.setProperty(property);
+
+                // release the lock for the business transaction which contains READ from db
+                LockerManager.getInstance().releaseLock(property, AppSession.getSessionId());
                 forward("/property-info.jsp");
             } catch (SQLException e) {
                 // if the update fails, prompt error

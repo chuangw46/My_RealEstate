@@ -20,8 +20,8 @@ import java.util.List;
  * contains core functionality of managing properties published by agents
  */
 public class PropertyManagement {
-    private static AddressMapper addressMapper = AddressMapper.getInstance();
-    private static PropertyMapper propertyMapper = PropertyMapper.getInstance();
+    private static AddressMapper addressMapper = AddressMapper.getSelfInstance();
+    private static PropertyMapper propertyMapper = PropertyMapper.getSelfInstance();
     private static FavoriteListMapper favoriteListMapper = FavoriteListMapper.getInstance();
 
     /**

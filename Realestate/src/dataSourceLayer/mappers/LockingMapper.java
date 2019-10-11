@@ -1,6 +1,6 @@
-package dataSourceLayer.ConcurrencyUtil;
+package dataSourceLayer.mappers;
 
-import dataSourceLayer.mappers.DataMapper;
+import dataSourceLayer.ConcurrencyUtil.LockManager;
 
 import java.sql.SQLException;
 
@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public class LockingMapper implements DataMapper{
+public class LockingMapper implements DataMapper {
     private DataMapper impl;
 
     public LockingMapper(DataMapper impl) {

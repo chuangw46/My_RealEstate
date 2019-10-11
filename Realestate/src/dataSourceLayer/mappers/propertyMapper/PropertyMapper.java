@@ -1,6 +1,6 @@
 package dataSourceLayer.mappers.propertyMapper;
 
-import dataSourceLayer.ConcurrencyUtil.LockingMapper;
+import dataSourceLayer.mappers.LockingMapper;
 import dataSourceLayer.dbConfig.DBConnection;
 import dataSourceLayer.mappers.DataMapper;
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
@@ -29,16 +29,24 @@ import java.util.List;
 public class PropertyMapper implements DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
     private static DataMapper instance;
+    private static PropertyMapper propertyMapper;
 
     private PropertyMapper() {
         //
     }
 
-    public static DataMapper getInstance() {
+    public static DataMapper getLockingMapperInstance() {
         if (instance == null) {
-            return new LockingMapper(new PropertyMapper());
+            instance = new LockingMapper(getSelfInstance());
         }
         return instance;
+    }
+
+    public static PropertyMapper getSelfInstance() {
+        if (propertyMapper == null) {
+            propertyMapper = new PropertyMapper();
+        }
+        return propertyMapper;
     }
 
     //------------------------- create, update, delete(Call by UoW) ------------------------------
@@ -80,7 +88,7 @@ public class PropertyMapper implements DataMapper {
     public void update(Object o) throws SQLException {
         Property property = (Property) o;
         String updatePropertyStatement = ConstructPropertySQLStmt.getUpdateStmt(property);
-        DataMapper am = AddressMapper.getInstance();
+        DataMapper am = AddressMapper.getLockingMapperInstance();
         // update the address first
         am.update(property.retrieveTheAddressObj());
         // update the property in db row

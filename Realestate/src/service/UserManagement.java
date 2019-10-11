@@ -2,8 +2,6 @@ package service;
 
 import dataSourceLayer.mappers.userMapper.UserMapper;
 import dataSourceLayer.unitOfWork.UnitOfWork;
-import models.Agent;
-import models.Client;
 import models.User;
 
 import java.sql.SQLException;
@@ -20,7 +18,7 @@ import java.sql.SQLException;
  * profile
  */
 public class UserManagement {
-    private static UserMapper userMapper = UserMapper.getInstance();
+    private static UserMapper userMapper = UserMapper.getSelfInstance();
 //
 //    /**
 //     * log in
@@ -44,10 +42,7 @@ public class UserManagement {
 
     /**
      * register an account
-     * @param email
-     * @param password
-     * @param name
-     * @param type
+     * @param user
      * @return a user object
      */
     public static void signup(User user) throws SQLException {

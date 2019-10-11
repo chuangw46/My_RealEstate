@@ -1,6 +1,6 @@
 package dataSourceLayer.mappers.addressMapper;
 
-import dataSourceLayer.ConcurrencyUtil.LockingMapper;
+import dataSourceLayer.mappers.LockingMapper;
 import dataSourceLayer.dbConfig.DBConnection;
 import dataSourceLayer.mappers.DataMapper;
 import models.Address;
@@ -24,16 +24,24 @@ import java.util.List;
 public class AddressMapper implements DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
     private static DataMapper instance;
+    private static AddressMapper addressMapper;
 
     private AddressMapper() {
         //
     }
 
-    public static DataMapper getInstance() {
+    public static DataMapper getLockingMapperInstance() {
         if (instance == null) {
-            return new LockingMapper(new AddressMapper());
+            instance = new LockingMapper(getSelfInstance());
         }
         return instance;
+    }
+
+    public static AddressMapper getSelfInstance() {
+        if (addressMapper == null) {
+            addressMapper = new AddressMapper();
+        }
+        return addressMapper;
     }
 
     //------------------------- create, update, delete(Call by UoW) ------------------------------

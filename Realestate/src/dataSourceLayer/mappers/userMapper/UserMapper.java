@@ -1,6 +1,6 @@
 package dataSourceLayer.mappers.userMapper;
 
-import dataSourceLayer.ConcurrencyUtil.LockingMapper;
+import dataSourceLayer.mappers.LockingMapper;
 import dataSourceLayer.dbConfig.DBConnection;
 import dataSourceLayer.mappers.DataMapper;
 import models.Agent;
@@ -27,16 +27,24 @@ import java.util.List;
 public class UserMapper implements DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
     private static DataMapper instance;
+    private static UserMapper userMapper;
 
     private UserMapper() {
         //
     }
 
-    public static DataMapper getInstance() {
+    public static DataMapper getLockingMapperInstance() {
         if (instance == null) {
-            return new LockingMapper(new UserMapper());
+            instance = new LockingMapper(getSelfInstance());
         }
         return instance;
+    }
+
+    public static UserMapper getSelfInstance() {
+        if (userMapper == null) {
+            userMapper = new UserMapper();
+        }
+        return userMapper;
     }
 
     //------------------------- create, update, delete(Call by UoW) ------------------------------
@@ -215,5 +223,25 @@ public class UserMapper implements DataMapper {
         DBConnection.close();
 
         return res;
+    }
+
+    public User getAgentByID(int agent_id)  {
+        User result = null;
+
+        try {
+            String selectStatement = ConstructUserSQLStmt.getAgentSELECTStmtByID(agent_id);
+            PreparedStatement stmt = DBConnection.prepare(selectStatement);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                result = ConstructObjectFromDB.constructAgentByRS(rs);
+            }
+            // close connections
+            rs.close();
+            stmt.close();
+            DBConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

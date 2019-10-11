@@ -17,7 +17,7 @@ public class LockManager {
 
     public static LockManager getInstance(){
         if (lockManager == null) {
-            return new LockManager();
+            lockManager = new LockManager();
         }
         return lockManager;
     }

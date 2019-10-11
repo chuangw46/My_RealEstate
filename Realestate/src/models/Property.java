@@ -1,6 +1,7 @@
 package models;
 
 import dataSourceLayer.mappers.addressMapper.AddressMapper;
+import dataSourceLayer.mappers.userMapper.UserMapper;
 
 import java.sql.Date;
 import java.util.Objects;
@@ -184,13 +185,19 @@ public class Property {
     }
 
     public String retrieveTheAddressString() {
-        AddressMapper am = AddressMapper.getInstance();
+        AddressMapper am = AddressMapper.getSelfInstance();
         Address a = am.getAddressByID(getAddress_id());
         return a.getStreet() + ", " + a.getCity() + " " + a.getState() + " " + a.getPostal_code() + " " + a.getCountry();
     }
 
     public Address retrieveTheAddressObj(){
-        return AddressMapper.getInstance().getAddressByID(getAddress_id());
+        AddressMapper am = AddressMapper.getSelfInstance();
+        return am.getAddressByID(getAddress_id());
+    }
+
+    public User retrieveTheAgentObj() {
+        UserMapper um =UserMapper.getSelfInstance();
+        return um.getAgentByID(getAgent_id());
     }
 
 

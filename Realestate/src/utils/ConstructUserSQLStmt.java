@@ -70,4 +70,8 @@ public class ConstructUserSQLStmt {
                         "bio = '" + agent.getBio() + "' \n" +
                 "WHERE agent_id = " + agent.getId() + ";" ;
     }
+
+    public static String getAgentSELECTStmtByID(int agent_id) {
+        return "SELECT * FROM agent WHERE agent_id = " + agent_id + "";
+    }
 }

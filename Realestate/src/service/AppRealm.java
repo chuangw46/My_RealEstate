@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AppRealm extends JdbcRealm {
-    private UserMapper userMapper = UserMapper.getInstance();
+    private UserMapper userMapper = UserMapper.getSelfInstance();
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {

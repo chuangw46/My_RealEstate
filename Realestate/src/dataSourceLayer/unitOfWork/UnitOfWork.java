@@ -91,11 +91,11 @@ public class UnitOfWork {
 
     private DataMapper getMapper(Object o){
         if (o instanceof User){
-            return UserMapper.getInstance();
+            return UserMapper.getLockingMapperInstance();
         } else if (o instanceof Property){
-            return PropertyMapper.getInstance();
+            return PropertyMapper.getLockingMapperInstance();
         } else if (o instanceof Address) {
-            return AddressMapper.getInstance();
+            return AddressMapper.getLockingMapperInstance();
         }
         return null;
     }

@@ -73,16 +73,6 @@ public class PropertyManagement {
     }
 
     /**
-     * to get a yes or no answer if a property is liked
-     * @param client_id
-     * @param property_id
-     * @return true or false
-     */
-    public static boolean isPropertyBeingLiked(int client_id, int property_id) {
-        return favoriteListMapper.isPropertyLiked(client_id, property_id);
-    }
-
-    /**
      * to update a property's details
      * @return updated property object
      */
@@ -113,5 +103,44 @@ public class PropertyManagement {
         UnitOfWork.getCurrent().registerDeleted(property.retrieveTheAddressObj());
 
         UnitOfWork.getCurrent().commit();
+    }
+
+    /**
+     * to get a yes or no answer if a property is liked
+     * @param client_id
+     * @param property_id
+     * @return true or false
+     */
+    public static boolean isPropertyBeingLiked(int client_id, int property_id) {
+        return favoriteListMapper.isPropertyLiked(client_id, property_id);
+    }
+
+    /**
+     * add a property to favorite list
+     * @param client_id
+     * @param property_id
+     * @throws SQLException
+     */
+    public static void likeAProperty(int client_id, int property_id) throws SQLException {
+        favoriteListMapper.likeAProperty(client_id, property_id);
+    }
+
+    /**
+     * remove a property from favorite list
+     * @param client_id
+     * @param property_id
+     * @throws SQLException
+     */
+    public static void unlikeAProperty(int client_id, int property_id) throws SQLException {
+        favoriteListMapper.unlikeProperty(client_id, property_id);
+    }
+
+    /**
+     * get current client's favorite list of properties
+     * @param client_id
+     * @return favorite list of properties
+     */
+    public static List<Property> getMyFavoriteList(int client_id) {
+        return favoriteListMapper.getFavoriteProperties(client_id);
     }
 }

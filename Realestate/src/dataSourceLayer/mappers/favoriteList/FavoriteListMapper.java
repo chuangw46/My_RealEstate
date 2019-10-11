@@ -24,7 +24,7 @@ import java.util.List;
  * Favorite List data mapper implementation
  */
 
-public class FavoriteListMapper{
+public class FavoriteListMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
     private static FavoriteListMapper favoriteListMapper;
 
@@ -76,7 +76,7 @@ public class FavoriteListMapper{
             String selectStmtForAST = ConstructFavoriteListSQLStmt.getSelectStmt(client_id);
             PreparedStatement stmtForAST = DBConnection.prepare(selectStmtForAST);
             ResultSet rsAST = stmtForAST.executeQuery();
-            while (rsAST.next()){
+            while (rsAST.next()) {
                 int property_id = rsAST.getInt(2);
                 /*
                 after retrieving a property id from AST, retrieve all the info of the property by
@@ -107,6 +107,7 @@ public class FavoriteListMapper{
     /**
      * If a property was deleted by its agent, then delete all rows from AST containing the property
      * In other words, make the property unavailable for those who favorite it
+     *
      * @param property_id
      * @return true if delete is done, false if exception is thrown
      */
@@ -129,20 +130,14 @@ public class FavoriteListMapper{
      *
      * @param client_id
      * @param property_id
-     * @return true if delete is done, false if exception is thrown
      */
-    public boolean likeAProperty(int client_id, int property_id) {
-        try {
-            String insertStmt = ConstructFavoriteListSQLStmt.getInsertStmt(client_id, property_id);
-            PreparedStatement stmt = DBConnection.prepare(insertStmt);
-            stmt.executeUpdate();
-            // close connections
-            stmt.close();
-            DBConnection.close();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
+    public void likeAProperty(int client_id, int property_id) throws SQLException {
+        String insertStmt = ConstructFavoriteListSQLStmt.getInsertStmt(client_id, property_id);
+        PreparedStatement stmt = DBConnection.prepare(insertStmt);
+        stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 
     /**
@@ -150,19 +145,13 @@ public class FavoriteListMapper{
      *
      * @param client_id
      * @param property_id
-     * @return true if delete is done, false if exception is thrown
      */
-    public boolean unlikeProperty(int client_id, int property_id) {
-        try {
-            String deleteStmt = ConstructFavoriteListSQLStmt.getDeleteStmtByPIDCID(client_id,property_id);
-            PreparedStatement stmt = DBConnection.prepare(deleteStmt);
-            stmt.executeUpdate();
-            // close connections
-            stmt.close();
-            DBConnection.close();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
+    public void unlikeProperty(int client_id, int property_id) throws SQLException {
+        String deleteStmt = ConstructFavoriteListSQLStmt.getDeleteStmtByPIDCID(client_id, property_id);
+        PreparedStatement stmt = DBConnection.prepare(deleteStmt);
+        stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 }

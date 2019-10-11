@@ -8,6 +8,7 @@ import utils.FlashMessage;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,12 @@ import java.util.List;
 public class ListPropertiesCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
         if (AppSession.isAuthenticated()) {
-            List<Property> pl = PropertyManagement.viewMyPropertyList(AppSession.getUser().getId());
+            List<Property> pl = new ArrayList<>();
+            if (AppSession.hasRole(AppSession.AGENT_ROLE)) {
+                pl = PropertyManagement.viewMyPropertyList(AppSession.getUser().getId());
+            } else if (AppSession.hasRole(AppSession.CLIENT_ROLE)) {
+                pl = PropertyManagement.getMyFavoriteList(AppSession.getUser().getId());
+            }
             // update the property_list in AppSession
             AppSession.setPropertyList(pl);
             forward("/property-list.jsp");

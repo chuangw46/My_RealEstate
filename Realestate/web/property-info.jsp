@@ -72,11 +72,11 @@
             <% } %>
             <% if (AppSession.hasRole(AppSession.CLIENT_ROLE)) { %>
                 <% if (AppSession.getLikeProperty()) { %>
-                    <a href="frontServlet?command=LikeProperty?id=${currentProperty.id}">
+                    <a href="frontServlet?command=UnlikeProperty&id=${currentProperty.id}">
                         <i class="fas fa-star fa-3x"></i> Like
                     </a>
                 <% } else { %>
-                    <a href="frontServlet?command=UnlikeProperty?id=${currentProperty.id}">
+                    <a href="frontServlet?command=LikeProperty&id=${currentProperty.id}">
                         <i class="far fa-star fa-3x"></i> Like
                     </a>
                 <% } %>

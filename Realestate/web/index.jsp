@@ -76,7 +76,7 @@
                                       <option value="Land">Land</option>
                                       <option value="Acreage">Acreage</option>
                                       <option value="Rural">Rural</option>
-                                      <option value="Block of Unit">Block of Units</option>
+                                      <option value="Block of Units">Block of Units</option>
                                       <option value="Retirement Living">Retirement Living</option>
                                   </select>
                                   <select class="custom-select" id="buy-beds-max" name="max-beds" aria-label="Beds Max">
@@ -148,7 +148,7 @@
                                       <option value="Land">Land</option>
                                       <option value="Acreage">Acreage</option>
                                       <option value="Rural">Rural</option>
-                                      <option value="Block of Unit">Block of Units</option>
+                                      <option value="Block of Units">Block of Units</option>
                                       <option value="Retirement Living">Retirement Living</option>
                                   </select>
                                   <select class="custom-select" id="rent-beds-max" name="max-beds"
@@ -233,25 +233,27 @@
           <div class="col-lg-6 mb-6 d-flex justify-content-center">
               <div class="card h-100 text-center w-75">
                   <h4 class="card-header">
-                      Review my favourite list
+                      Review my property list
                       <i class="fas fa-shopping-cart"></i>
                   </h4>
                   <div class="card-body">
                       <p class="card-text">
-                          As a buyer or tenant, you can mark a property that you are interested to follow up. This
-                          property then will be added into your personal favourite list, which can be reviewed and
-                          modified by you anytime.
+                          As an agent, you can manage your published list of properties. As a buyer or tenant, you
+                          can mark a property that you are interested to follow up. This property then will be added
+                          into your personal favourite list, which can be reviewed and modified by you anytime.
                       </p>
                   </div>
                   <div class="card-footer">
-                      <a href="frontServlet?command=ViewFavouriteList" class="btn btn-info" >Check out my favourite list</a>
+                      <a href="frontServlet?command=ListProperties" class="btn btn-info" >
+                          Check out the list
+                      </a>
                   </div>
               </div>
           </div>
           <div class="col-lg-6 mb-6 d-flex justify-content-center">
               <div class="card h-100 text-center w-75">
                   <h4 class="card-header">
-                      Publish properties
+                      Publish a new property
                       <i class="fas fa-home"></i>
                   </h4>
                   <div class="card-body">
@@ -262,7 +264,7 @@
                       </p>
                   </div>
                   <div class="card-footer">
-                      <a href="frontServlet?command=RedirectPublish" class="btn btn-info">Publish a property</a>
+                      <a href="frontServlet?command=RedirectPublish" class="btn btn-info">Go to publish</a>
                   </div>
               </div>
           </div>

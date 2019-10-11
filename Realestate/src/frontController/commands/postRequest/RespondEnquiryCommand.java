@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class RespondEnquiryCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
-        FlashMessage.createSuccessMessage(request.getSession(), "The enquiry has been responded.");
+        FlashMessage.createSuccessMessage("The enquiry has been responded.");
         forward("/enquiry-list.jsp");
     }
 }

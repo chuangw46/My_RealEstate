@@ -33,11 +33,11 @@ public class SignInCommand extends FrontCommand {
             // get current user by using getCurrentUser method in the service layer
             User user = UserManagement.getUserBasedOnEmail(email);
             AppSession.init(user);
-            FlashMessage.createSuccessMessage(request.getSession(), "Hi " + user.getName() + ", " +
+            FlashMessage.createSuccessMessage("Hi " + user.getName() + ", " +
                     "Welcome to Realestate website.  Enjoy your journey here :)");
             forward("/index.jsp");
         } catch (UnknownAccountException | IncorrectCredentialsException e) {
-            FlashMessage.createErrorMessage(request.getSession(), "We didn't recognise the " +
+            FlashMessage.createErrorMessage("We didn't recognise the " +
                     "username or password you entered. Please try again!");
             forward("/signin.jsp");
         }

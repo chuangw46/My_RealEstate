@@ -16,7 +16,7 @@ public class ViewEnquiryCommand extends FrontCommand {
             forward("/enquiry-list.jsp");
         }
         else {
-            FlashMessage.createAlertMessage(request.getSession(), "You are required to sign in.");
+            FlashMessage.createAlertMessage("You are required to sign in.");
             forward("/signin.jsp");
         }
     }

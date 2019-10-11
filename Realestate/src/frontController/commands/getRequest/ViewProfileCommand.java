@@ -15,7 +15,7 @@ public class ViewProfileCommand extends FrontCommand {
         if (AppSession.isAuthenticated()) {
             forward("/profile.jsp");
         } else {
-            FlashMessage.createAlertMessage(request.getSession(), "You are required to sign in");
+            FlashMessage.createAlertMessage("You are required to sign in");
             forward("/signin.jsp");
         }
     }

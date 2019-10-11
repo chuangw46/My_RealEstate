@@ -33,4 +33,11 @@ public class ConstructFavoriteListSQLStmt {
                         client_id + ", " +
                         property_id + ")\n";
     }
+
+    public static String getSelectLikeStmt(int client_id, int property_id) {
+        return "SELECT * FROM client_likes_properties " +
+                "WHERE " +
+                    "client_client_id = " + client_id + " AND " +
+                    "property_property_id = " + property_id + ";";
+    }
 }

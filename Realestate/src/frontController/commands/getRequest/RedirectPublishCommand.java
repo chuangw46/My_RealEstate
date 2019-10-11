@@ -20,13 +20,12 @@ public class RedirectPublishCommand extends FrontCommand {
                 forward("/property-publish.jsp");
             }
             else {
-                FlashMessage.createAlertMessage(request.getSession(),
-                        "Only agents can publish properties or update property details.");
+                FlashMessage.createAlertMessage("Only agents can publish properties or update property details.");
                 forward("/index.jsp");
             }
         }
         else {
-            FlashMessage.createAlertMessage(request.getSession(), "You are required to sign in.");
+            FlashMessage.createAlertMessage("You are required to sign in.");
             forward("/signin.jsp");
         }
     }

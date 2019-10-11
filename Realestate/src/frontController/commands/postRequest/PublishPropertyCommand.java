@@ -47,14 +47,14 @@ public class PublishPropertyCommand extends FrontCommand {
                 // insert the property into db, return true or false
                 PropertyManagement.publishProperty(property, address);
                 // if success, redirect to property list page
-                FlashMessage.createSuccessMessage(request.getSession(), "Property has been published.");
+                FlashMessage.createSuccessMessage("Property has been published.");
 
                 // update the property_list in AppSession
                 List<Property> pl = PropertyManagement.viewMyPropertyList(Integer.parseInt(agent_id));
                 AppSession.setPropertyList(pl);
                 forward("/property-list.jsp");
             } catch (SQLException e) {
-                FlashMessage.createErrorMessage(request.getSession(), "Fail to publish the property.");
+                FlashMessage.createErrorMessage("Fail to publish the property.");
                 forward("/property-publish.jsp");
             }
         } else {
@@ -83,16 +83,14 @@ public class PublishPropertyCommand extends FrontCommand {
                 PropertyManagement.updateProperty(property);
 
                 // give flash msg on the web interface
-                FlashMessage.createSuccessMessage(request.getSession(), "Property has been " +
-                        "updated.");
+                FlashMessage.createSuccessMessage("Property has been updated.");
 
                 // if the update is successful, update the currentProperty in AppSession
                 AppSession.setProperty(property);
                 forward("/property-info.jsp");
             } catch (SQLException e) {
                 // if the update fails, prompt error
-                FlashMessage.createErrorMessage(request.getSession(), "Fail to update property " +
-                        "details.");
+                FlashMessage.createErrorMessage("Fail to update property details.");
                 forward("/property-edit.jsp");
             }
         }

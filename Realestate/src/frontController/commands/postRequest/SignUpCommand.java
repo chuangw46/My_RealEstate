@@ -36,7 +36,7 @@ public class SignUpCommand extends FrontCommand {
             // sign up this new user through the service layer
             UserManagement.signup(user);
         } catch (SQLException e) {
-            FlashMessage.createErrorMessage(request.getSession(), "This email already exists.");
+            FlashMessage.createErrorMessage("This email already exists.");
             forward("/signup.jsp");
         }
 
@@ -47,11 +47,11 @@ public class SignUpCommand extends FrontCommand {
         try {
             currentUser.login(token);
             AppSession.init(user);
-            FlashMessage.createSuccessMessage(request.getSession(), "Hi " + user.getName() + ", " +
+            FlashMessage.createSuccessMessage("Hi " + user.getName() + ", " +
                     "Welcome to Realestate website.  Enjoy your journey here :)");
             forward("/index.jsp");
         } catch (UnknownAccountException | IncorrectCredentialsException e) {
-            FlashMessage.createErrorMessage(request.getSession(), "Account is created, please sign in now.");
+            FlashMessage.createErrorMessage("Account is created, please sign in now.");
             forward("/signin.jsp");
         }
     }

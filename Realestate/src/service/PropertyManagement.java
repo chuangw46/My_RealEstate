@@ -72,6 +72,15 @@ public class PropertyManagement {
         return propertyMapper.searchByPropertyID(property_id);
     }
 
+    /**
+     * to get a yes or no answer if a property is liked
+     * @param client_id
+     * @param property_id
+     * @return true or false
+     */
+    public static boolean isPropertyBeingLiked(int client_id, int property_id) {
+        return favoriteListMapper.isPropertyLiked(client_id, property_id);
+    }
 
     /**
      * to update a property's details

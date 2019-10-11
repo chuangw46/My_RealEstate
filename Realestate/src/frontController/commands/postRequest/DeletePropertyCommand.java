@@ -23,14 +23,14 @@ public class DeletePropertyCommand extends FrontCommand {
                 try {
                     int property_id = Integer.parseInt(request.getParameter("property-id"));
                     PropertyManagement.deleteProperty(property_id);
-                    FlashMessage.createSuccessMessage(request.getSession(), "Property has been deleted.");
+                    FlashMessage.createSuccessMessage("Property has been deleted.");
                 } catch (SQLException e) {
                     // exception is caught during the deleteProperty procedure
-                    FlashMessage.createErrorMessage(request.getSession(), "Fail to delete the property.");
+                    FlashMessage.createErrorMessage("Fail to delete the property.");
                 }
             } else {
                 // id is missing, cannot delete the chosen property
-                FlashMessage.createErrorMessage(request.getSession(), "Fail to delete the property.");
+                FlashMessage.createErrorMessage("Fail to delete the property.");
             }
 
             // update the property_list in AppSession
@@ -38,7 +38,7 @@ public class DeletePropertyCommand extends FrontCommand {
             AppSession.setPropertyList(pl);
             forward("/property-list.jsp");
         } else {
-            FlashMessage.createAlertMessage(request.getSession(), "You are required to sign in.");
+            FlashMessage.createAlertMessage("You are required to sign in.");
             forward("/signin.jsp");
         }
     }

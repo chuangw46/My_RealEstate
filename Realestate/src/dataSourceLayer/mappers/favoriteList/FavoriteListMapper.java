@@ -39,6 +39,28 @@ public class FavoriteListMapper{
         return favoriteListMapper;
     }
 
+    public boolean isPropertyLiked(int client_id, int property_id) {
+        // create and initialize an empty list for result
+        boolean result = false;
+        try {
+            // retrieve all the properties' id liked by the client from AST(association table)
+            String selectStmtForLike = ConstructFavoriteListSQLStmt.getSelectLikeStmt(client_id, property_id);
+            System.out.println(selectStmtForLike);
+            PreparedStatement stmtForLike = DBConnection.prepare(selectStmtForLike);
+            ResultSet rs = stmtForLike.executeQuery();
+            if (rs.next()) {
+                result = true;
+            }
+            // close connections
+            rs.close();
+            stmtForLike.close();
+            DBConnection.close();
+        } catch (SQLException e) {
+            return result;
+        }
+        return result;
+    }
+
 
     /**
      * get a list of properties objects based on client id

@@ -22,7 +22,7 @@ public class ListPropertiesCommand extends FrontCommand {
             forward("/property-list.jsp");
         }
         else {
-            FlashMessage.createAlertMessage(request.getSession(), "You are required to sign in.");
+            FlashMessage.createAlertMessage("You are required to sign in.");
             forward("/signin.jsp");
         }
     }

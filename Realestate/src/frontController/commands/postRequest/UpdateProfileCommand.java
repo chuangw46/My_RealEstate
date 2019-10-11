@@ -43,12 +43,10 @@ public class UpdateProfileCommand extends FrontCommand {
                     client.setName(name);
                     UserManagement.updateProfile(client);
                 }
-                FlashMessage.createSuccessMessage(request.getSession(), "Your profile has been " +
-                        "updated!");
+                FlashMessage.createSuccessMessage("Your profile has been updated!");
                 forward("/profile.jsp");
             } catch (SQLException e) {
-                FlashMessage.createErrorMessage(request.getSession(), "Fail to update your profile! " +
-                        "Try again please.");
+                FlashMessage.createErrorMessage("Fail to update your profile! Try again please.");
                 forward("/profile.jsp");
             }
         }

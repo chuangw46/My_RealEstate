@@ -12,6 +12,7 @@ public class AppSession {
     private static final String PROPERTY_ATTRIBUTE_NAME = "currentProperty";
     private static final String PROPERTY_LIST_ATTRIBUTE_NAME = "propertyList";
     private static final String AGENT_LIST_ATTRIBUTE_NAME = "agentList";
+    private static final String LIKE_PROPERTY_ATTRIBUTE_NAME = "likeProperty";
     public static final String CLIENT_ROLE = "Client";
     public static final String AGENT_ROLE = "Agent";
 
@@ -82,5 +83,17 @@ public class AppSession {
 
     public static void removeAgentList() {
         SecurityUtils.getSubject().getSession().removeAttribute(AGENT_LIST_ATTRIBUTE_NAME);
+    }
+
+    public static boolean getLikeProperty() {
+        return (boolean)SecurityUtils.getSubject().getSession().getAttribute(LIKE_PROPERTY_ATTRIBUTE_NAME);
+    }
+
+    public static void setLikeProperty(boolean i) {
+        SecurityUtils.getSubject().getSession().setAttribute(LIKE_PROPERTY_ATTRIBUTE_NAME, i);
+    }
+
+    public static void removeLikeProperty() {
+        SecurityUtils.getSubject().getSession().removeAttribute(LIKE_PROPERTY_ATTRIBUTE_NAME);
     }
 }

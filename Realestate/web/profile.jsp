@@ -32,11 +32,11 @@
     <hr>
 
     <div class="row">
-        <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
+        <div class="col-lg-6 d-flex justify-content-center">
+            <div class="card w-75" style="width: 18rem;">
                 <img src="images/dmitry-demidko-eBWzFKahEaU-unsplash.jpg" class="card-img-top" alt="Agent picture">
                 <div class="card-body">
-                    <h5 class="card-title">Buyer</h5>
+                    <h5 class="card-title">Buyer/Tenant</h5>
                     <p class="card-text">
                         I want to check out properties that are marked in my favourite list.
                     </p>
@@ -53,29 +53,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="images/nordwood-themes-bJjsKbToY34-unsplash.jpg" class="card-img-top" alt="Agent picture">
-                <div class="card-body">
-                    <h5 class="card-title">Tenant</h5>
-                    <p class="card-text">
-                        I want to check out properties that are marked in my favourite list.
-                    </p>
-                </div>
-                <div class="card-footer text-center">
-                    <form id="tenant-properties-form" method="get" action="frontServlet">
-                        <input type="hidden" name="command" value="ListProperties">
-                        <button class="btn btn-info" type="submit"
-                                <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
-                                disabled
-                                <% }%>>My favourite properties
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
+        <div class="col-lg-6 d-flex justify-content-center">
+            <div class="card w-75" style="width: 18rem;">
                 <img src="images/kobu-agency-7okkFhxrxNw-unsplash.jpg" class="card-img-top" alt="Agent picture">
                 <div class="card-body">
                     <h5 class="card-title">Agent</h5>

@@ -10,6 +10,7 @@
 <%@ page import="models.AgencyCompany" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="models.Property" %>
+<%@ page import="service.DTO.AgentDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
@@ -33,7 +34,7 @@
         <li class="breadcrumb-item active">Agent Profile</li>
     </ol>
     <hr>
-    <% Agent agent = (Agent) AppSession.getOtherUser(); %>
+    <% AgentDTO agentDTO = AppSession.getOtherUser(); %>
     <div class="row">
         <div class="col-lg-12">
             <h3 class="my-3 text-muted">
@@ -41,14 +42,13 @@
             </h3>
             <hr>
             <ul class="text-black-50 font-weight-light">
-                <li>Name: <%= agent.getName() %>
+                <li>Name: <%= agentDTO.getAgent_name() %>
                 </li>
-                <li>Contact Information: <%= agent.getPhone() %>
+                <li>Contact Information: <%= agentDTO.getAgent_phone() %>
                 </li>
-                <li>Biography: <%= agent.getBio() %>
+                <li>Biography: <%= agentDTO.getAgent_bio() %>
                 </li>
             </ul>
-            <% AgencyCompany company = agent.getCompany(); %>
         </div>
     </div>
     <div class="row">
@@ -56,11 +56,11 @@
             <h3 class="my-3 text-muted">Company Details</h3>
             <hr>
             <ul class="text-black-50 font-weight-light">
-                <li>Name: <%= company.getName() %>
+                <li>Name: <%= agentDTO.getCompany_name() %>
                 </li>
-                <li>Address: <%= company.getAddress() %>
+                <li>Address: <%= agentDTO.getCompany_address() %>
                 </li>
-                <li>Website: <%= company.getWebsite() %>
+                <li>Website: <%= agentDTO.getCompany_website() %>
                 </li>
             </ul>
         </div>

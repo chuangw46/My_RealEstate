@@ -111,10 +111,10 @@
 </div>
 
 <tags:footer-copyright/>
-<script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, "frontServlet?command=ListProperties");
-    }
-</script>
+<%--<script>--%>
+<%--    if (window.history.replaceState) {--%>
+<%--        window.history.replaceState(null, null, "frontServlet?command=ListProperties");--%>
+<%--    }--%>
+<%--</script>--%>
 </body>
 </html>

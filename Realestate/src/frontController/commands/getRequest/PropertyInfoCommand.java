@@ -2,9 +2,10 @@ package frontController.commands.getRequest;
 
 import frontController.commands.FrontCommand;
 import models.Property;
-import models.User;
 import service.AppSession;
+import service.DTO.AgentDTO;
 import service.PropertyManagement;
+import service.remoteFacade.AgentFacade;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -22,8 +23,9 @@ public class PropertyInfoCommand extends FrontCommand {
             Property property = PropertyManagement.viewSpecificProperty(property_id);
             // update the property in AppSession
             AppSession.setProperty(property);
-            User agent = property.retrieveTheAgentObj();
-            AppSession.setOtherUser(agent);
+//            User agent = property.retrieveTheAgentObj();
+            AgentDTO agentDTO = AgentFacade.getInstance().getAgentDTO(property.getAgent_id());
+            AppSession.setOtherUser(agentDTO);
             if (AppSession.isAuthenticated() && AppSession.hasRole(AppSession.CLIENT_ROLE)) {
                 boolean is_liked = PropertyManagement.isPropertyBeingLiked(AppSession.getUser().getId(), property.getId());
                 AppSession.setLikeProperty(is_liked);

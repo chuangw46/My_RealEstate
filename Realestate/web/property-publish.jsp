@@ -62,7 +62,9 @@
             </div>
             <div class="form-group col-lg-2">
                 <label for="post-code"></label>
-                <input id="post-code" name="post-code" type="number" class="form-control" placeholder="Post code" required>
+                <input id="post-code" name="post-code" type="number" min="0"
+                       oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                       class="form-control" placeholder="Post code" required>
             </div>
         </div>
         <div class="row">
@@ -99,6 +101,8 @@
                     <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                 </div>
                 <input id="price" name="price" type="number" class="form-control"
+                       oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                       min="1"
                        placeholder="Renting or selling price" max="999999999" required>
             </div>
             <div class="input-group col-lg-4">
@@ -122,7 +126,8 @@
                     <span class="input-group-text"><i class="fas fa-bed"></i></span>
                 </div>
                 <input id="bed-num" name="bed-num" type="number" class="form-control"
-                       placeholder="Number of bedrooms" required>
+                       oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                       min="0" placeholder="Number of bedrooms" required>
             </div>
             <div class="input-group col-lg-3">
                 <label for="bath-num"></label>
@@ -130,7 +135,8 @@
                     <span class="input-group-text"><i class="fas fa-bath"></i></span>
                 </div>
                 <input id="bath-num" name="bath-num" type="number" class="form-control"
-                       placeholder="Number of bathrooms" required>
+                       oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                       min="0" placeholder="Number of bathrooms" required>
             </div>
             <div class="input-group col-lg-3">
                 <label for="car-park-num"></label>
@@ -138,7 +144,8 @@
                     <span class="input-group-text"><i class="fas fa-car-side"></i></span>
                 </div>
                 <input id="car-park-num" name="car-park-num" type="number" class="form-control"
-                       placeholder="Number of car parks" required>
+                       oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                       min="0" placeholder="Number of car parks" required>
             </div>
         </div>
 

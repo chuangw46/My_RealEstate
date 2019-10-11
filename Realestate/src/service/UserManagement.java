@@ -41,9 +41,9 @@ public class UserManagement {
         return userMapper.getUserByEmail(email);
     }
 
-    public static User getUserBasedOnID(int id){
-        return userMapper.getAgentByID(id);
-    }
+//    public static User getUserBasedOnID(int id){
+//        return userMapper.getAgentByID(id);
+//    }
 
     public static List<User> findAgents(String name) {
         return userMapper.getAgentsByName(name);

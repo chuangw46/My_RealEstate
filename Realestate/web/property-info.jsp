@@ -8,6 +8,7 @@
 <%@ page import="models.Property" %>
 <%@ page import="service.AppSession" %>
 <%@ page import="models.Agent" %>
+<%@ page import="service.DTO.AgentDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
@@ -59,15 +60,16 @@
                     <i class="fas fa-car-side"></i> ${currentProperty.num_carpark} </li>
             </ul>
             <% if (!AppSession.hasRole(AppSession.AGENT_ROLE) && AppSession.getOtherUser() != null) { %>
-            <% Agent a = (Agent) AppSession.getOtherUser(); %>
+            <% AgentDTO agentDTO = AppSession.getOtherUser(); %>
             <h3 class="my-3 text-muted">Agent Information</h3>
             <ul class="text-black-50 font-weight-light">
                 <li>Name:
-                    <a href="frontServlet?command=ViewOthersProfile&id=<%= a.getId() %>">
-                        <%= a.getName() %>
+                    <a href="frontServlet?command=ViewOthersProfile&id=<%=
+                    agentDTO.getAgent_id() %>">
+                        <%= agentDTO.getAgent_name() %>
                     </a>
                 </li>
-                <li>Contact Information: <%= a.getPhone() %></li>
+                <li>Contact Information: <%= agentDTO.getAgent_phone() %></li>
             </ul>
             <% } %>
             <% if (AppSession.hasRole(AppSession.CLIENT_ROLE)) { %>

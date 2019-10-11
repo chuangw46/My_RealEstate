@@ -3,6 +3,7 @@ package service;
 import models.Property;
 import models.User;
 import org.apache.shiro.SecurityUtils;
+import service.DTO.AgentDTO;
 
 import java.util.List;
 
@@ -36,11 +37,11 @@ public class AppSession {
         return (User)SecurityUtils.getSubject().getSession().getAttribute(USER_ATTRIBUTE_NAME);
     }
 
-    public static User getOtherUser() {
-        return (User)SecurityUtils.getSubject().getSession().getAttribute(OTHER_USER_ATTRIBUTE_NAME);
+    public static AgentDTO getOtherUser() {
+        return (AgentDTO) SecurityUtils.getSubject().getSession().getAttribute(OTHER_USER_ATTRIBUTE_NAME);
     }
 
-    public static void setOtherUser(User user) {
+    public static void setOtherUser(AgentDTO user) {
         SecurityUtils.getSubject().getSession().setAttribute(OTHER_USER_ATTRIBUTE_NAME, user);
     }
 

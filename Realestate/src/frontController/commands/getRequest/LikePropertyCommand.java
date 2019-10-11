@@ -16,6 +16,7 @@ public class LikePropertyCommand extends FrontCommand {
         try {
             // like the property through service layer method
             PropertyManagement.likeAProperty(AppSession.getUser().getId(), property_id);
+            System.out.println("----------------" + AppSession.getUser().getId() + "----" );
             // set is_like to true after like action
             AppSession.setLikeProperty(true);
             forward("/property-info.jsp");

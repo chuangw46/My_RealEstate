@@ -5,7 +5,10 @@ import frontController.commands.FrontCommand;
 import models.Address;
 import models.Property;
 import service.AppSession;
+import service.DTO.PropertyDTO;
 import service.PropertyManagement;
+import service.remoteFacade.PropertyAssembler;
+import service.remoteFacade.PropertyFacade;
 import utils.FlashMessage;
 
 import javax.servlet.ServletException;
@@ -83,7 +86,9 @@ public class PublishPropertyCommand extends FrontCommand {
                 property.setPrice(Integer.parseInt(price));
 
                 // update db -> get the updated property
-                PropertyManagement.updateProperty(property);
+//                PropertyManagement.updateProperty(property);
+                PropertyDTO propertyDTO = PropertyAssembler.createPropertyDTO(property);
+                PropertyFacade.getInstance().updateProperty(propertyDTO);
 
                 // give flash msg on the web interface
                 FlashMessage.createSuccessMessage("Property has been updated.");

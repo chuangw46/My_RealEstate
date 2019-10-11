@@ -27,13 +27,12 @@ public class LockingMapper implements DataMapper {
 
     @Override
     public void update(Object o) throws SQLException {
-        LockerManager.getInstance().acquireLock(o, sessionID);
         impl.update(o);
-        LockerManager.getInstance().releaseLock(o, sessionID);
     }
 
     @Override
     public void delete(Object o) throws SQLException {
+        // Implicit lock implementation
         LockerManager.getInstance().acquireLock(o, sessionID);
         impl.delete(o);
         LockerManager.getInstance().releaseLock(o, sessionID);

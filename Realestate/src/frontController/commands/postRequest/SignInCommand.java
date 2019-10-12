@@ -22,6 +22,7 @@ import java.io.IOException;
  */
 public class SignInCommand extends FrontCommand {
     public void process() throws ServletException, IOException{
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         UsernamePasswordToken token = new UsernamePasswordToken(email, password);
@@ -32,11 +33,13 @@ public class SignInCommand extends FrontCommand {
             currentUser.login(token);
             // get current user by using getCurrentUser method in the service layer
             User user = UserManagement.getUserBasedOnEmail(email);
+            // login successfully, add user to session and show success message to user
             AppSession.init(user);
             FlashMessage.createSuccessMessage("Hi " + user.getName() + ", " +
                     "Welcome to Realestate website.  Enjoy your journey here :)");
             forward("/index.jsp");
         } catch (UnknownAccountException | IncorrectCredentialsException e) {
+            // fail to login, show failure message to user
             FlashMessage.createErrorMessage("We didn't recognise the " +
                     "username or password you entered. Please try again!");
             forward("/signin.jsp");

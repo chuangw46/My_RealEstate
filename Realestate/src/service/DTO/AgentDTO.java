@@ -21,16 +21,6 @@ public class AgentDTO implements Serializable {
     private String company_address;
     private String company_website;
 
-
-//    public AgentDTO(int agent_id, String agent_phone, String agent_bio, String company_name, String company_address, String company_website) {
-//        this.agent_id = agent_id;
-//        this.agent_phone = agent_phone;
-//        this.agent_bio = agent_bio;
-//        this.company_name = company_name;
-//        this.company_address = company_address;
-//        this.company_website = company_website;
-//    }
-
     public int getAgent_id() {
         return agent_id;
     }

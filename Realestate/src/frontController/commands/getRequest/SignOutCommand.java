@@ -13,6 +13,7 @@ import java.io.IOException;
 public class SignOutCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
         if (AppSession.isAuthenticated()) {
+            // do logout
             SecurityUtils.getSubject().logout();
         }
         forward("/index.jsp");

@@ -17,18 +17,39 @@ import java.io.IOException;
 @WebServlet(name = "frontController.FrontServlet", urlPatterns = {"/frontServlet"})
 public class FrontServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
+    /**
+     * Handle POST request
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FrontCommand command = getCommand(request, "postRequest.");
         command.init(getServletContext(), request, response);
         command.process();
     }
 
+    /**
+     * Handle GET request
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FrontCommand command = getCommand(request, "getRequest.");
         command.init(getServletContext(), request, response);
         command.process();
     }
 
+    /**
+     * Get command class based on the request command parameter
+     * @param request
+     * @param pkg
+     * @return
+     */
     private FrontCommand getCommand(HttpServletRequest request, String pkg){
         try{
             return (FrontCommand) getCommandClass(request, pkg).newInstance();
@@ -39,6 +60,12 @@ public class FrontServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Helper function for getCommand()
+     * @param request
+     * @param pkg
+     * @return
+     */
     private Class getCommandClass(HttpServletRequest request, String pkg){
         Class result;
         final String commandClassName = "frontController.commands." + pkg + (String) request.getParameter("command") + "Command";

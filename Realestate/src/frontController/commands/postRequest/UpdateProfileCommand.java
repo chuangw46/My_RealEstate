@@ -20,11 +20,13 @@ public class UpdateProfileCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
         User user = null;
         if (AppSession.isAuthenticated()) {
+            // get current user from the session
             user = AppSession.getUser();
-//            int id = user.getId();
             String name = request.getParameter("name");
             try {
                 if (AppSession.hasRole(AppSession.AGENT_ROLE)) {
+                    // if current user is agent
+                    // create a updated agent object based on current user object
                     String phone = request.getParameter("phone");
                     String company_name = request.getParameter("company-name");
                     String company_address = request.getParameter("company-address");
@@ -37,15 +39,21 @@ public class UpdateProfileCommand extends FrontCommand {
                     agent.getCompany().setAddress(company_address);
                     agent.getCompany().setWebsite(company_website);
                     agent.setBio(biography);
+                    // update the agent through service layer
                     UserManagement.updateProfile(agent);
                 } else if (AppSession.hasRole(AppSession.CLIENT_ROLE)) {
+                    // if current user is client
                     Client client = (Client) user;
+                    // update the name
                     client.setName(name);
+                    // update the client through service layer
                     UserManagement.updateProfile(client);
                 }
+                // update successfully, show the success message to user
                 FlashMessage.createSuccessMessage("Your profile has been updated!");
                 forward("/profile.jsp");
             } catch (SQLException e) {
+                // fail to update, show error message to user
                 FlashMessage.createErrorMessage("Fail to update your profile! Try again please.");
                 forward("/profile.jsp");
             }

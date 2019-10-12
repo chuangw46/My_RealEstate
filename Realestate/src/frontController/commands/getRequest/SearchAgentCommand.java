@@ -15,7 +15,9 @@ import java.util.List;
 public class SearchAgentCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
         String name = request.getParameter("name");
+        // get user list based on the input name through service layer
         List<User> ul = UserManagement.findAgents(name);
+        // set user list in session
         AppSession.setAgentList(ul);
         forward("/agent-results.jsp");
     }

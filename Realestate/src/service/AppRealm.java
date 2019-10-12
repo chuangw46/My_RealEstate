@@ -16,6 +16,13 @@ import java.util.Set;
 public class AppRealm extends JdbcRealm {
     private UserMapper userMapper = UserMapper.getSelfInstance();
 
+    /**
+     * get email from token and find the corresponding user, then create a SimpleAuthenticationInfo storing the user
+     * object
+     * @param token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken userPassToken = (UsernamePasswordToken) token;
@@ -29,6 +36,11 @@ public class AppRealm extends JdbcRealm {
         return new SimpleAuthenticationInfo(user, user.getPassword(), user.getName());
     }
 
+    /**
+     * retrieve user object from the principals, give user corresponding role based on their user type
+     * @param principals
+     * @return
+     */
     @Override
     protected AuthorizationInfo getAuthorizationInfo(PrincipalCollection principals) {
         Set<String> roles = new HashSet<>();

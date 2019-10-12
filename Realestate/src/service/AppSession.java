@@ -8,6 +8,9 @@ import service.DTO.AgentDTO;
 import java.util.List;
 
 public class AppSession {
+    /**
+     * Class that manages the what should be stored and modified in the session
+     */
     private static final String USER_ATTRIBUTE_NAME = "currentUser";
     private static final String OTHER_USER_ATTRIBUTE_NAME = "otherUser";
     private static final String PROPERTY_ATTRIBUTE_NAME = "currentProperty";
@@ -17,14 +20,27 @@ public class AppSession {
     public static final String CLIENT_ROLE = "Client";
     public static final String AGENT_ROLE = "Agent";
 
+    /**
+     * check if user has the authorisation
+     * @param role
+     * @return true or false
+     */
     public static boolean hasRole(String role) {
         return SecurityUtils.getSubject().hasRole(role);
     }
 
+    /**
+     * check if user is logged in
+     * @return true or false
+     */
     public static boolean isAuthenticated() {
         return SecurityUtils.getSubject().isAuthenticated();
     }
 
+    /**
+     * store user object in session
+     * @param user
+     */
     public static void init(User user) {
         SecurityUtils.getSubject().getSession().setAttribute(USER_ATTRIBUTE_NAME, user);
     }

@@ -38,6 +38,7 @@ public class DeletePropertyCommand extends FrontCommand {
             AppSession.setPropertyList(pl);
             forward("/property-list.jsp");
         } else {
+            // ask the user to log in
             FlashMessage.createAlertMessage("You are required to sign in.");
             forward("/signin.jsp");
         }

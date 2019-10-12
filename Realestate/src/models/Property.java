@@ -172,17 +172,17 @@ public class Property {
         this.agent_id = agent_id;
     }
 
-    public Set<Client> getFavoriteBy() {
-        return favoriteBy;
-    }
-
-    public void addClient(Client client) {
-        favoriteBy.add(client);
-    }
-
-    public void removeClient(Client client){
-        favoriteBy.remove(client);
-    }
+//    public Set<Client> getFavoriteBy() {
+//        return favoriteBy;
+//    }
+//
+//    public void addClient(Client client) {
+//        favoriteBy.add(client);
+//    }
+//
+//    public void removeClient(Client client){
+//        favoriteBy.remove(client);
+//    }
 
     public String retrieveTheAddressString() {
         AddressMapper am = AddressMapper.getSelfInstance();

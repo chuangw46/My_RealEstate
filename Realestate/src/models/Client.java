@@ -37,16 +37,16 @@ public class Client extends User {
     }
 
 
-    public FavoriteList getFavorites() {
-        return favorites;
-    }
-
-    public void addToFavorite(Property property) {
-        favorites.add(property);
-    }
-
-    public void removeFromFavorite(Property property) {
-        favorites.remove(property);
-    }
+//    public FavoriteList getFavorites() {
+//        return favorites;
+//    }
+//
+//    public void addToFavorite(Property property) {
+//        favorites.add(property);
+//    }
+//
+//    public void removeFromFavorite(Property property) {
+//        favorites.remove(property);
+//    }
 
 }

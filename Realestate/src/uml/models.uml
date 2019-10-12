@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="954.0">models.Property</node>
+    <node x="36.87976190476195" y="631.5">models.Client</node>
+    <node x="39.275000000000034" y="0.0">models.User</node>
+    <node x="231.87976190476195" y="543.0">models.Agent</node>
+    <node x="518.879761904762" y="411.0">models.Address</node>
+    <node x="327.7464285714286" y="66.0">models.AgencyCompany</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="models.Agent" target="models.AgencyCompany">
+      <point x="0.0" y="-114.5" />
+      <point x="365.37976190476195" y="391.0" />
+      <point x="359.91309523809525" y="391.0" />
+      <point x="-64.33333333333337" y="114.5" />
+    </edge>
+    <edge source="models.Property" target="models.Address">
+      <point x="84.66666666666669" y="-488.5" />
+      <point x="211.66666666666669" y="929.0" />
+      <point x="616.379761904762" y="929.0" />
+      <point x="0.0" y="246.5" />
+    </edge>
+    <edge source="models.Property" target="models.Client">
+      <point x="0.0" y="-488.5" />
+      <point x="127.0" y="929.0" />
+      <point x="124.37976190476195" y="929.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="models.Client" target="models.User">
+      <point x="-43.75" y="-26.0" />
+      <point x="80.62976190476195" y="391.0" />
+      <point x="99.87500000000006" y="391.0" />
+      <point x="-40.39999999999998" y="180.5" />
+    </edge>
+    <edge source="models.Property" target="models.User">
+      <point x="-84.66666666666669" y="-488.5" />
+      <point x="42.333333333333314" y="929.0" />
+      <point x="26.37976190476195" y="929.0" />
+      <point x="26.37976190476195" y="391.0" />
+      <point x="59.47500000000002" y="391.0" />
+      <point x="-80.80000000000001" y="180.5" />
+    </edge>
+    <edge source="models.Agent" target="models.User">
+      <point x="-53.39999999999998" y="-114.5" />
+      <point x="311.979761904762" y="381.0" />
+      <point x="221.0750000000001" y="381.0" />
+      <point x="80.80000000000007" y="180.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7192249636477883" x="394.3473704410819" y="458.98782357713753" />
+  <SelectedNodes>
+    <node>models.Property</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

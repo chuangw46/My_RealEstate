@@ -14,10 +14,12 @@ import java.util.*;
  * address identity map
  */
 public class AddressIdentityMapUtil {
+    // Map <address id, address>
     private static Map<Integer, Address> addressPKMap = new HashMap<>();
+    // Map <address post code, address>
     private static Map<Integer, List<Address>> addressPostCodeMap = new HashMap<>();
 
-
+    // -----------------------operations on Map <address id, address>-----------------------------
     public static Address getAddressByID(int id){
         return addressPKMap.get(id);
     }
@@ -27,6 +29,7 @@ public class AddressIdentityMapUtil {
         addressPKMap.put(address.getId(), address);
     }
 
+    // -----------------operations on Map <address post code, address>-----------------------------
     public static List<Address> getAddressByPostCode(int postcode){
         return addressPostCodeMap.get(postcode);
     }

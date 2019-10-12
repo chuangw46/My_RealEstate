@@ -5,6 +5,7 @@
   Time: 16:10
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="service.AppSession" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
@@ -14,7 +15,6 @@
 </head>
 <body>
 <tags:navbar-log-in/>
-<% boolean isAgent = request.getSession().getAttribute("userType").equals("Agent"); %>
 <div class="container">
     <tags:flash-message/>
     <!-- Page Heading/Breadcrumbs -->
@@ -32,11 +32,11 @@
     <hr>
 
     <div class="row">
-        <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
+        <div class="col-lg-6 d-flex justify-content-center">
+            <div class="card w-75" style="width: 18rem;">
                 <img src="images/dmitry-demidko-eBWzFKahEaU-unsplash.jpg" class="card-img-top" alt="Agent picture">
                 <div class="card-body">
-                    <h5 class="card-title">Buyer</h5>
+                    <h5 class="card-title">Buyer/Tenant</h5>
                     <p class="card-text">
                         I want to check out properties that are marked in my favourite list.
                     </p>
@@ -45,39 +45,16 @@
                     <form id="buyer-properties-form" method="get" action="frontServlet">
                         <input type="hidden" name="command" value="ListProperties">
                         <button class="btn btn-info" type="submit"
-<%--                                <% if (isAgent) { %>--%>
-<%--                                disabled--%>
-<%--                                <% }%>--%>
-                        disabled>My favourite properties
+                                <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
+                                disabled
+                                <% }%>>My favourite properties
                         </button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="images/nordwood-themes-bJjsKbToY34-unsplash.jpg" class="card-img-top" alt="Agent picture">
-                <div class="card-body">
-                    <h5 class="card-title">Tenant</h5>
-                    <p class="card-text">
-                        I want to check out properties that are marked in my favourite list.
-                    </p>
-                </div>
-                <div class="card-footer text-center">
-                    <form id="tenant-properties-form" method="get" action="frontServlet">
-                        <input type="hidden" name="command" value="ListProperties">
-                        <button class="btn btn-info" type="submit"
-<%--                                <% if (isAgent) { %>--%>
-<%--                                disabled--%>
-<%--                                <% }%>--%>
-                        disabled>My favourite properties
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
+        <div class="col-lg-6 d-flex justify-content-center">
+            <div class="card w-75" style="width: 18rem;">
                 <img src="images/kobu-agency-7okkFhxrxNw-unsplash.jpg" class="card-img-top" alt="Agent picture">
                 <div class="card-body">
                     <h5 class="card-title">Agent</h5>
@@ -89,10 +66,9 @@
                     <form method="get" action="frontServlet">
                         <input type="hidden" name="command" value="ListProperties">
                         <button class="btn btn-info mt-1" type="submit"
-                                <% if (!isAgent) { %>
+                                <% if (AppSession.hasRole(AppSession.CLIENT_ROLE)) { %>
                                 disabled
-                                <% }%>
-                        >My published properties
+                                <% }%>>My published properties
                         </button>
                     </form>
                 </div>
@@ -135,7 +111,7 @@
                        value="${currentUser.email}" disabled/>
             </div>
         </div>
-        <% if (isAgent) { %>
+        <% if (AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
         <div class="row">
             <div class="col">
                 <p class="h5 font-weight-light text-black-50">Your contact number</p>

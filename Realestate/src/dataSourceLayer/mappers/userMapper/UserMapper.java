@@ -1,6 +1,8 @@
 package dataSourceLayer.mappers.userMapper;
 
-import dbConfig.DBConnection;
+import dataSourceLayer.mappers.LockingMapper;
+import dataSourceLayer.dbConfig.DBConnection;
+import dataSourceLayer.mappers.DataMapper;
 import models.Agent;
 import models.Client;
 import models.User;
@@ -10,6 +12,7 @@ import utils.ConstructUserSQLStmt;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,36 +24,116 @@ import java.util.List;
 /**
  * user data mapper implementation
  */
-public class UserMapper implements UserMapperI {
+public class UserMapper implements DataMapper {
+    //---------------------------- singleton pattern setup ---------------------------------------
+    private static LockingMapper instance;
+    private static UserMapper userMapper;
+
+    private UserMapper() {
+        //
+    }
+
+    public static LockingMapper getLockingMapperInstance() {
+        if (instance == null) {
+            instance = new LockingMapper(getSelfInstance());
+        }
+        return instance;
+    }
+
+    public static UserMapper getSelfInstance() {
+        if (userMapper == null) {
+            userMapper = new UserMapper();
+        }
+        return userMapper;
+    }
+
+    //------------------------- create, update, delete(Call by UoW) ------------------------------
 
     /**
      * create a new user in database either in client table or in agent table
-     * @param user
-     * @return true if success, false if failed
+     *
+     * @param o
      */
     @Override
-    public boolean createUser(User user) {
-        try {
-            String insertStatement = "";
-            if (user instanceof Client){
-                insertStatement = ConstructUserSQLStmt.getClientINSERTStmt(user);
-            } else if (user instanceof Agent){
-                insertStatement = ConstructUserSQLStmt.getAgentINSERTStmt(user);
-            }
-            PreparedStatement stmt = DBConnection.prepare(insertStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            return false;
+    public void create(Object o) throws SQLException {
+        User user = (User) o;
+
+        String insertStatement = "";
+        if (user instanceof Client) {
+            insertStatement = ConstructUserSQLStmt.getClientINSERTStmt(user);
+        } else if (user instanceof Agent) {
+            insertStatement = ConstructUserSQLStmt.getAgentINSERTStmt(user);
         }
-        return true;
+        PreparedStatement stmt = DBConnection.prepare(insertStatement);
+        stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
     }
 
     /**
+     * update a user information and update the row in database
+     *
+     * @param o
+     */
+    @Override
+    public void update(Object o) throws SQLException {
+        User user = (User) o;
+        if (user instanceof Client) {
+            updateClient((Client) user);
+        } else if (user instanceof Agent) {
+            updateAgent((Agent) user);
+        }
+
+    }
+
+    /**
+     * There is no account delete operation available for users. As such this method is not
+     * implemented.
+     *
+     * @param o
+     */
+    @Override
+    public void delete(Object o) throws SQLException{
+        //
+    }
+
+    /**
+     * helper function for updateUser
+     *
+     * @param client
+     */
+    private void updateClient(Client client) throws SQLException {
+        String updateStatement = ConstructUserSQLStmt.getClientUPDATEStmt(client);
+        PreparedStatement stmt = DBConnection.prepare(updateStatement);
+        stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
+    }
+
+    /**
+     * helper function for updateUser
+     *
+     * @param agent
+     */
+    private void updateAgent(Agent agent) throws SQLException {
+        String updateStatement = ConstructUserSQLStmt.getAgentUPDATEStmt(agent);
+        PreparedStatement stmt = DBConnection.prepare(updateStatement);
+        stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
+    }
+
+    //------------------- read operations (Called by service layer directly) -------------------
+
+    /**
      * retrieve a user information based on user email which is unique in table
+     *
      * @param email
      * @return a user object
      */
-    @Override
     public User getUserByEmail(String email) {
         User user = UserIdentityMapUtil.getUserByEmail(email);
         try {
@@ -71,100 +154,95 @@ public class UserMapper implements UserMapperI {
     }
 
     /**
-     * TODO - Feature B: client can find an agent
+     * TODO - Feature B: client can find an agent by name
+     *
      * @param name
      * @return
      */
-    @Override
-    public List<User> getUserByName(String name) {
-        return null;
-    }
-
-    /**
-     * update a user information and update the row in database
-     * @param user
-     * @return true if success, false if failed
-     */
-    @Override
-    public boolean updateUser(User user) {
-        if (user instanceof Client) {
-            return updateClient((Client)user);
-        } else if (user instanceof Agent) {
-            return updateAgent((Agent)user);
-        }
-        return false;
-    }
-
-    /**
-     * helper function for updateUser
-     * @param client
-     * @return true if success, false if failed
-     */
-    private boolean updateClient(Client client) {
+    public List<User> getAgentsByName(String name) {
+        List<User> result = new ArrayList<>();
         try {
-            String updateStatement = ConstructUserSQLStmt.getClientUPDATEStmt(client);
-            System.out.println(updateStatement);
-            PreparedStatement stmt = DBConnection.prepare(updateStatement);
-            int i = stmt.executeUpdate();
-            System.out.println(i + " rows changed");
+            String selectStatement = ConstructUserSQLStmt.getAgentSELECTStmtByName(name);
+            System.out.println(selectStatement);
+            PreparedStatement stmt = DBConnection.prepare(selectStatement);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                result.add(ConstructObjectFromDB.constructAgentByRS(rs));
+            }
+            // close connections
+            rs.close();
+            stmt.close();
+            DBConnection.close();
         } catch (SQLException e) {
-            return false;
+            return null;
         }
-        return true;
+        return result;
     }
 
-    /**
-     * helper function for updateUser
-     * @param agent
-     * @return true if success, false if failed
-     */
-    private boolean updateAgent(Agent agent) {
-        try {
-            String updateStatement = ConstructUserSQLStmt.getAgentUPDATEStmt(agent);
-            PreparedStatement stmt = DBConnection.prepare(updateStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
-
-
-    // TODO - Feature B
-    @Override
-    public void deleteUser(User user) {
-    }
 
     /**
      * helper function for getUserByEmail function
+     *
      * @param email
      * @return a user object
      * @throws SQLException
      */
     private User findUserByEmailFromClient(String email) throws SQLException {
+        User res = null;
         String selectStatement = ConstructUserSQLStmt.getClientSELECTStmt(email);
         PreparedStatement stmt = DBConnection.prepare(selectStatement);
         ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            return ConstructObjectFromDB.constructClientByRS(rs);
+        if (rs.next()) {
+            res = ConstructObjectFromDB.constructClientByRS(rs);
         }
+        // close connections
+        rs.close();
+        stmt.close();
+        DBConnection.close();
 
-        return null;
+        return res;
     }
 
     /**
      * helper function for getUserByEmail function
+     *
      * @param email
      * @return a user object
      * @throws SQLException
      */
     private User findUserByEmailFromAgent(String email) throws SQLException {
-        String selectStatement = ConstructUserSQLStmt.getAgentSELECTStmt(email);
+        User res = null;
+        String selectStatement = ConstructUserSQLStmt.getAgentSELECTStmtByEmail(email);
         PreparedStatement stmt = DBConnection.prepare(selectStatement);
         ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            return ConstructObjectFromDB.constructAgentByRS(rs);
+        if (rs.next()) {
+            res = ConstructObjectFromDB.constructAgentByRS(rs);
         }
-        return null;
+        // close connections
+        rs.close();
+        stmt.close();
+        DBConnection.close();
+
+        return res;
+    }
+
+    public User getAgentByID(int agent_id)  {
+        User result = null;
+
+        try {
+            String selectStatement = ConstructUserSQLStmt.getAgentSELECTStmtByID(agent_id);
+            PreparedStatement stmt = DBConnection.prepare(selectStatement);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                result = ConstructObjectFromDB.constructAgentByRS(rs);
+            }
+            // close connections
+            rs.close();
+            stmt.close();
+            DBConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

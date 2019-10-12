@@ -15,7 +15,7 @@ import dataSourceLayer.lazyLoad.FavoriteListImplement;
  * to construct object based on information retrieved from client table in database
  */
 
-public class Client extends User{
+public class Client extends User {
     private FavoriteList favorites;
 
     public Client(int id) {
@@ -37,16 +37,16 @@ public class Client extends User{
     }
 
 
-    public FavoriteList getFavorites() {
-        return favorites;
-    }
-
-    public void addToFavorite(Property property){
-        favorites.add(property);
-    }
-
-    public void removeFromFavorite(Property property){
-        favorites.remove(property);
-    }
+//    public FavoriteList getFavorites() {
+//        return favorites;
+//    }
+//
+//    public void addToFavorite(Property property) {
+//        favorites.add(property);
+//    }
+//
+//    public void removeFromFavorite(Property property) {
+//        favorites.remove(property);
+//    }
 
 }

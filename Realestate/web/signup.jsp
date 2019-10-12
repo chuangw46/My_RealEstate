@@ -59,7 +59,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="user-type"><i class="fas fa-user-tag"></i></label>
                         </div>
-                        <select class="custom-select" id="user-type" name="user-type">
+                        <select class="custom-select" id="user-type" name="user-type" required>
                             <option selected>My user type...</option>
                             <option value="Client">Buyer/Tenant</option>
                             <option value="Agent">Agent</option>

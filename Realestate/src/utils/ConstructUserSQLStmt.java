@@ -18,8 +18,12 @@ public class ConstructUserSQLStmt {
         return "SELECT * FROM client WHERE email = '" + email + "'";
     }
 
-    public static String getAgentSELECTStmt(String email) {
+    public static String getAgentSELECTStmtByEmail(String email) {
         return "SELECT * FROM agent WHERE email = '" + email + "'";
+    }
+
+    public static String getAgentSELECTStmtByName(String name) {
+        return "SELECT * FROM agent WHERE UPPER(name) LIKE UPPER('%" + name + "%')";
     }
 
     public static String getClientINSERTStmt(User client){
@@ -65,5 +69,9 @@ public class ConstructUserSQLStmt {
                         "company_website = '" + agent.getCompany().getWebsite() + "', " +
                         "bio = '" + agent.getBio() + "' \n" +
                 "WHERE agent_id = " + agent.getId() + ";" ;
+    }
+
+    public static String getAgentSELECTStmtByID(int agent_id) {
+        return "SELECT * FROM agent WHERE agent_id = " + agent_id + "";
     }
 }

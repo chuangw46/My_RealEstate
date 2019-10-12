@@ -42,7 +42,8 @@ public class ConstructPropertySQLStmt{
                         property.getAddress_id() + ", '" +
                         property.getRent_or_buy() + "', " +
                         property.getPrice() + ", " +
-                        property.getAgent_id() + "); ";
+                        property.getAgent_id() + ")\n" +
+                "RETURNING property_id;";
     }
 
     /**
@@ -82,5 +83,41 @@ public class ConstructPropertySQLStmt{
      */
     public static String getSelectStmt(int p_id) {
         return "SELECT * FROM properties WHERE property_id = " + p_id;
+    }
+
+    public static String getSelectStmt(String rent_or_buy, String property_type, int minBed, int maxBed, int minPrice,
+                                       int maxPrice, int postCode) {
+        String sql = "SELECT p.*, a.* FROM properties AS p INNER JOIN address AS a \n" +
+                "ON p.fk_address_id = a.address_id \n" +
+                "WHERE " +
+                "p.rent_or_buy = '" + rent_or_buy + "' ";
+        if (property_type != "") {
+            sql += "AND p.property_type = '" + property_type + "' ";
+        }
+        if (minBed != -1) {
+            sql += "AND p.num_bed >= " + minBed + " ";
+        }
+        if (maxBed != -1) {
+            sql += "AND p.num_bed <= " + maxBed + " ";
+        }
+        if (minPrice != -1) {
+            sql += "AND p.price >= " + minPrice + " ";
+        }
+        if (maxPrice != -1) {
+            sql += "AND p.price <= " + maxPrice + " ";
+        }
+        if (postCode != -1) {
+            sql += "AND a.postal_code = " + postCode;
+        }
+//        return "SELECT p.*, a.* FROM properties AS p INNER JOIN address AS a \n" +
+//                "ON p.fk_address_id = a.address_id \n" +
+//                "WHERE " +
+//                "p.rent_or_buy = '" + rent_or_buy + "' " +
+//                "AND p.property_type = '" + property_type + "' " +
+//                "AND p.num_bed >= " + minBed + " AND p.num_bed <= " + maxBed + " " +
+//                "AND p.price >= " + minPrice + " AND p.price <= " + maxPrice + " " +
+//                "AND a.postal_code = " + postCode;
+        System.out.println(sql.trim());
+        return sql.trim();
     }
 }

@@ -1,6 +1,8 @@
 package dataSourceLayer.mappers.addressMapper;
 
-import dbConfig.DBConnection;
+import dataSourceLayer.mappers.LockingMapper;
+import dataSourceLayer.dbConfig.DBConnection;
+import dataSourceLayer.mappers.DataMapper;
 import models.Address;
 import utils.ConstructAddressSQLStmt;
 import utils.ConstructObjectFromDB;
@@ -19,33 +21,83 @@ import java.util.List;
 /**
  * address data mapper implementation
  */
-public class AddressMapper implements AddressMapperI {
+public class AddressMapper implements DataMapper {
+    //---------------------------- singleton pattern setup ---------------------------------------
+    private static LockingMapper instance;
+    private static AddressMapper addressMapper;
+
+    private AddressMapper() {
+        //
+    }
+
+    public static LockingMapper getLockingMapperInstance() {
+        if (instance == null) {
+            instance = new LockingMapper(getSelfInstance());
+        }
+        return instance;
+    }
+
+    public static AddressMapper getSelfInstance() {
+        if (addressMapper == null) {
+            addressMapper = new AddressMapper();
+        }
+        return addressMapper;
+    }
+
+    //------------------------- create, update, delete(Call by UoW) ------------------------------
 
     @Override
-    public int createAddress(Address address) {
-        try {
-            String insertStatetment = ConstructAddressSQLStmt.getInsertStmt(address);
-            PreparedStatement stmt = DBConnection.prepare(insertStatetment);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            //TODO: Add to identity map
-            AddressIdentityMapUtil.addToPKMap(address);
-            AddressIdentityMapUtil.addToPostCodeMap(address);
-            return rs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
+    public void create(Object o) throws SQLException {
+        Address address = (Address) o;
+        int address_id;
+        String insertStatement = ConstructAddressSQLStmt.getInsertStmt(address);
+        PreparedStatement stmt = DBConnection.prepare(insertStatement);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+
+        address_id = rs.getInt(1);
+        address.setId(address_id);
+        AddressIdentityMapUtil.addToPKMap(address);
+        AddressIdentityMapUtil.addToPostCodeMap(address);
+        // close connections
+        rs.close();
+        stmt.close();
+        DBConnection.close();
     }
 
     @Override
+    public void update(Object o) throws SQLException {
+        Address address = (Address) o;
+        String updateStatement = ConstructAddressSQLStmt.getUpdateStmt(address);
+        PreparedStatement stmt = DBConnection.prepare(updateStatement);
+        stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
+    }
+
+    @Override
+    public void delete(Object o) throws SQLException {
+        Address address = (Address) o;
+        int a_id = address.getId();
+        String deleteStatement = ConstructAddressSQLStmt.getDeleteStmt(a_id);
+        System.out.println(deleteStatement);
+        PreparedStatement stmt = DBConnection.prepare(deleteStatement);
+        stmt.executeUpdate();
+        // close connections
+        stmt.close();
+        DBConnection.close();
+    }
+
+    //------------------- read operations (Called by service layer directly) -------------------
+
     public Address getAddressByID(int id) {
         Address result = AddressIdentityMapUtil.getAddressByID(id);
 
         try {
             if (result == null) {
                 // get the object from database
-                String selectStatement = "SELECT * FROM address WHERE address_id = " + id;
+                String selectStatement = ConstructAddressSQLStmt.getSelectByIDStmt(id);
                 PreparedStatement stmt = DBConnection.prepare(selectStatement);
 
                 ResultSet rs = stmt.executeQuery();
@@ -54,6 +106,10 @@ public class AddressMapper implements AddressMapperI {
                     // add the object to IdentityMap
                     AddressIdentityMapUtil.addToPKMap(result);
                 }
+                // close connections
+                rs.close();
+                stmt.close();
+                DBConnection.close();
 
             }
         } catch (SQLException e) {
@@ -62,13 +118,12 @@ public class AddressMapper implements AddressMapperI {
         return result;
     }
 
-    @Override
     public List<Address> getAllAddressByPostCode(int postcode) {
         List<Address> result = AddressIdentityMapUtil.getAddressByPostCode(postcode);
         try {
             if (result == null) {
                 // get all objects from database
-                String selectStatement = "SELECT * FROM address WHERE postal_code = " + postcode;
+                String selectStatement = ConstructAddressSQLStmt.getSelectByPostCodeStmt(postcode);
                 PreparedStatement stmt = DBConnection.prepare(selectStatement);
                 ResultSet rs = stmt.executeQuery();
 
@@ -78,6 +133,10 @@ public class AddressMapper implements AddressMapperI {
                     AddressIdentityMapUtil.addToPostCodeMap(temp);
                 }
                 result = AddressIdentityMapUtil.getAddressByPostCode(postcode);
+                // close connections
+                rs.close();
+                stmt.close();
+                DBConnection.close();
             }
 
         } catch (SQLException e) {
@@ -86,30 +145,26 @@ public class AddressMapper implements AddressMapperI {
         return result;
     }
 
-    @Override
-    public boolean updateAddress(Address address) {
-        try {
-            String updateStatement = ConstructAddressSQLStmt.getUpdateStmt(address);
-            PreparedStatement stmt = DBConnection.prepare(updateStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
+    public int createAndGetID(Object o) throws SQLException {
+        Address address = (Address) o;
+        int address_id;
+        String insertStatement = ConstructAddressSQLStmt.getInsertStmt(address);
+        PreparedStatement stmt = DBConnection.prepare(insertStatement);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
 
-    @Override
-    public boolean deleteAddressByID(int a_id) {
-        try {
-            String deleteStatement = ConstructAddressSQLStmt.getDeleteStmt(a_id);
-            System.out.println(deleteStatement);
-            PreparedStatement stmt = DBConnection.prepare(deleteStatement);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
+        //TODO: Add to identity map
+        address_id = rs.getInt(1);
+        address.setId(address_id);
+        AddressIdentityMapUtil.addToPKMap(address);
+        AddressIdentityMapUtil.addToPostCodeMap(address);
 
+        // close connections
+        rs.close();
+        stmt.close();
+        DBConnection.close();
+
+        return address_id;
     }
 
 

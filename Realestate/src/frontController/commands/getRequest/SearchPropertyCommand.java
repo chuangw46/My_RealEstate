@@ -17,6 +17,7 @@ public class SearchPropertyCommand extends FrontCommand {
         // get parameters from the form of GET method
         String rent_or_buy = request.getParameter("rent-or-buy");
         String type = request.getParameter("type");
+
         // -1 refers to no user input in this filter
         int maxBeds = !request.getParameter("max-beds").equals("") ?
                 Integer.parseInt(request.getParameter("max-beds")) : -1;

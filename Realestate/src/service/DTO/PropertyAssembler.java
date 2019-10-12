@@ -1,11 +1,10 @@
-package service.remoteFacade;
+package service.DTO;
 
 import dataSourceLayer.mappers.propertyMapper.PropertyMapper;
 import models.Address;
 import models.Agent;
 import models.Property;
-import service.DTO.AgentDTO;
-import service.DTO.PropertyDTO;
+import service.remoteFacade.AgentFacade;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -16,7 +15,14 @@ import java.sql.SQLException;
  * @institution University of Melbourne
  */
 public class PropertyAssembler {
-    public static PropertyDTO createPropertyDTO(Property property) {
+
+    /**
+     * encapsulate all property data into a property DTO including property data and its address
+     * and agent DTO
+     * @param property
+     * @return PropertyDTO object
+     */
+    public PropertyDTO createPropertyDTO(Property property) {
         PropertyDTO result = new PropertyDTO();
 
         int property_id = property.getId();
@@ -39,7 +45,7 @@ public class PropertyAssembler {
         String country = address.getCountry();
 
         Agent agent = (Agent)property.retrieveTheAgentObj();
-        AgentDTO agentDTO = AgentAssembler.createAgentDTO(agent);
+        AgentDTO agentDTO = AgentFacade.getAgentAssembler().createAgentDTO(agent);
 
         result.setProperty_id(property_id);
         result.setType(type);
@@ -64,7 +70,12 @@ public class PropertyAssembler {
         return result;
     }
 
-    public static void updateProperty(PropertyDTO propertyDTO) throws SQLException {
+    /**
+     * update PROPERTY data based on given property DTO object and store it into db
+     * @param propertyDTO
+     * @throws SQLException
+     */
+    public void updateProperty(PropertyDTO propertyDTO) throws SQLException {
         Property property = new Property();
         property.setId(propertyDTO.getProperty_id());
         property.setType(propertyDTO.getType());

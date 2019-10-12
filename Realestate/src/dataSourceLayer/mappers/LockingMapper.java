@@ -1,6 +1,5 @@
 package dataSourceLayer.mappers;
 
-import dataSourceLayer.ConcurrencyUtil.LockManager;
 import service.AppSession;
 
 import java.sql.SQLException;
@@ -11,15 +10,19 @@ import java.sql.SQLException;
  * @institution University of Melbourne
  */
 public class LockingMapper implements DataMapper {
+    // the concrete mapper
     private DataMapper impl;
     private String sessionID;
 
+    /*
+     a locking mapper object is created when concrete mapper's instance is created(both are
+     singleton)
+     */
     public LockingMapper(DataMapper impl) {
         this.impl = impl;
         this.sessionID = AppSession.getSessionId();
     }
 
-    // TODO: all retrieve - read lock  & favorite list all CRUD
     @Override
     public void create(Object o) throws SQLException {
         impl.create(o);
@@ -33,8 +36,8 @@ public class LockingMapper implements DataMapper {
     @Override
     public void delete(Object o) throws SQLException {
         // Implicit lock implementation
-        LockManager.getInstance().acquireLock(o, sessionID);
+        ExclusiveWriteLockManager.getInstance().acquireLock(o, sessionID);
         impl.delete(o);
-        LockManager.getInstance().releaseLock(o, sessionID);
+        ExclusiveWriteLockManager.getInstance().releaseLock(o, sessionID);
     }
 }

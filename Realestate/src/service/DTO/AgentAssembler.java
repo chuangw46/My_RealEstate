@@ -1,9 +1,8 @@
-package service.remoteFacade;
+package service.DTO;
 
 import dataSourceLayer.mappers.userMapper.UserMapper;
 import models.AgencyCompany;
 import models.Agent;
-import service.DTO.AgentDTO;
 
 import java.sql.SQLException;
 
@@ -13,7 +12,13 @@ import java.sql.SQLException;
  * @institution University of Melbourne
  */
 public class AgentAssembler {
-    public static AgentDTO createAgentDTO(Agent agent) {
+
+    /**
+     * encapsulate all agent data into an agent dto including agent personal data and the company
+     * @param agent
+     * @return AgentDTO object
+     */
+    public AgentDTO createAgentDTO(Agent agent) {
         AgentDTO result = new AgentDTO();
 
         // collect all agent fields
@@ -44,7 +49,12 @@ public class AgentAssembler {
         return result;
     }
 
-    public static void updateAgent(AgentDTO agentDTO) throws SQLException {
+    /**
+     * update agent data based on given agent dto object and store it into db
+     * @param agentDTO
+     * @throws SQLException
+     */
+    public void updateAgent(AgentDTO agentDTO) throws SQLException {
         Agent agent = new Agent();
         agent.setName(agentDTO.getAgent_name());
         agent.setEmail(agentDTO.getAgent_email());

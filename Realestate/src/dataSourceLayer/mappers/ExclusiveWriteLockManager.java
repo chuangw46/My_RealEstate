@@ -1,4 +1,4 @@
-package dataSourceLayer.ConcurrencyUtil;
+package dataSourceLayer.mappers;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -8,19 +8,30 @@ import java.util.concurrent.ConcurrentHashMap;
  * @studentID 791793
  * @institution University of Melbourne
  */
-public class LockManager {
-    private static LockManager lockManager;
+
+// ExclusiveWriteLockManager is responsible for allocating locks
+public class ExclusiveWriteLockManager {
+
+    //---------------------------- singleton pattern setup ---------------------------------------
+    private static ExclusiveWriteLockManager exclusiveWriteLockManager;
+
+    /*
+     a lockMap maintains which session holds what object
+     the key is the object to be locked on
+     the value is session id
+     */
     private Map<Object, String> lockMap = new ConcurrentHashMap<>();
 
-    private LockManager(){ }
+    private ExclusiveWriteLockManager(){ }
 
-    public static LockManager getInstance(){
-        if (lockManager == null) {
-            lockManager = new LockManager();
+    public static ExclusiveWriteLockManager getInstance(){
+        if (exclusiveWriteLockManager == null) {
+            exclusiveWriteLockManager = new ExclusiveWriteLockManager();
         }
-        return lockManager;
+        return exclusiveWriteLockManager;
     }
 
+    //---------------------------- Lock management ---------------------------------------
     public boolean acquireLock(Object lockable, String owner) {
         boolean result = true;
         if (hasLock(lockable)){

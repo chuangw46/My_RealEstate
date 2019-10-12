@@ -19,7 +19,11 @@
     <tags:head/>
 </head>
 <body>
+<% if (AppSession.isAuthenticated()) { %>
 <tags:navbar-log-in/>
+<% } else { %>
+<tags:navbar-log-out/>
+<% } %>
 <div class="container">
     <tags:flash-message/>
     <!-- Page Heading/Breadcrumbs -->
@@ -44,9 +48,11 @@
             <ul class="text-black-50 font-weight-light">
                 <li>Name: <%= agentDTO.getAgent_name() %>
                 </li>
-                <li>Contact Information: <%= agentDTO.getAgent_phone() %>
+                <li>Contact Information: <%=
+                agentDTO.getAgent_phone()!=null?agentDTO.getAgent_phone():"N/A" %>
                 </li>
-                <li>Biography: <%= agentDTO.getAgent_bio() %>
+                <li>Biography: <%=
+                agentDTO.getAgent_bio()!=null?agentDTO.getAgent_bio():"N/A" %>
                 </li>
             </ul>
         </div>
@@ -56,11 +62,14 @@
             <h3 class="my-3 text-muted">Company Details</h3>
             <hr>
             <ul class="text-black-50 font-weight-light">
-                <li>Name: <%= agentDTO.getCompany_name() %>
+                <li>Name: <%=
+                agentDTO.getCompany_name()!=null?agentDTO.getCompany_name():"N/A" %>
                 </li>
-                <li>Address: <%= agentDTO.getCompany_address() %>
+                <li>Address: <%=
+                agentDTO.getCompany_address()!=null?agentDTO.getCompany_address():"N/A" %>
                 </li>
-                <li>Website: <%= agentDTO.getCompany_website() %>
+                <li>Website: <%=
+                agentDTO.getCompany_website()!=null?agentDTO.getCompany_website():"N/A" %>
                 </li>
             </ul>
         </div>

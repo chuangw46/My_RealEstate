@@ -59,9 +59,10 @@
                     </th>
                     <td><%=a.getName()%>
                     </td>
-                    <td><%=a.getPhone()%>
+                    <td><%=a.getPhone() != null ? a.getPhone(): "N/A" %>
                     </td>
-                    <td><%=a.getCompany().getName()%>
+                    <td><%=a.getCompany().getName() != null ?
+                            a.getCompany().getName() : "N/A" %>
                     </td>
                     <td>
                         <form method="post" action="frontServlet" class="form-inline">

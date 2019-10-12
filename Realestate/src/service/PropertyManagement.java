@@ -72,16 +72,16 @@ public class PropertyManagement {
         return propertyMapper.searchByPropertyID(property_id);
     }
 
-    /**
-     * to update a property's details
-     * @return updated property object
-     */
-    public static void updateProperty(Property new_property) throws SQLException {
-        // update the property in db
-        UnitOfWork.newCurrent();
-        UnitOfWork.getCurrent().registerDirty(new_property);
-        UnitOfWork.getCurrent().commit();;
-    }
+//    /**
+//     * to update a property's details
+//     * @return updated property object
+//     */
+//    public static void updateProperty(Property new_property) throws SQLException {
+//        // update the property in db
+//        UnitOfWork.newCurrent();
+//        UnitOfWork.getCurrent().registerDirty(new_property);
+//        UnitOfWork.getCurrent().commit();;
+//    }
 
 
     /**

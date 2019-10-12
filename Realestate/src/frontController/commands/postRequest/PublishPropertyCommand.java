@@ -1,6 +1,6 @@
 package frontController.commands.postRequest;
 
-import dataSourceLayer.ConcurrencyUtil.LockerManager;
+import dataSourceLayer.ConcurrencyUtil.LockManager;
 import frontController.commands.FrontCommand;
 import models.Address;
 import models.Property;
@@ -97,7 +97,7 @@ public class PublishPropertyCommand extends FrontCommand {
                 AppSession.setProperty(property);
 
                 // release the lock for the business transaction which contains READ from db
-                LockerManager.getInstance().releaseLock(property, AppSession.getSessionId());
+                LockManager.getInstance().releaseLock(property, AppSession.getSessionId());
                 forward("/property-info.jsp");
             } catch (SQLException e) {
                 // if the update fails, prompt error

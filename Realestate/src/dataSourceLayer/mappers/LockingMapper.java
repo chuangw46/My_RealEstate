@@ -1,6 +1,6 @@
 package dataSourceLayer.mappers;
 
-import dataSourceLayer.ConcurrencyUtil.LockerManager;
+import dataSourceLayer.ConcurrencyUtil.LockManager;
 import service.AppSession;
 
 import java.sql.SQLException;
@@ -33,8 +33,8 @@ public class LockingMapper implements DataMapper {
     @Override
     public void delete(Object o) throws SQLException {
         // Implicit lock implementation
-        LockerManager.getInstance().acquireLock(o, sessionID);
+        LockManager.getInstance().acquireLock(o, sessionID);
         impl.delete(o);
-        LockerManager.getInstance().releaseLock(o, sessionID);
+        LockManager.getInstance().releaseLock(o, sessionID);
     }
 }

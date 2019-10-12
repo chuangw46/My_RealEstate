@@ -26,14 +26,14 @@ import java.util.List;
  */
 public class UserMapper implements DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
-    private static DataMapper instance;
+    private static LockingMapper instance;
     private static UserMapper userMapper;
 
     private UserMapper() {
         //
     }
 
-    public static DataMapper getLockingMapperInstance() {
+    public static LockingMapper getLockingMapperInstance() {
         if (instance == null) {
             instance = new LockingMapper(getSelfInstance());
         }

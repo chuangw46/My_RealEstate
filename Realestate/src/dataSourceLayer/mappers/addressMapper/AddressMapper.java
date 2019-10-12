@@ -23,14 +23,14 @@ import java.util.List;
  */
 public class AddressMapper implements DataMapper {
     //---------------------------- singleton pattern setup ---------------------------------------
-    private static DataMapper instance;
+    private static LockingMapper instance;
     private static AddressMapper addressMapper;
 
     private AddressMapper() {
         //
     }
 
-    public static DataMapper getLockingMapperInstance() {
+    public static LockingMapper getLockingMapperInstance() {
         if (instance == null) {
             instance = new LockingMapper(getSelfInstance());
         }

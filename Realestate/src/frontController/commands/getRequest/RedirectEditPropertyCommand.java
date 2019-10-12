@@ -1,6 +1,6 @@
 package frontController.commands.getRequest;
 
-import dataSourceLayer.ConcurrencyUtil.LockManager;
+import dataSourceLayer.mappers.ExclusiveWriteLockManager;
 import frontController.commands.FrontCommand;
 import models.Property;
 import service.AppSession;
@@ -19,7 +19,7 @@ public class RedirectEditPropertyCommand extends FrontCommand {
             Property property = new Property(property_id);
 
             // Lock the business transaction which contains READ from db
-            LockManager.getInstance().acquireLock(property, AppSession.getSessionId());
+            ExclusiveWriteLockManager.getInstance().acquireLock(property, AppSession.getSessionId());
 
             property = PropertyManagement.viewSpecificProperty(property_id);
             // update property in AppSession

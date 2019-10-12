@@ -265,7 +265,10 @@
                       </p>
                   </div>
                   <div class="card-footer">
-                      <a href="frontServlet?command=RedirectPublish" class="btn btn-info">Go to publish</a>
+                      <a href="frontServlet?command=RedirectPublish" class="btn btn-info"
+                              <% if (!AppSession.hasRole(AppSession.AGENT_ROLE)) { %>
+                                disabled
+                              <% }%>>Go to publish</a>
                   </div>
               </div>
           </div>

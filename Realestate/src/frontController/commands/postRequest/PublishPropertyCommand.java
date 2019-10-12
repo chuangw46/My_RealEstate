@@ -1,13 +1,12 @@
 package frontController.commands.postRequest;
 
-import dataSourceLayer.ConcurrencyUtil.LockManager;
+import dataSourceLayer.mappers.ExclusiveWriteLockManager;
 import frontController.commands.FrontCommand;
 import models.Address;
 import models.Property;
 import service.AppSession;
 import service.DTO.PropertyDTO;
 import service.PropertyManagement;
-import service.remoteFacade.PropertyAssembler;
 import service.remoteFacade.PropertyFacade;
 import utils.FlashMessage;
 
@@ -87,7 +86,7 @@ public class PublishPropertyCommand extends FrontCommand {
 
                 // update db -> get the updated property
 //                PropertyManagement.updateProperty(property);
-                PropertyDTO propertyDTO = PropertyAssembler.createPropertyDTO(property);
+                PropertyDTO propertyDTO = PropertyFacade.getPropertyAssembler().createPropertyDTO(property);
                 PropertyFacade.getInstance().updateProperty(propertyDTO);
 
                 // give flash msg on the web interface
@@ -97,7 +96,7 @@ public class PublishPropertyCommand extends FrontCommand {
                 AppSession.setProperty(property);
 
                 // release the lock for the business transaction which contains READ from db
-                LockManager.getInstance().releaseLock(property, AppSession.getSessionId());
+                ExclusiveWriteLockManager.getInstance().releaseLock(property, AppSession.getSessionId());
                 forward("/property-info.jsp");
             } catch (SQLException e) {
                 // if the update fails, prompt error

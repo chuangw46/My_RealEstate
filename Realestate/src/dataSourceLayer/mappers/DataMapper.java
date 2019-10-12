@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public interface DataMapper {
     public void create(Object o) throws SQLException;
 
-    public void update(Object o) throws SQLException;
+    public void update(Object o) throws SQLException; 
 
     public void delete(Object o) throws SQLException;
 }

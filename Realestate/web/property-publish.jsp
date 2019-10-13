@@ -172,15 +172,15 @@
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col-lg-10">
-                <div class="form-group">
-                    <p class="h5 font-weight-light text-black-50">Upload Photos</p>
-                    <p><small class="text-muted">Select multiple files by pressing Ctrl</small></p>
-                    <input id="photos" name="photos" type="file" multiple>
-                </div>
-            </div>
-        </div>
+<%--        <div class="row mb-3">--%>
+<%--            <div class="col-lg-10">--%>
+<%--                <div class="form-group">--%>
+<%--                    <p class="h5 font-weight-light text-black-50">Upload Photos</p>--%>
+<%--                    <p><small class="text-muted">Select multiple files by pressing Ctrl</small></p>--%>
+<%--                    <input id="photos" name="photos" type="file" multiple>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
         <div class="row mb-3">
             <div class="form-group col-lg">

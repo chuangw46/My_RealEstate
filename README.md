@@ -41,8 +41,6 @@ This project is done by [Chuang Wang](https://www.linkedin.com/in/chuangw/) and 
 > For more detailed information about the project, please check out the project documentation file [here](https://github.com/chuangw46/SWEN90007_Project/blob/master/SWEN90007_Project%20Documentation.pdf)
 
 
-
-
 ### **Contributors**
 ---
 
@@ -51,6 +49,10 @@ This project is done by [Chuang Wang](https://www.linkedin.com/in/chuangw/) and 
 |  Chuang Wang |Database + Backend (datasource layer, domain layer)| chuangw@student.unimelb.edu.au| [LinkedIn](https://www.linkedin.com/in/chuangw/)|
 | Junhan Yang | Frontend development + Domain layer | junhany@student.unimelb.edu.au | [LinkedIn](https://www.linkedin.com/in/junhan-yang-269213190/) |
 
+
+### **License**
+---
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/chuangw46/SWEN90007_Project/blob/master/LICENSE)
 
 
 

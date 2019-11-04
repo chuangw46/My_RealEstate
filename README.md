@@ -27,13 +27,13 @@ This project is done by [Chuang Wang](https://www.linkedin.com/in/chuangw/) and 
 
 ### **Architecture**
 ---
-1. High level Layered Architecture Diagram
+#### 1. High level Layered Architecture Diagram
 ![](https://github.com/chuangw46/SWEN90007_Project/blob/master/diagrams/SDA%20architechture%20diagram.png)
 
-2. Component Diagram
+#### 2. Component Diagram
 ![](https://github.com/chuangw46/SWEN90007_Project/blob/master/diagrams/SDA%20Component%20Diagram.png)
 
-3. Database Design
+#### 3. Database Design
 ![](https://github.com/chuangw46/SWEN90007_Project/blob/master/diagrams/database%20architecture%20.png)
 
 ### **Project Documentation**

@@ -5,7 +5,7 @@
 
 ### **Project Description**
 ---
-- In this project, we are aiming to build a web-based and enterprise-scale property resource application which connects real estate agents with highly engaged and informed consumers right across the buying and renting cycle. Properties on this platform include residential and commercial properties. 
+- In this project, we built a web-based and enterprise-scale property resource application which connects real estate agents with highly engaged and informed consumers right across the buying and renting cycle. Properties on this platform include residential and commercial properties. 
 - The application serves as a way that real estate agents can publish housing estates on it for sale or rent. Meanwhile, it provides a centralized resource platform where consumers can seek for properties to buy or rent and book inspections for ones they like.
 - This project is done by [Chuang Wang](https://www.linkedin.com/in/chuangw/) and [Junhan Yang](https://www.linkedin.com/in/junhan-yang-269213190/)
 

@@ -6,12 +6,14 @@ package models;
  * @institution University of Melbourne
  */
 
+import java.io.Serializable;
+
 /**
  * to construct a company object, but it will be a small object. As such, we used the embedded
  * value pattern
  */
 
-public class AgencyCompany {
+public class AgencyCompany implements Serializable {
     private String name;
     private String address;
     private String website;

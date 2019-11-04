@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Objects;
 /**
  * the parent class for Client and Agent
  */
-public class User {
+public class User implements Serializable {
     private int id;
     private String email;
     private String password;

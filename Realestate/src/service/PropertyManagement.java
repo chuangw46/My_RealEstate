@@ -91,6 +91,8 @@ public class PropertyManagement {
      */
     public static void deleteProperty(int property_id) throws SQLException {
         Property property = propertyMapper.searchByPropertyID(property_id);
+        if (property == null)
+            return;
         UnitOfWork.newCurrent();
         // 1. delete property from association table(favorite list) - AST stands for association
         // table

@@ -28,12 +28,28 @@ This project is done by [Chuang Wang](https://www.linkedin.com/in/chuangw/) and 
 ### **Architecture**
 ---
 #### 1. High level Layered Architecture Diagram
+**1. Presentation Layer**\
+This layer contains the user-oriented functionality responsible for managing user interaction with the backend. It also consists of components that provide a communication channel into the core domain(business) logic encapsulated in the domain logic layer.
+
+**2. Domain Logic Layer**\
+This layer decouples the data source layer and the presentation layer. It implements the core functionality of the main features for agents and encapsulates the main business logic.
+    * Service Layer
+        * This layer defines a set of available operations for user account management and property management
+        * It also coordinates the requests sent from presentation layer and the response from the data source layer. From the lecture and lecture notes, in order to make domain model classes clearer and for the sake of simplicity of the system, service layer has been designed to communicate with data source layer directly by calling unit of work or specific mapper to retrieve data, rather than delegating the tasks to domain model classes, which increases the complexity of domain model classes and makes our architecture messed.
+    * Domain Model
+        * Domain model layer basically contains all classes that encapsulates data only corresponding each table in the database.
+        
+**3. Data Source Layer**\
+This layer provides access to data hosted in PostgreSQL database including create, read, update and delete operations. To facilitate the data access and queries sent from client, unit of work pattern and mapper pattern are used in this layer.
+
 ![](https://github.com/chuangw46/SWEN90007_Project/blob/master/diagrams/SDA%20architechture%20diagram.png)
 
-#### 2. Component Diagram
+#### 2. Component Diagram 
+In this modified component diagram, components in the web server are classified according to which layers they are at. In particular, the client side communicates with the server side through the FrontServlet component in terms of GET/POST requests, and the data mappers such as Property Mapper performs CRUD actions to manage the data stored in PostgreSQL.
 ![](https://github.com/chuangw46/SWEN90007_Project/blob/master/diagrams/SDA%20Component%20Diagram.png)
 
 #### 3. Database Design
+This diagram shows how we built the database tables in PostgreSQL. Each property has one address only. The reason why `address` has a separate table instead of storing all the address in property table is to avoid storing too many fields in property table. Although client and agent are the intended end users of the system, we design a separate table for each of them because they perform different actions while using our system. For instance, an agent is the main person who manages a list of properties including publishing a new property, updating or deleting an existing property he or she published before. Therefore, `agent` and `property` have one-to-many relationship. On the other hand, a client (property seeker) will mainly search properties based on some filters and save a particular property into his or her favourite property list. In that sense, `property` and `client` have many-to-many relationship. As such, an association table called `client_likes_properties` is created to solve many-to-many relationship.
 ![](https://github.com/chuangw46/SWEN90007_Project/blob/master/diagrams/database%20architecture%20.png)
 
 ### **Project Documentation**

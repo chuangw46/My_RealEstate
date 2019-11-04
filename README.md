@@ -29,10 +29,10 @@ This project is done by [Chuang Wang](https://www.linkedin.com/in/chuangw/) and 
 ---
 #### 1. High level Layered Architecture Diagram
 
-**1). Presentation Layer**\
+1. Presentation Layer\
 This layer contains the user-oriented functionality responsible for managing user interaction with the backend. It also consists of components that provide a communication channel into the core domain(business) logic encapsulated in the domain logic layer.
 
-**2. Domain Logic Layer**
+2. Domain Logic Layer\
 This layer decouples the data source layer and the presentation layer. It implements the core functionality of the main features for agents and encapsulates the main business logic.
     * Service Layer
         * This layer defines a set of available operations for user account management and property management
@@ -40,7 +40,7 @@ This layer decouples the data source layer and the presentation layer. It implem
     * Domain Model
         * Domain model layer basically contains all classes that encapsulates data only corresponding each table in the database.
         
-**3. Data Source Layer**\
+3. Data Source Layer\
 This layer provides access to data hosted in PostgreSQL database including create, read, update and delete operations. To facilitate the data access and queries sent from client, unit of work pattern and mapper pattern are used in this layer.
 
 ![](https://github.com/chuangw46/SWEN90007_Project/blob/master/diagrams/SDA%20architechture%20diagram.png)

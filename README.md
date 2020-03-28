@@ -1,4 +1,4 @@
-# SWEN90007_Project - Realestate
+# My RealEstate
 ### **Website**
 ---
 [My Realestate](https://swen90007-2019-realestate.herokuapp.com/)
